@@ -1,8 +1,9 @@
--- --------------------------------------------------------
--- 
+--
 -- main.lua
--- 
+-- project fmanager
+-- andreaszdw@googlemail.com
 -- --------------------------------------------------------
+
 local composer = require("composer")
 
 display.setStatusBar(display.HiddenStatusBar)
@@ -14,7 +15,8 @@ debugMode = false
 if debugMode then 
 	print("debug mode on")
 end
- 
+
+-- get the platform
 local platform = system.getInfo("platform")
 
 -- set the window size and load the window scenes
