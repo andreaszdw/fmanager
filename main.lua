@@ -21,5 +21,6 @@ local platform = system.getInfo("platform")
 
 -- set the window size and load the window scenes
 if platform == "win32" then 
-	native.setProperty("windowSize", {width=800, height=600})
+	native.setProperty("windowSize", {width=1280, height=720})
+	composer.gotoScene("scenes.win32.welcome")
 end
