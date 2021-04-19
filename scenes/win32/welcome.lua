@@ -39,7 +39,7 @@ function scene:create(event)
 	display.setDefault("background", unpack(theme.blue))
 
 	local welcomeText = display.newText(i18nStrings.welcome, centerX, centerY, native.sysemFont, 120)
-	welcomeText:setFillColor(unpack(theme.yellow))
+	welcomeText:setFillColor(unpack(theme.orange))
 end
 
 -- --------------------------------------------------------
