@@ -1,8 +1,12 @@
 local de = {}
 de.welcome = "Willkommen!"
+de.back = "Zurück"
+de.player = "Spieler"
 
 local default = {}
 default.welcome = "Welcome!"
+default.back = "Back"
+default.player = "Player"
 
 local i18n = {}
 

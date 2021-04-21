@@ -10,7 +10,7 @@ local widget = require("widget")
 local theme = require("theme")
 local i18n = require("i18n")
 
-local i18nStrings = i18n.getStrings()
+local strings = i18n.getStrings()
 
 -- new scene
 local scene = composer.newScene()
@@ -62,14 +62,14 @@ function scene:create(event)
 	local nextElement = 120
 	local gap = 20
 
-	welcomeText = display.newText(self.view, i18nStrings.welcome, centerX, nextElement, native.sysemFont, 120)
+	welcomeText = display.newText(self.view, strings.welcome, centerX, nextElement, native.sysemFont, 120)
 	welcomeText:setFillColor(unpack(theme.orange))
 
 	nextElement = nextElement + welcomeText.height
 
 	goPlayerButton = widget.newButton(
 	{
-		label = "Player",
+		label = strings.player,
 		onEvent = goPlayer,
 		emboss = false,
 		shape = "roundedRect",

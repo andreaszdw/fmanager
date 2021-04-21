@@ -10,6 +10,9 @@
 local composer = require("composer")
 local theme = require("theme")
 local widget = require("widget")
+local i18n = require("i18n")
+
+local strings = i18n.getStrings()
 
 -- new scene
 local scene = composer.newScene()
@@ -73,7 +76,7 @@ function scene:create(event)
 
 	buttonGoBack = widget.newButton(
 	{
-		label = "zurück",
+		label = strings.back,
 		onEvent = goBack,
 		emboss = false,
 		shape = "roundedRect",
