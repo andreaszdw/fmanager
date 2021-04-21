@@ -1,15 +1,15 @@
 --
--- template.lua
+-- player.lua
 --
 -- andreaszdw@googlemail.com
+--
+-- this shows player values in detail
 --
 -- --------------------------------------------------------
 
 local composer = require("composer")
 local theme = require("theme")
-local i18n = require("i18n")
-
-local i18nStrings = i18n.getStrings()
+local widget = require("widget")
 
 -- new scene
 local scene = composer.newScene()
@@ -18,6 +18,7 @@ local width = display.pixelWidth
 local height = display.pixelHeight
 local centerX = width * 0.5 
 local centerY = height * 0.5
+local buttonGoBack = 0
 
 -- --------------------------------------------------------
 local function onUpdate(event)
@@ -26,7 +27,15 @@ end
 -- --------------------------------------------------------
 local function onKey(event)
 	if(event.keyName == "f") then
-		print("f")
+		if(event.phase == "down") then 
+			-- toggle window
+			local w = native.getProperty("windowMode")
+			if w == "fullscreen" then 
+				native.setProperty("windowMode", "normal")
+			else 
+				native.setProperty("windowMode", "fullscreen")
+			end
+		end
 	end
 	return false
 end
@@ -41,6 +50,13 @@ local function onResize(event)
 	height = display.pixelHeight
 	centerX = width * 0.5
 	centerY = height * 0.5
+	buttonGoBack.x = centerX 
+	buttonGoBack.y = centerY
+end
+
+-- -------------------------------------------------------
+local function goBack(event)
+	print("goBack")
 end
 
 -- 
@@ -49,10 +65,24 @@ end
 -- --------------------------------------------------------
 function scene:create(event)
 
-	display.setDefault("background", unpack(theme.blue))
+	buttonGoBack = widget.newButton(
+	{
+		label = "zurück",
+		onEvent = goBack,
+		emboss = false,
+		shape = "roundedRect",
+		width = 200,
+		height = 40,
+		cornerRadius = 2,
+		fillColor = {default=theme.lightBlue, over=theme.darkBlue},
+		strokeColor = {default=theme.orange, over=theme.yellow},
+		strokeWidth = 2
+	}
+	)
+	buttonGoBack.x = centerX 
+	buttonGoBack.y = centerY
 
-	local welcomeText = display.newText(self.view, i18nStrings.welcome, centerX, centerY, native.sysemFont, 120)
-	welcomeText:setFillColor(unpack(theme.orange))
+	self.view:insert(buttonGoBack)
 end
 
 -- --------------------------------------------------------

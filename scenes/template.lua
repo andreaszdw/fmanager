@@ -28,7 +28,6 @@ end
 --
 -- --------------------------------------------------------
 function scene:create(event)
-	space_widget = widget_space:new(self.view)
 end
 
 -- --------------------------------------------------------
