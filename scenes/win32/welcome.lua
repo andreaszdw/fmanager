@@ -6,6 +6,7 @@
 -- --------------------------------------------------------
 
 local composer = require("composer")
+local widget = require("widget")
 local theme = require("theme")
 local i18n = require("i18n")
 
@@ -19,16 +20,15 @@ local height = display.pixelHeight
 local centerX = width * 0.5 
 local centerY = height * 0.5
 
+local welcomeLabel = 0
+local goPlayerButton = 0
+
 -- --------------------------------------------------------
 local function onUpdate(event)
 end
 
 -- --------------------------------------------------------
 local function onKey(event)
-	if(event.keyName == "f") then
-		print("f")
-	end
-	return false
 end
 
 -- -------------------------------------------------------
@@ -43,6 +43,13 @@ local function onResize(event)
 	centerY = height * 0.5
 end
 
+-- -------------------------------------------------------
+local function goPlayer(event)
+	if("ended" == event.phase) then 
+		composer.gotoScene("scenes.cross.player")
+	end
+end
+
 -- 
 -- now the scene functions 
 --
@@ -51,8 +58,34 @@ function scene:create(event)
 
 	display.setDefault("background", unpack(theme.blue))
 
-	local welcomeText = display.newText(self.view, i18nStrings.welcome, centerX, centerY, native.sysemFont, 120)
+	local counter = 0
+	local nextElement = 120
+	local gap = 20
+
+	welcomeText = display.newText(self.view, i18nStrings.welcome, centerX, nextElement, native.sysemFont, 120)
 	welcomeText:setFillColor(unpack(theme.orange))
+
+	nextElement = nextElement + welcomeText.height
+
+	goPlayerButton = widget.newButton(
+	{
+		label = "Player",
+		onEvent = goPlayer,
+		emboss = false,
+		shape = "roundedRect",
+		width = 200,
+		height = 40,
+		cornerRadius = 2,
+		labelColor = {default=theme.orange, over=theme.yellow},
+		fillColor = {default=theme.lightBlue, over=theme.darkBlue},
+		strokeColor = {default=theme.orange, over=theme.yellow},
+		strokeWidth = 2
+	}
+	)
+	goPlayerButton.x = centerX 
+	goPlayerButton.y = nextElement
+
+	self.view:insert(goPlayerButton)
 end
 
 -- --------------------------------------------------------

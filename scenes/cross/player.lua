@@ -18,6 +18,7 @@ local width = display.pixelWidth
 local height = display.pixelHeight
 local centerX = width * 0.5 
 local centerY = height * 0.5
+
 local buttonGoBack = 0
 
 -- --------------------------------------------------------
@@ -56,7 +57,10 @@ end
 
 -- -------------------------------------------------------
 local function goBack(event)
-	print("goBack")
+	if("ended" == event.phase) then 
+		local prevScene = composer.getSceneName("previous")
+		composer.gotoScene(prevScene)
+	end
 end
 
 -- 
@@ -64,6 +68,8 @@ end
 --
 -- --------------------------------------------------------
 function scene:create(event)
+
+	display.setDefault("background", unpack(theme.blue))
 
 	buttonGoBack = widget.newButton(
 	{
@@ -74,6 +80,7 @@ function scene:create(event)
 		width = 200,
 		height = 40,
 		cornerRadius = 2,
+		labelColor = {default=theme.orange, over=theme.yellow},
 		fillColor = {default=theme.lightBlue, over=theme.darkBlue},
 		strokeColor = {default=theme.orange, over=theme.yellow},
 		strokeWidth = 2
