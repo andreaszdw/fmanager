@@ -41,8 +41,8 @@ settings =
     	enableMaximizeButton = true,
     	titleText = 
     	{
-    		default = "default",
-    		["de"] = "de"
+    		default = "fmanager",
+    		["de"] = "fmanager"
     	}
     },
 }

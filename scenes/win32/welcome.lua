@@ -22,6 +22,7 @@ local centerY = height * 0.5
 
 local welcomeLabel = 0
 local goPlayerButton = 0
+local quitButton = 0
 
 -- --------------------------------------------------------
 local function onUpdate(event)
@@ -41,12 +42,33 @@ local function onResize(event)
 	height = display.pixelHeight
 	centerX = width * 0.5
 	centerY = height * 0.5
+
+	local counter = 0
+	local nextElement = 120
+	local gap = 20
+
+	welcomeText.x = centerX 
+	welcomeText.y = nextElement
+	nextElement = nextElement + welcomeText.height
+
+	goPlayerButton.x = centerX 
+	goPlayerButton.y = nextElement
+
+	quitButton.x = width  - quitButton.width/2 - 10
+	quitButton.y = height - quitButton.height/2 - 10
 end
 
 -- -------------------------------------------------------
 local function goPlayer(event)
 	if("ended" == event.phase) then 
 		composer.gotoScene("scenes.cross.player")
+	end
+end
+
+-- --------------------------------------------------------
+local function quitApp(event)
+	if("ended" == event.phase) then 
+		native.requestExit()
 	end
 end
 
@@ -73,19 +95,39 @@ function scene:create(event)
 		onEvent = goPlayer,
 		emboss = false,
 		shape = "roundedRect",
-		width = 200,
+		width = 150,
 		height = 40,
 		cornerRadius = 2,
 		labelColor = {default=theme.orange, over=theme.yellow},
 		fillColor = {default=theme.lightBlue, over=theme.darkBlue},
 		strokeColor = {default=theme.orange, over=theme.yellow},
 		strokeWidth = 2
-	}
-	)
+	})
+
 	goPlayerButton.x = centerX 
 	goPlayerButton.y = nextElement
 
 	self.view:insert(goPlayerButton)
+
+	quitButton = widget.newButton(
+	{
+		label = strings.quit,
+		onEvent = quitApp,
+		emboss = false,
+		shape = "roundedRect",
+		width = 150,
+		height = 40,
+		cornerRadius = 2,
+		labelColor = {default=theme.orange, over=theme.yellow},
+		fillColor = {default=theme.lightBlue, over=theme.darkBlue},
+		strokeColor = {default=theme.orange, over=theme.yellow},
+		strokeWidth = 2
+	})
+
+	quitButton.x = width  - quitButton.width/2 - 10
+	quitButton.y = height - quitButton.height/2 - 10
+
+	self.view:insert(quitButton)
 end
 
 -- --------------------------------------------------------
@@ -121,6 +163,7 @@ end
 
 -- --------------------------------------------------------
 function scene:destroy(event)
+	print("destroy")
 	local phase = event.phase 
 	if phase == "will" then 
 	elseif phase == "did" then 

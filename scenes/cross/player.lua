@@ -54,8 +54,9 @@ local function onResize(event)
 	height = display.pixelHeight
 	centerX = width * 0.5
 	centerY = height * 0.5
-	buttonGoBack.x = centerX 
-	buttonGoBack.y = centerY
+
+	buttonGoBack.x = width  - buttonGoBack.width/2 - 10
+	buttonGoBack.y = height - buttonGoBack.height/2 - 10
 end
 
 -- -------------------------------------------------------
@@ -80,7 +81,7 @@ function scene:create(event)
 		onEvent = goBack,
 		emboss = false,
 		shape = "roundedRect",
-		width = 200,
+		width = 150,
 		height = 40,
 		cornerRadius = 2,
 		labelColor = {default=theme.orange, over=theme.yellow},
@@ -89,8 +90,8 @@ function scene:create(event)
 		strokeWidth = 2
 	}
 	)
-	buttonGoBack.x = centerX 
-	buttonGoBack.y = centerY
+	buttonGoBack.x = width  - buttonGoBack.width/2 - 10
+	buttonGoBack.y = height - buttonGoBack.height/2 - 10
 
 	self.view:insert(buttonGoBack)
 end
