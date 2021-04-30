@@ -73,6 +73,8 @@ end
 -- --------------------------------------------------------
 function scene:create(event)
 
+	print(event.phase)
+
 	display.setDefault("background", unpack(theme.blue))
 
 	buttonGoBack = widget.newButton(
@@ -102,8 +104,10 @@ function scene:show(event)
 	local phase = event.phase
 
 	if (phase == "will") then
+		print("will show")
 
 	elseif (phase == "did") then
+		print("did show")
 		-- add listeners
 		Runtime:addEventListener("enterFrame", onUpdate)
 		Runtime:addEventListener("key", onKey)
@@ -114,25 +118,23 @@ end
 
 -- --------------------------------------------------------
 function scene:hide(event)
-
 	local phase = event.phase
 
 	if phase == "will" then
 		-- remove listeners	
+		print("will hide")
 		Runtime:removeEventListener("enterFrame", onUpdate)
 		Runtime:removeEventListener("key", onKey)
 		Runtime:removeEventListener("mouse", onMouse)
 		Runtime:removeEventListener("resize", onResize)
 	elseif phase == "did" then 
+		print("did hide")
 	end
 end
 
 -- --------------------------------------------------------
 function scene:destroy(event)
-	local phase = event.phase 
-	if phase == "will" then 
-	elseif phase == "did" then 
-	end
+	
 end
 
 --

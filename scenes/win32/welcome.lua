@@ -67,7 +67,9 @@ end
 
 -- --------------------------------------------------------
 local function quitApp(event)
-	if("ended" == event.phase) then 
+	if("ended" == event.phase) then
+		composer.removeHidden()
+		composer.removeScene(composer.getSceneName("current"))
 		native.requestExit()
 	end
 end
@@ -163,11 +165,7 @@ end
 
 -- --------------------------------------------------------
 function scene:destroy(event)
-	print("destroy")
-	local phase = event.phase 
-	if phase == "will" then 
-	elseif phase == "did" then 
-	end
+	print("do saving")
 end
 
 --
