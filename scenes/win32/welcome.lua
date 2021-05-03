@@ -7,7 +7,6 @@
 
 local composer = require("composer")
 local widget = require("widget")
-local theme = require("theme")
 local i18n = require("i18n")
 
 local strings = i18n.getStrings()
@@ -80,14 +79,14 @@ end
 -- --------------------------------------------------------
 function scene:create(event)
 
-	display.setDefault("background", unpack(theme.blue))
+	display.setDefault("background", unpack(theme.bg))
 
 	local counter = 0
 	local nextElement = 120
 	local gap = 20
 
 	welcomeText = display.newText(self.view, strings.welcome, centerX, nextElement, native.sysemFont, 120)
-	welcomeText:setFillColor(unpack(theme.orange))
+	welcomeText:setFillColor(unpack(theme.label))
 
 	nextElement = nextElement + welcomeText.height
 
@@ -100,9 +99,9 @@ function scene:create(event)
 		width = 150,
 		height = 40,
 		cornerRadius = 2,
-		labelColor = {default=theme.orange, over=theme.yellow},
-		fillColor = {default=theme.lightBlue, over=theme.darkBlue},
-		strokeColor = {default=theme.orange, over=theme.yellow},
+		labelColor = {default=theme.label, over=theme.label},
+		fillColor = {default=theme.fill, over=theme.fill},
+		strokeColor = {default=theme.stroke, over=theme.stroke},
 		strokeWidth = 2
 	})
 
@@ -120,9 +119,9 @@ function scene:create(event)
 		width = 150,
 		height = 40,
 		cornerRadius = 2,
-		labelColor = {default=theme.orange, over=theme.yellow},
-		fillColor = {default=theme.lightBlue, over=theme.darkBlue},
-		strokeColor = {default=theme.orange, over=theme.yellow},
+		labelColor = {default=theme.label, over=theme.label},
+		fillColor = {default=theme.fill, over=theme.fill},
+		strokeColor = {default=theme.stroke, over=theme.stroke},
 		strokeWidth = 2
 	})
 

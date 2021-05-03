@@ -33,8 +33,8 @@ settings =
     window = 
     {
     	defaultMode = "normal",
-    	defaultViewWidth = 800,
-    	defaultViewHeight = 600,
+    	defaultViewWidth = 1280,
+    	defaultViewHeight = 720,
     	resizable = true,
     	enableCloseButton = true,
     	enableMinimizeButton = true,
