@@ -10,6 +10,7 @@
 local composer = require("composer")
 local widget = require("widget")
 local i18n = require("i18n")
+local fmw = require("fm.widgets")
 
 local strings = i18n.getStrings()
 
@@ -140,6 +141,9 @@ function scene:create(event)
 	buttonGoBack.y = height - buttonGoBack.height/2 - 10
 
 	self.view:insert(buttonGoBack)
+
+	fmwidgets = fmw:new(self.view)
+	fmwidgets:button("test", goBack, 400, 100)
 end
 
 -- --------------------------------------------------------
