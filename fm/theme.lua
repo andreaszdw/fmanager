@@ -3,11 +3,19 @@ local theme = {
 	fill = {55/255, 55/255, 55/255},
 	label = {255/255, 146/255, 3/255},
 	stroke = {255/255, 146/255, 3/255},
+
 	button = {
 		width = 150,
 		height = 40,
-		cornerRadius = 2
+		cornerRadius = 2,
+		labelColor = {default={255/255, 146/255, 3/255}, over={255/255, 146/255, 3/255}},
+		fillColor = {default={55/255, 55/255, 55/255}, over={55/255, 55/255, 55/255}},
+		strokeColor = {default={255/255, 146/255, 3/255}, over={255/255, 146/255, 3/255}},
+		strokeWidth = 2
 	},
+
+	font = "fm/assets/fonts/ubuntu/Ubuntu-R.ttf",
+
 	progressView = {
 		sheet = "fm/assets/images/widget-progress-view-standard.png",
 		options = {

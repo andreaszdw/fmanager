@@ -1,7 +1,6 @@
 --
 -- button.lua
 --
---
 -- andreaszdw@googlemail.com
 -- --------------------------------------------------------
 local widget = require("widget")
@@ -11,12 +10,20 @@ local button = {}
 --
 -- constructor
 -- --------------------------------------------------------
-function button:new(parent, label, onEvent, x, y, width, height)
+function button:new(parent, label, eventFunction, x, y, width, height)
+
+	-- this is the function for the button,
+	-- it will call the function for the given function
+	local function onEvent(event)
+		if("ended" == event.phase) then 
+			eventFunction(event)
+		end
+	end
+
 	local o = {
 		parent = parent,
 		theme = parent.theme,
 		label = label,
-		onEvent = onEvent,
 		x = x or 0,
 		y = y or 0,
 		width = width or parent.theme.button.width,
@@ -26,20 +33,36 @@ function button:new(parent, label, onEvent, x, y, width, height)
 	o.button = widget.newButton(
 	{
 		label = o.label,
-		onEvent = o.onEvent,
+		onEvent = onEvent,
 		emboss = false,
 		shape = "roundedRect",
 		width = o.width,
 		height = o.height,
 		cornerRadius = o.theme.button.cornerRadius,
-		labelColor = {default = o.theme.label, over = o.theme.label},
-		fillColor = {default = o.theme.fill, over = o.theme.fill},
-		strokeColor = {default = o.theme.stroke, over = o.theme.stroke},
-		strokeWidth = 2
+		labelColor = o.theme.button.labelColor,
+		fillColor = o.theme.button.fillColor,
+		strokeColor = o.theme.button.strokeColor,
+		strokeWidth = o.theme.button.strokeWidth,
+		font = o.theme.font
 	})
 
-	o.button.x = x
-	o.button.y = y
+	if o.x == "right" then 
+		o.button.x = display.pixelWidth - o.button.width*0.5 - 10
+	elseif o.x == "left" then 
+		o.button.x = 0 + o.button.width*0.5 + 10
+	elseif o.x == "center" then 
+		o.button.x = display.pixelWidth * 0.5
+	else
+		o.button.x = o.x
+	end
+
+	if o.y == "bottom" then 
+		o.button.y = display.pixelHeight - o.button.height*0.52 - 10
+	elseif o.y == "top" then 
+		o.button.y = 0 + o.button.height * 0.5 + 10
+	else
+		o.button.y = o.y 
+	end
 
 	parent.view:insert(o.button)
 

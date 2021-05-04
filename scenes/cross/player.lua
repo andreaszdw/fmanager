@@ -24,6 +24,7 @@ local centerY = height * 0.5
 
 local playerImage = 0
 local buttonGoBack = 0
+local fmwidgets = 0
 
 -- --------------------------------------------------------
 local function onUpdate(event)
@@ -61,11 +62,9 @@ local function onResize(event)
 end
 
 -- -------------------------------------------------------
-local function goBack(event)
-	if("ended" == event.phase) then 
-		local prevScene = composer.getSceneName("previous")
-		composer.gotoScene(prevScene)
-	end
+local function goBack(event) 
+	local prevScene = composer.getSceneName("previous")
+	composer.gotoScene(prevScene)
 end
 
 -- 
@@ -120,30 +119,8 @@ function scene:create(event)
 	-- Set the progress to 50%
 	progressView:setProgress(1.0)
 	
-	self.view:insert(progressView)
-
-	buttonGoBack = widget.newButton(
-	{
-		label = strings.back,
-		onEvent = goBack,
-		emboss = false,
-		shape = "roundedRect",
-		width = 150,
-		height = 40,
-		cornerRadius = 2,
-		labelColor = {default=theme.label, over=theme.label},
-		fillColor = {default=theme.fill, over=theme.fill},
-		strokeColor = {default=theme.stroke, over=theme.stroke},
-		strokeWidth = 2
-	})
-
-	buttonGoBack.x = width  - buttonGoBack.width/2 - 10
-	buttonGoBack.y = height - buttonGoBack.height/2 - 10
-
-	self.view:insert(buttonGoBack)
-
 	fmwidgets = fmw:new(self.view)
-	fmwidgets:button("test", goBack, 400, 100)
+	fmwidgets:button("Zurück", goBack, "center", "top")
 end
 
 -- --------------------------------------------------------

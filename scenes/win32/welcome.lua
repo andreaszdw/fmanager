@@ -8,6 +8,7 @@
 local composer = require("composer")
 local widget = require("widget")
 local i18n = require("i18n")
+local fmw = require("fm.widgets")
 
 local strings = i18n.getStrings()
 
@@ -19,9 +20,11 @@ local height = display.pixelHeight
 local centerX = width * 0.5 
 local centerY = height * 0.5
 
-local welcomeLabel = 0
+local welcomeText = 0
 local goPlayerButton = 0
 local quitButton = 0
+
+local fmwidgets = 0
 
 -- --------------------------------------------------------
 local function onUpdate(event)
@@ -48,7 +51,7 @@ local function onResize(event)
 
 	welcomeText.x = centerX 
 	welcomeText.y = nextElement
-	nextElement = nextElement + welcomeText.height
+	nextElement = nextElement + welcomeText:getHeight()
 
 	goPlayerButton.x = centerX 
 	goPlayerButton.y = nextElement
@@ -59,18 +62,14 @@ end
 
 -- -------------------------------------------------------
 local function goPlayer(event)
-	if("ended" == event.phase) then 
-		composer.gotoScene("scenes.cross.player")
-	end
+	composer.gotoScene("scenes.cross.player")
 end
 
 -- --------------------------------------------------------
 local function quitApp(event)
-	if("ended" == event.phase) then
-		composer.removeHidden()
-		composer.removeScene(composer.getSceneName("current"))
-		native.requestExit()
-	end
+	composer.removeHidden()
+	composer.removeScene(composer.getSceneName("current"))
+	native.requestExit()
 end
 
 -- 
@@ -78,57 +77,28 @@ end
 --
 -- --------------------------------------------------------
 function scene:create(event)
+	
+	fmwidgets = fmw:new(self.view)
 
-	display.setDefault("background", unpack(theme.bg))
+	display.setDefault("background", unpack(fmwidgets.theme.bg))
 
 	local counter = 0
 	local nextElement = 120
 	local gap = 20
 
-	welcomeText = display.newText(self.view, strings.welcome, centerX, nextElement, native.sysemFont, 120)
-	welcomeText:setFillColor(unpack(theme.label))
+	local vbox = fmwidgets:vBox()
+	local testText = fmwidgets:singleText("test", 0, 0, 60)
+	vbox:add(testText)
 
-	nextElement = nextElement + welcomeText.height
 
-	goPlayerButton = widget.newButton(
-	{
-		label = strings.player,
-		onEvent = goPlayer,
-		emboss = false,
-		shape = "roundedRect",
-		width = 150,
-		height = 40,
-		cornerRadius = 2,
-		labelColor = {default=theme.label, over=theme.label},
-		fillColor = {default=theme.fill, over=theme.fill},
-		strokeColor = {default=theme.stroke, over=theme.stroke},
-		strokeWidth = 2
-	})
 
-	goPlayerButton.x = centerX 
-	goPlayerButton.y = nextElement
+	welcomeText = fmwidgets:singleText(strings.welcome, centerX, 120, 60)
+	nextElement = nextElement + welcomeText:getHeight()
+	goPlayerButton = fmwidgets:button(strings.player, goPlayer, centerX, nextElement)
+	quitButton = fmwidgets:button(strings.quit, quitApp, "right", "bottom")
 
-	self.view:insert(goPlayerButton)
-
-	quitButton = widget.newButton(
-	{
-		label = strings.quit,
-		onEvent = quitApp,
-		emboss = false,
-		shape = "roundedRect",
-		width = 150,
-		height = 40,
-		cornerRadius = 2,
-		labelColor = {default=theme.label, over=theme.label},
-		fillColor = {default=theme.fill, over=theme.fill},
-		strokeColor = {default=theme.stroke, over=theme.stroke},
-		strokeWidth = 2
-	})
-
-	quitButton.x = width  - quitButton.width/2 - 10
-	quitButton.y = height - quitButton.height/2 - 10
-
-	self.view:insert(quitButton)
+	print(#fmwidgets.childs)
+	print(#vbox.elements)
 end
 
 -- --------------------------------------------------------
