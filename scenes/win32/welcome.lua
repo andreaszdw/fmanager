@@ -20,12 +20,6 @@ local height = display.pixelHeight
 local centerX = width * 0.5 
 local centerY = height * 0.5
 
-local welcomeText = 0
-local goPlayerButton = 0
-local quitButton = 0
-
-local fmwidgets = 0
-
 -- --------------------------------------------------------
 local function onUpdate(event)
 end
@@ -36,28 +30,6 @@ end
 
 -- -------------------------------------------------------
 local function onMouse(event)
-end
-
--- -------------------------------------------------------
-local function onResize(event)
-	width = display.pixelWidth
-	height = display.pixelHeight
-	centerX = width * 0.5
-	centerY = height * 0.5
-
-	local counter = 0
-	local nextElement = 120
-	local gap = 20
-
-	welcomeText.x = centerX 
-	welcomeText.y = nextElement
-	nextElement = nextElement + welcomeText:getHeight()
-
-	goPlayerButton.x = centerX 
-	goPlayerButton.y = nextElement
-
-	quitButton.x = width  - quitButton.width/2 - 10
-	quitButton.y = height - quitButton.height/2 - 10
 end
 
 -- -------------------------------------------------------
@@ -78,27 +50,26 @@ end
 -- --------------------------------------------------------
 function scene:create(event)
 	
-	fmwidgets = fmw:new(self.view)
+	local fmwidgets = fmw:new(self.view)
 
 	display.setDefault("background", unpack(fmwidgets.theme.bg))
 
 	local counter = 0
 	local nextElement = 120
-	local gap = 20
+	local gap = 10
 
-	local vbox = fmwidgets:vBox()
-	local testText = fmwidgets:singleText("test", 0, 0, 60)
-	vbox:add(testText)
-
-
-
-	welcomeText = fmwidgets:singleText(strings.welcome, centerX, 120, 60)
+	local welcomeText = fmwidgets:singleText(strings.welcome, centerX, 120, 60)
 	nextElement = nextElement + welcomeText:getHeight()
-	goPlayerButton = fmwidgets:button(strings.player, goPlayer, centerX, nextElement)
-	quitButton = fmwidgets:button(strings.quit, quitApp, "right", "bottom")
+	local goPlayerButton = fmwidgets:button(strings.player, goPlayer, centerX, nextElement)
+	nextElement = nextElement + goPlayerButton:getHeight() + gap
+	
+	local quitButton = fmwidgets:button(strings.quit, quitApp)
+	local tmpW = quitButton:getWidth()
+	local tmpH = quitButton:getHeight()
+	quitButton:setPosition(width - tmpW/2 - gap, height - tmpH/2 - gap)
+
 
 	print(#fmwidgets.childs)
-	print(#vbox.elements)
 end
 
 -- --------------------------------------------------------
@@ -113,7 +84,6 @@ function scene:show(event)
 		Runtime:addEventListener("enterFrame", onUpdate)
 		Runtime:addEventListener("key", onKey)
 		Runtime:addEventListener("mouse", onMouse)
-		Runtime:addEventListener("resize", onResize)
 	end
 end
 
@@ -127,7 +97,6 @@ function scene:hide(event)
 		Runtime:removeEventListener("enterFrame", onUpdate)
 		Runtime:removeEventListener("key", onKey)
 		Runtime:removeEventListener("mouse", onMouse)
-		Runtime:removeEventListener("resize", onResize)
 	elseif phase == "did" then 
 	end
 end

@@ -35,10 +35,10 @@ settings =
     	defaultMode = "normal",
     	defaultViewWidth = 1280,
     	defaultViewHeight = 720,
-    	resizable = true,
+    	resizable = false,
     	enableCloseButton = true,
     	enableMinimizeButton = true,
-    	enableMaximizeButton = true,
+    	enableMaximizeButton = false,
     	titleText = 
     	{
     		default = "fmanager",

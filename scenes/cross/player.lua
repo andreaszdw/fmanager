@@ -22,10 +22,6 @@ local height = display.pixelHeight
 local centerX = width * 0.5 
 local centerY = height * 0.5
 
-local playerImage = 0
-local buttonGoBack = 0
-local fmwidgets = 0
-
 -- --------------------------------------------------------
 local function onUpdate(event)
 end
@@ -51,17 +47,6 @@ local function onMouse(event)
 end
 
 -- -------------------------------------------------------
-local function onResize(event)
-	width = display.pixelWidth
-	height = display.pixelHeight
-	centerX = width * 0.5
-	centerY = height * 0.5
-
-	buttonGoBack.x = width  - buttonGoBack.width/2 - 10
-	buttonGoBack.y = height - buttonGoBack.height/2 - 10
-end
-
--- -------------------------------------------------------
 local function goBack(event) 
 	local prevScene = composer.getSceneName("previous")
 	composer.gotoScene(prevScene)
@@ -72,55 +57,30 @@ end
 --
 -- --------------------------------------------------------
 function scene:create(event)
+
+	local gap = 10
+
 	display.setDefault("background", unpack(theme.bg))
 
-	playerImage = display.newRect(self.view, 10, 10, 300, 450)
+	local playerImage = display.newRect(self.view, 10, 10, 300, 450)
 	playerImage.strokeWidth = 2
-	playerImage:setFillColor(unpack(theme.fill))
+	playerImage:setFillColor(unpack(theme.green))
 	playerImage:setStrokeColor(unpack(theme.stroke))
 	playerImage.anchorX = 0
 	playerImage.anchorY = 0
 
-	local progress = widget.newProgressView(
-	{
-		left = 350,
-		top = 200,
-		width = 220,
-		isAnimated = false
-	})
-
-	progress:setProgress(0.5)
-
-	self.view:insert(progress)
-
-	local tpv = theme.progressView
-	local progressSheet = graphics.newImageSheet(tpv.sheet, tpv.options)
-	 
-	-- Create the widget
-	local progressView = widget.newProgressView(
-	{
-	        sheet = progressSheet,
-	        fillOuterLeftFrame = tpv.olf,
-	        fillOuterMiddleFrame = tpv.omf,
-	        fillOuterRightFrame = tpv.orf,
-	        fillOuterWidth = tpv.ow,
-	        fillOuterHeight = tpv.oh,
-	        fillInnerLeftFrame = tpv.ilf,
-	        fillInnerMiddleFrame = tpv.imf,
-	        fillInnerRightFrame = tpv.irf,
-	        fillWidth = tpv.fw,
-	        fillHeight = tpv.fh,
-	        left = 350,
-	        top = 300,
-	        width = 800,
-	        isAnimated = true
-	})
- 
-	-- Set the progress to 50%
-	progressView:setProgress(1.0)
+	local image = display.newImage(self.view, "assets/images/player/BürgerLarsDietrich.png")
+	image.x = 310/2
+	image.y = 460/2
 	
-	fmwidgets = fmw:new(self.view)
-	fmwidgets:button("Zurück", goBack, "center", "top")
+	local fmwidgets = fmw:new(self.view)
+
+	local progressView = fmwidgets:progressView(400, 400, 400, 0.5, false)
+
+	local backButton = fmwidgets:button("Zurück", goBack)
+	local tmpW = backButton:getWidth()
+	local tmpH = backButton:getHeight()
+	backButton:setPosition(width - tmpW/2 - gap, height - tmpH/2 - gap)
 end
 
 -- --------------------------------------------------------
@@ -137,7 +97,6 @@ function scene:show(event)
 		Runtime:addEventListener("enterFrame", onUpdate)
 		Runtime:addEventListener("key", onKey)
 		Runtime:addEventListener("mouse", onMouse)
-		Runtime:addEventListener("resize", onResize)
 	end
 end
 
@@ -151,7 +110,6 @@ function scene:hide(event)
 		Runtime:removeEventListener("enterFrame", onUpdate)
 		Runtime:removeEventListener("key", onKey)
 		Runtime:removeEventListener("mouse", onMouse)
-		Runtime:removeEventListener("resize", onResize)
 	elseif phase == "did" then 
 		print("did hide")
 	end

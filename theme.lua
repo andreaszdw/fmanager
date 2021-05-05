@@ -5,6 +5,7 @@ theme.standard = {
 	fill = {55/255, 55/255, 55/255},
 	label = {255/255, 146/255, 3/255},
 	stroke = {255/255, 146/255, 3/255},
+	green = {0/255, 255/255, 0/255},
 	progressView = {
 		sheet = "assets/images/widget-progress-view-standard.png",
 		options = {

@@ -38,12 +38,5 @@ function singleText:getHeight()
 	return self.text.height 
 end
 
---
---
--- --------------------------------------------------------
-function singleText:setY(y)
-	self.text.y = y
-end
-
 -- --------------------------------------------------------
 return singleText

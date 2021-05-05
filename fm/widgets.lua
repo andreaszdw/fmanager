@@ -6,7 +6,7 @@
 
 local button = require("fm.button")
 local singleText = require("fm.singletext")
-local vbox = require("fm.vbox")
+local progressView = require("fm.progressview")
 
 local fmwidgets = {}
 
@@ -22,7 +22,6 @@ function fmwidgets:new(view, theme)
 		childs = {}
 	}
 
-	print(o.theme.progressView.sheet)
 	setmetatable(o, self)
 	self.__index = self
 	return o
@@ -47,10 +46,10 @@ function fmwidgets:singleText(label, x, y, fontSize, font)
 end
 
 --
--- vBox
--- -------------------------------------------------------
-function fmwidgets:vBox()
-	local child = vbox:new(self)
+-- progressVies
+-- --------------------------------------------------------
+function fmwidgets:progressView(left, top, width, value, isAnimated)
+	local child = progressView:new(self, left, top, width, value, isAnimated)
 	table.insert(self.childs, child)
 	return child
 end

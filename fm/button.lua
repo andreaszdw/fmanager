@@ -46,23 +46,8 @@ function button:new(parent, label, eventFunction, x, y, width, height)
 		font = o.theme.font
 	})
 
-	if o.x == "right" then 
-		o.button.x = display.pixelWidth - o.button.width*0.5 - 10
-	elseif o.x == "left" then 
-		o.button.x = 0 + o.button.width*0.5 + 10
-	elseif o.x == "center" then 
-		o.button.x = display.pixelWidth * 0.5
-	else
-		o.button.x = o.x
-	end
-
-	if o.y == "bottom" then 
-		o.button.y = display.pixelHeight - o.button.height*0.52 - 10
-	elseif o.y == "top" then 
-		o.button.y = 0 + o.button.height * 0.5 + 10
-	else
-		o.button.y = o.y 
-	end
+	o.button.x = x 
+	o.button.y = y 
 
 	parent.view:insert(o.button)
 
@@ -71,5 +56,27 @@ function button:new(parent, label, eventFunction, x, y, width, height)
 	return o
 end
 
------------------------------------------------------------
+--
+-- getHeight
+-- --------------------------------------------------------
+function button:getHeight() 
+	return self.button.height 
+end
+
+-- 
+-- getWidth
+-- --------------------------------------------------------
+function button:getWidth() 
+	return self.button.width 
+end
+
+--
+-- set position
+-- --------------------------------------------------------
+function button:setPosition(x, y)
+	self.button.x = x 
+	self.button.y = y 
+end
+
+-- --------------------------------------------------------
 return button
