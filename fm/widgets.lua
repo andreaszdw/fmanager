@@ -28,6 +28,13 @@ function fmwidgets:new(view, theme)
 end
 
 --
+-- getTheme
+-- --------------------------------------------------------
+function fmwidgets:getTheme()
+	return self.theme 
+end
+
+--
 -- button
 -- --------------------------------------------------------
 function fmwidgets:button(label, onEvent, x, y, width, height)
