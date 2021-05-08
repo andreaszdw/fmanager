@@ -38,5 +38,13 @@ function singleText:getHeight()
 	return self.text.height 
 end
 
+--
+-- set anchor
+-- --------------------------------------------------------
+function singleText:setAnchor(x, y)
+	self.text.anchorX = x 
+	self.text.anchorY = y 
+end
+
 -- --------------------------------------------------------
 return singleText

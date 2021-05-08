@@ -10,7 +10,7 @@
 local composer = require("composer")
 local widget = require("widget")
 local i18n = require("i18n")
-local fmw = require("fm.widgets")
+local fmwidgets = require("fm.widgets")
 
 local strings = i18n.getStrings()
 
@@ -73,20 +73,28 @@ end
 --
 -- --------------------------------------------------------
 function scene:create(event)
-	
-	local fmwidgets = fmw:new(self.view)
 
-	local theme = fmwidgets:getTheme()
+	local imageFile = "assets/images/player/BürgerLarsDietrich.png"
+	local nameText = "Bürger Lars Dietrich"
+	local age = 18
+	local contract = 3
+
+	local fmw = fmwidgets:new(self.view)
+
+	local theme = fmw:getTheme()
 
 	local gap = 10
 
 	display.setDefault("background", unpack(theme.bg))
 
+	-- this is the rect for the view
 	local bgRect = display.newRect(self.view, 640, 360, 1280, 720)
 	bgRect.strokeWidth = 2
 	bgRect:setStrokeColor(unpack(theme.stroke))
 	bgRect:setFillColor(1, 1, 1, 0)
 
+	-- this is the left side
+	-- the rect for the player image
 	local playerImage = display.newRect(self.view, 10, 10, 300, 450)
 	playerImage.strokeWidth = 2
 	playerImage:setFillColor(unpack(theme.green))
@@ -94,18 +102,55 @@ function scene:create(event)
 	playerImage.anchorX = 0
 	playerImage.anchorY = 0
 
-	local image = display.newImage(self.view, "assets/images/player/BürgerLarsDietrich.png")
+	-- the player image
+	local image = display.newImage(self.view, imageFile)
 	image.x = 310/2
 	image.y = 460/2
 
-	local progressView = fmwidgets:progressView(400, 400, 400, 0.5, false)
+	local nextLine = 480
+	local centerLine = 160
+	local left = 10
+	local tab = 100
+	local width = 304
+	local height = 30
+	local fontSize = 20
+	local lineGap = 2
 
-	local backButton = fmwidgets:button("Zurück", goBack)
+	-- bgRect for player name 
+	local rectPlayerName = display.newRect(self.view, centerLine, nextLine, width, height)
+	rectPlayerName:setFillColor(unpack(theme.lineEven))
+	-- the player name
+	local playerText = fmw:singleText(nameText, centerLine, nextLine, fontSize)
+
+	nextLine = nextLine + height + lineGap
+
+	-- bgRect for age
+	local rectAge = display.newRect(self.view, centerLine, nextLine, width, height)
+	rectAge:setFillColor(unpack(theme.lineOdd))
+	-- the player age
+	local ageText = fmw:singleText(strings.age, left, nextLine, fontSize)
+	ageText:setAnchor(0, 0.5)
+	local ageYears = fmw:singleText(": " .. age .. " " .. strings.years, tab, nextLine, fontSize)
+	ageYears:setAnchor(0, 0.5)
+	
+	nextLine = nextLine + height + lineGap
+
+	local rectContract = display.newRect(self.view, centerLine, nextLine, width, height)
+	rectContract:setFillColor(unpack(theme.lineEven))
+	local contractText = fmw:singleText(strings.contract, left, nextLine, fontSize)
+	contractText:setAnchor(0, 0.5)
+	local contractYears = fmw:singleText(": " .. contract .. " " .. strings.years, tab, nextLine, fontSize)
+	contractYears:setAnchor(0, 0.5)
+
+	-- contract	
+
+	local progressView = fmw:progressView(400, 400, 400, 0.5, false)
+
+	local backButton = fmw:button("Zurück", goBack)
 	local tmpW = backButton:getWidth()
 	local tmpH = backButton:getHeight()
 	backButton:setPosition(1280 - tmpW/2 - gap, 720 - tmpH/2 - gap)
- 	
- 	print("in p")
+
 	-- put the view in the local sceneView, so it can be changed on resize
 	sceneView = self.view
 end
