@@ -78,6 +78,7 @@ function scene:create(event)
 	local nameText = "Bürger Lars Dietrich"
 	local age = 18
 	local contract = 3
+	local salary = 1000000
 
 	local fmw = fmwidgets:new(self.view)
 
@@ -142,7 +143,15 @@ function scene:create(event)
 	local contractYears = fmw:singleText(": " .. contract .. " " .. strings.years, tab, nextLine, fontSize)
 	contractYears:setAnchor(0, 0.5)
 
-	-- contract	
+	nextLine = nextLine + height + lineGap
+
+	-- contract
+	local rectSalary = display.newRect(self.view, centerLine, nextLine, width, height)
+	rectSalary:setFillColor(unpack(theme.lineOdd))
+	local salaryText = fmw:singleText(strings.salary, left, nextLine, fontSize)
+	salaryText:setAnchor(0, 0.5)
+	local salaryAmount = fmw:singleText(": " .. i18n.currencyFormat(salary, 0, "suf"), tab, nextLine, fontSize)
+	salaryAmount:setAnchor(0, 0.5)
 
 	local progressView = fmw:progressView(400, 400, 400, 0.5, false)
 
