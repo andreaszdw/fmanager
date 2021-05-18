@@ -1,3 +1,4 @@
+-- --------------------------------------------------------
 --
 -- template.lua
 --
@@ -23,15 +24,27 @@ local centerY = height * 0.5
 local sceneView = 0
 
 -- -------------------------------------------------------
+--
+-- centerSceneView
+--
+-- -------------------------------------------------------
 local function centerSceneView()
 	sceneView.x = (display.pixelWidth - 1280)/2
 	sceneView.y = (display.pixelHeight - 720)/2
 end
 
 -- --------------------------------------------------------
+--
+-- update
+--
+-- --------------------------------------------------------
 local function onUpdate(event)
 end
 
+-- --------------------------------------------------------
+--
+-- onKey
+--
 -- --------------------------------------------------------
 local function onKey(event)
 	if(event.keyName == "f") then
@@ -49,19 +62,35 @@ local function onKey(event)
 end
 
 -- -------------------------------------------------------
+--
+-- on Mouse
+--
+-- -------------------------------------------------------
 local function onMouse(event)
 end
 
+-- -------------------------------------------------------
+--
+-- onResize 
+--
 -- -------------------------------------------------------
 local function onResize(event)
 	centerSceneView()
 end
 
 -- -------------------------------------------------------
+--
+-- goPlayer
+--
+-- -------------------------------------------------------
 local function goPlayer(event)
 	composer.gotoScene("scenes.win32.player")
 end
 
+-- --------------------------------------------------------
+--
+-- quitApp 
+--
 -- --------------------------------------------------------
 local function quitApp(event)
 	composer.removeHidden()
@@ -69,9 +98,12 @@ local function quitApp(event)
 	native.requestExit()
 end
 
+-- --------------------------------------------------------
 -- 
 -- now the scene functions 
 --
+-- --------------------------------------------------------
+
 -- --------------------------------------------------------
 function scene:create(event)
 	
@@ -140,6 +172,7 @@ function scene:destroy(event)
 	print("do saving")
 end
 
+-- --------------------------------------------------------
 --
 -- add event listener
 --

@@ -1,15 +1,19 @@
+-- --------------------------------------------------------
 --
 -- singletext.lua
 --
 --
 -- andreaszdw@googlemail.com
+--
 -- --------------------------------------------------------
 local widget = require("widget")
 
 local singleText = {}
 
+-- --------------------------------------------------------
 --
 -- constructor
+--
 -- --------------------------------------------------------
 function singleText:new(parent, label, x, y, fontSize, font)
 
@@ -31,15 +35,19 @@ function singleText:new(parent, label, x, y, fontSize, font)
 	return o
 end
 
+-- --------------------------------------------------------
 --
 -- get height
+--
 -- --------------------------------------------------------
 function singleText:getHeight()
 	return self.text.height 
 end
 
+-- --------------------------------------------------------
 --
 -- set anchor
+--
 -- --------------------------------------------------------
 function singleText:setAnchor(x, y)
 	self.text.anchorX = x 

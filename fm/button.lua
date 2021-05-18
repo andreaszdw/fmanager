@@ -1,14 +1,18 @@
+-- --------------------------------------------------------
 --
 -- button.lua
 --
 -- andreaszdw@googlemail.com
+--
 -- --------------------------------------------------------
 local widget = require("widget")
 
 local button = {}
 
+-- --------------------------------------------------------
 --
 -- constructor
+--
 -- --------------------------------------------------------
 function button:new(parent, label, eventFunction, x, y, width, height)
 
@@ -56,22 +60,28 @@ function button:new(parent, label, eventFunction, x, y, width, height)
 	return o
 end
 
+-- --------------------------------------------------------
 --
 -- getHeight
+--
 -- --------------------------------------------------------
 function button:getHeight() 
 	return self.button.height 
 end
 
+-- --------------------------------------------------------
 -- 
 -- getWidth
+--
 -- --------------------------------------------------------
 function button:getWidth() 
 	return self.button.width 
 end
 
+-- --------------------------------------------------------
 --
 -- set position
+--
 -- --------------------------------------------------------
 function button:setPosition(x, y)
 	self.button.x = x 

@@ -1,3 +1,4 @@
+-- --------------------------------------------------------
 --
 -- player.lua
 --
@@ -25,15 +26,27 @@ local centerY = height * 0.5
 local sceneView = 0
 
 -- -------------------------------------------------------
+--
+-- centerSceneView
+--
+-- -------------------------------------------------------
 local function centerSceneView()
 	sceneView.x = (display.pixelWidth - 1280)/2
 	sceneView.y = (display.pixelHeight - 720)/2
 end
 
 -- --------------------------------------------------------
+--
+-- onUpdate
+--
+-- --------------------------------------------------------
 local function onUpdate(event)
 end
 
+-- --------------------------------------------------------
+-- 
+-- onKey
+--
 -- --------------------------------------------------------
 local function onKey(event)
 	if(event.keyName == "f") then
@@ -51,23 +64,38 @@ local function onKey(event)
 end
 
 -- -------------------------------------------------------
+--
+-- onMouse
+--
+-- -------------------------------------------------------
 local function onMouse(event)
 end
 
+-- -------------------------------------------------------
+--
+-- onResize
+--
 -- -------------------------------------------------------
 local function onResize(event)
 	centerSceneView()
 end
 
 -- -------------------------------------------------------
+--
+-- goBack
+--
+-- -------------------------------------------------------
 local function goBack(event) 
 	local prevScene = composer.getSceneName("previous")
 	composer.gotoScene(prevScene)
 end
 
+-- --------------------------------------------------------
 -- 
 -- now the scene functions 
 --
+-- --------------------------------------------------------
+
 -- --------------------------------------------------------
 function scene:create(event)
 
@@ -196,6 +224,7 @@ function scene:destroy(event)
 	
 end
 
+-- --------------------------------------------------------
 --
 -- add event listener
 --

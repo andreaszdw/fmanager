@@ -1,7 +1,9 @@
+-- --------------------------------------------------------
 --
 -- main.lua
 -- project fmanager
 -- andreaszdw@googlemail.com
+--
 -- --------------------------------------------------------
 local composer = require("composer")
 

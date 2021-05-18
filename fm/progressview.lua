@@ -1,14 +1,18 @@
+-- --------------------------------------------------------
 --
 -- progressview.lua
 --
 -- andreaszdw@googlemail.com
+--
 -- --------------------------------------------------------
 local widget = require("widget")
 
 local progress = {}
 
+-- --------------------------------------------------------
 --
 -- constructor
+--
 -- --------------------------------------------------------
 function progress:new(parent, left, top, width, value, isAnimated)
 
@@ -55,29 +59,37 @@ function progress:new(parent, left, top, width, value, isAnimated)
 	return o
 end
 
+-- --------------------------------------------------------
 --
 -- setValue
+--
 -- --------------------------------------------------------
 function progress:setValue(v)
 	self.progressView:setProgress(v)
 end
 
+-- --------------------------------------------------------
 --
 -- getHeight
+--
 -- --------------------------------------------------------
 function progress:getHeight() 
 	return self.button.height 
 end
 
+-- --------------------------------------------------------
 -- 
 -- getWidth
+--
 -- --------------------------------------------------------
 function progress:getWidth() 
 	return self.button.width 
 end
 
+-- --------------------------------------------------------
 --
 -- set position
+--
 -- --------------------------------------------------------
 function progress:setPosition(x, y)
 end

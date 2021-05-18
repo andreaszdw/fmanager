@@ -1,15 +1,19 @@
+-- --------------------------------------------------------
 --
 -- button.lua
 --
 --
 -- andreaszdw@googlemail.com
+--
 -- --------------------------------------------------------
 local widgets = require("widgets")
 
 local button = {}
 
+-- --------------------------------------------------------
 --
 -- constructor
+--
 -- --------------------------------------------------------
 function button:new(parent, label, onEvent, x, y, width, height)
 	local o = {
@@ -48,5 +52,5 @@ function button:new(parent, label, onEvent, x, y, width, height)
 	return o
 end
 
------------------------------------------------------------
+-- --------------------------------------------------------
 return button

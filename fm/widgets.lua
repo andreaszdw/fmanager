@@ -1,7 +1,9 @@
+-- --------------------------------------------------------
 --
 -- widgets.lua
 --
 -- andreaszdw@googlemail.com
+--
 -- --------------------------------------------------------
 
 local button = require("fm.button")
@@ -10,8 +12,10 @@ local progressView = require("fm.progressview")
 
 local fmwidgets = {}
 
+-- --------------------------------------------------------
 --
 -- constructor
+-- 
 -- --------------------------------------------------------
 function fmwidgets:new(view, theme)
 
@@ -27,15 +31,19 @@ function fmwidgets:new(view, theme)
 	return o
 end
 
+-- --------------------------------------------------------
 --
 -- getTheme
+--
 -- --------------------------------------------------------
 function fmwidgets:getTheme()
 	return self.theme 
 end
 
+-- --------------------------------------------------------
 --
 -- button
+--
 -- --------------------------------------------------------
 function fmwidgets:button(label, onEvent, x, y, width, height)
 	local child = button:new(self, label, onEvent, x, y, width, height)
@@ -43,8 +51,10 @@ function fmwidgets:button(label, onEvent, x, y, width, height)
 	return child
 end
 
+-- --------------------------------------------------------
 --
 -- singleText
+--
 -- --------------------------------------------------------
 function fmwidgets:singleText(label, x, y, fontSize, font)
 	local child = singleText:new(self, label, x, y, fontSize, font)
@@ -52,8 +62,10 @@ function fmwidgets:singleText(label, x, y, fontSize, font)
 	return child
 end
 
+-- --------------------------------------------------------
 --
 -- progressVies
+--
 -- --------------------------------------------------------
 function fmwidgets:progressView(left, top, width, value, isAnimated)
 	local child = progressView:new(self, left, top, width, value, isAnimated)
@@ -61,5 +73,5 @@ function fmwidgets:progressView(left, top, width, value, isAnimated)
 	return child
 end
 
------------------------------------------------------------
+-- --------------------------------------------------------
 return fmwidgets
