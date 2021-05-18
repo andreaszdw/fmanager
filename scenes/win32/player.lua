@@ -25,12 +25,9 @@ local centerY = height * 0.5
 local sceneView = 0
 
 -- -------------------------------------------------------
-local function repositeSceneView()
-	local repositionX = (display.pixelWidth - 1280)/2
-	sceneView.x = repositionX
-
-	local repositionY = (display.pixelHeight - 720)/2
-	sceneView.y = repositionY
+local function centerSceneView()
+	sceneView.x = (display.pixelWidth - 1280)/2
+	sceneView.y = (display.pixelHeight - 720)/2
 end
 
 -- --------------------------------------------------------
@@ -59,7 +56,7 @@ end
 
 -- -------------------------------------------------------
 local function onResize(event)
-	repositeSceneView()
+	centerSceneView()
 end
 
 -- -------------------------------------------------------
@@ -170,7 +167,7 @@ function scene:show(event)
 	local phase = event.phase
 
 	if (phase == "will") then
-		repositeSceneView()
+		centerSceneView()
 	elseif (phase == "did") then
 		-- add listeners
 		Runtime:addEventListener("enterFrame", onUpdate)
