@@ -21,6 +21,7 @@ function player:new()
 		contract = contract or 3,
 		salary = salary or 125000,
 		imageFile = imageFile or "assets/images/player/BürgerLarsDietrich.png",
+		foot = foot or "L",
 		-- position skills - this is a star system
 		keeper = keeper or 1,
 		defender = defender or 1,

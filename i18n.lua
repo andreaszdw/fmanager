@@ -11,6 +11,8 @@ de.digitGrouping = 3
 de.groupingSeparator = "."
 de.decimalSeparator = ","
 de.currencySign = "€"
+de.foot = "Fuss"
+de.keeper = "Torwart"
 
 
 local default = {}
@@ -26,6 +28,8 @@ default.digitGrouping = 3
 default.groupingSeparator = ","
 default.decimalSeparator = "."
 default.currencySign = "$"
+default.foot = "Fuss"
+default.keeper ="Keeper"
 
 local i18n = {}
 

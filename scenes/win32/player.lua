@@ -100,11 +100,11 @@ end
 -- --------------------------------------------------------
 function scene:create(event)
 
-	local imageFile = "assets/images/player/BürgerLarsDietrich.png"
-	local nameText = "Bürger Lars Dietrich"
-	local age = 18
-	local contract = 3
-	local salary = 1000000
+	-- local imageFile = "assets/images/player/BürgerLarsDietrich.png"
+	-- local nameText = "Bürger Lars Dietrich"
+	-- local age = 18
+	-- local contract = 3
+	-- local salary = 1000000
 
 	local docPlayer = CPlayer:new()
 
@@ -164,6 +164,7 @@ function scene:create(event)
 	
 	nextLine = nextLine + height + lineGap
 
+	-- contract
 	local rectContract = display.newRect(self.view, centerLine, nextLine, width, height)
 	rectContract:setFillColor(unpack(theme.lineEven))
 	local contractText = fmw:singleText(strings.contract, left, nextLine, fontSize)
@@ -173,7 +174,7 @@ function scene:create(event)
 
 	nextLine = nextLine + height + lineGap
 
-	-- contract
+	-- salary
 	local rectSalary = display.newRect(self.view, centerLine, nextLine, width, height)
 	rectSalary:setFillColor(unpack(theme.lineOdd))
 	local salaryText = fmw:singleText(strings.salary, left, nextLine, fontSize)
@@ -181,6 +182,32 @@ function scene:create(event)
 	local salaryAmount = fmw:singleText(": " .. i18n.currencyFormat(docPlayer.salary, 0, "suf"), tab, nextLine, fontSize)
 	salaryAmount:setAnchor(0, 0.5)
 
+	nextLine = nextLine + height + lineGap
+
+	-- foot
+	local rectFoot = display.newRect(self.view, centerLine, nextLine, width, height)
+	rectFoot:setFillColor(unpack(theme.lineEven))
+	local footText = fmw:singleText(strings.foot, left, nextLine, fontSize)
+	footText:setAnchor(0, 0.5)
+	local foot = fmw:singleText(": " .. docPlayer.foot, tab, nextLine, fontSize)
+	foot:setAnchor(0, 0.5)
+	
+	nextLine = nextLine + height + lineGap
+
+	-- position skills
+	local rectKeeper = display.newRect(self.view, centerLine, nextLine, width, height)
+	rectKeeper:setFillColor(unpack(theme.lineOdd))
+	local keeperText = fmw:singleText(strings.keeper, left, nextLine, fontSize)
+	keeperText:setAnchor(0, 0.5)
+	local keeperStars = display.newImage(self.view, "assets/images/stars/fuel40x38.png")
+	keeperStars.x = tab + 50
+	keeperStars.y = nextLine
+	local keeperStars2 = display.newImage(self.view, "assets/images/stars/fuel40x38.png")
+	keeperStars2.x = tab + 50 + 50
+	keeperStars2.y = nextLine
+
+
+	-- --
 	local progressView = fmw:progressView(400, 400, 400, 0.5, false)
 
 	local backButton = fmw:button("Zurück", goBack)
