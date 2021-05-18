@@ -12,6 +12,7 @@ local composer = require("composer")
 local widget = require("widget")
 local i18n = require("i18n")
 local fmwidgets = require("fm.widgets")
+local CPlayer = require("doc.player")
 
 local strings = i18n.getStrings()
 
@@ -105,6 +106,8 @@ function scene:create(event)
 	local contract = 3
 	local salary = 1000000
 
+	local docPlayer = CPlayer:new()
+
 	local fmw = fmwidgets:new(self.view)
 
 	local theme = fmw:getTheme()
@@ -129,7 +132,7 @@ function scene:create(event)
 	playerImage.anchorY = 0
 
 	-- the player image
-	local image = display.newImage(self.view, imageFile)
+	local image = display.newImage(self.view, docPlayer.imageFile)
 	image.x = 310/2
 	image.y = 460/2
 
@@ -146,7 +149,7 @@ function scene:create(event)
 	local rectPlayerName = display.newRect(self.view, centerLine, nextLine, width, height)
 	rectPlayerName:setFillColor(unpack(theme.lineEven))
 	-- the player name
-	local playerText = fmw:singleText(nameText, centerLine, nextLine, fontSize)
+	local playerText = fmw:singleText(docPlayer.name, centerLine, nextLine, fontSize)
 
 	nextLine = nextLine + height + lineGap
 
@@ -156,7 +159,7 @@ function scene:create(event)
 	-- the player age
 	local ageText = fmw:singleText(strings.age, left, nextLine, fontSize)
 	ageText:setAnchor(0, 0.5)
-	local ageYears = fmw:singleText(": " .. age .. " " .. strings.years, tab, nextLine, fontSize)
+	local ageYears = fmw:singleText(": " .. docPlayer.age .. " " .. strings.years, tab, nextLine, fontSize)
 	ageYears:setAnchor(0, 0.5)
 	
 	nextLine = nextLine + height + lineGap
@@ -165,7 +168,7 @@ function scene:create(event)
 	rectContract:setFillColor(unpack(theme.lineEven))
 	local contractText = fmw:singleText(strings.contract, left, nextLine, fontSize)
 	contractText:setAnchor(0, 0.5)
-	local contractYears = fmw:singleText(": " .. contract .. " " .. strings.years, tab, nextLine, fontSize)
+	local contractYears = fmw:singleText(": " .. docPlayer.contract .. " " .. strings.years, tab, nextLine, fontSize)
 	contractYears:setAnchor(0, 0.5)
 
 	nextLine = nextLine + height + lineGap
@@ -175,7 +178,7 @@ function scene:create(event)
 	rectSalary:setFillColor(unpack(theme.lineOdd))
 	local salaryText = fmw:singleText(strings.salary, left, nextLine, fontSize)
 	salaryText:setAnchor(0, 0.5)
-	local salaryAmount = fmw:singleText(": " .. i18n.currencyFormat(salary, 0, "suf"), tab, nextLine, fontSize)
+	local salaryAmount = fmw:singleText(": " .. i18n.currencyFormat(docPlayer.salary, 0, "suf"), tab, nextLine, fontSize)
 	salaryAmount:setAnchor(0, 0.5)
 
 	local progressView = fmw:progressView(400, 400, 400, 0.5, false)

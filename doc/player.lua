@@ -16,8 +16,11 @@ local player = {}
 function player:new()
 
 	local o = {
-		name = name or "",
+		name = name or "Egal Egal",
 		age = age or 17, -- this is the normal starting age
+		contract = contract or 3,
+		salary = salary or 125000,
+		imageFile = imageFile or "assets/images/player/BürgerLarsDietrich.png",
 		-- position skills - this is a star system
 		keeper = keeper or 1,
 		defender = defender or 1,
