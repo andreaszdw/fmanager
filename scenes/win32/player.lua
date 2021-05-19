@@ -232,14 +232,19 @@ function scene:create(event)
 		rowTitle:setFillColor(1, 0, 0, 1)
 		rowTitle.anchorX = 0
 		rowTitle.anchorY = 0
+
+		local rowValue = display.newText(row, value, 50, 0, nil, 14)
+		rowValue:setFillColor(0, 1, 0, 1)
+		rowValue.anchorX = 0 
+		rowValue.anchorY = 0
 	end
 
 	local tableView = fmw:table(400, 400, 200, 300, onRowRender)
 
 	tableView:insertRow({title = "Name", value = "Klaas Gärtner"})
-	tableView:insertRow({title = "Name", value = "Klaas Gärtner"})
-	tableView:insertRow({title = "Name", value = "Klaas Gärtner"})
-	tableView:insertRow({title = "Name", value = "Klaas Gärtner"})
+	tableView:insertRow({title = "Name", value = "Fritz Merkel"})
+	tableView:insertRow({title = "Name", value = "August Oeyster"})
+	tableView:insertRow({title = "Name", value = "Kai Birne"})
 
 	-- put the view in the local sceneView, so it can be changed on resize
 	sceneView = self.view
