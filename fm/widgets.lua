@@ -9,7 +9,7 @@
 local button = require("fm.button")
 local singleText = require("fm.singletext")
 local progressView = require("fm.progressview")
-local grid = require("fm.grid")
+local tableView = require("fm.table")
 
 local fmwidgets = {}
 
@@ -79,8 +79,8 @@ end
 -- grid
 -- 
 -- --------------------------------------------------------
-function fmwidgets:grid(x, y, rows, columns)
-	local child = grid:new(self, x, y, rows, columns)
+function fmwidgets:table(left, top, width, height, rowRenderer)
+	local child = tableView:new(self, left, top, width, height, rowRenderer)
 	table.insert(self.childs, child)
 	return child
 end

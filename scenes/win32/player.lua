@@ -215,7 +215,31 @@ function scene:create(event)
 	local tmpH = backButton:getHeight()
 	backButton:setPosition(1280 - tmpW/2 - gap, 720 - tmpH/2 - gap)
 
-	local grid = fmw:grid(400, 400, 200, 300, 2, 2)
+	-- ----------------------------------------------------
+	-- 
+	-- onRowRender 
+	--
+	-- ----------------------------------------------------
+	local function onRowRender(event)
+		local row = event.row
+		local title = row.params.title 
+		local value = row.params.value
+
+		local rowHeight = row.contentHeight		
+		local rowWidth = row.contentWidth 
+
+		local rowTitle = display.newText(row, title, 0, 0, nil, 14)
+		rowTitle:setFillColor(1, 0, 0, 1)
+		rowTitle.anchorX = 0
+		rowTitle.anchorY = 0
+	end
+
+	local tableView = fmw:table(400, 400, 200, 300, onRowRender)
+
+	tableView:insertRow({title = "Name", value = "Klaas Gärtner"})
+	tableView:insertRow({title = "Name", value = "Klaas Gärtner"})
+	tableView:insertRow({title = "Name", value = "Klaas Gärtner"})
+	tableView:insertRow({title = "Name", value = "Klaas Gärtner"})
 
 	-- put the view in the local sceneView, so it can be changed on resize
 	sceneView = self.view
