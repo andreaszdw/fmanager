@@ -9,6 +9,7 @@
 local button = require("fm.button")
 local singleText = require("fm.singletext")
 local progressView = require("fm.progressview")
+local grid = require("fm.grid")
 
 local fmwidgets = {}
 
@@ -69,6 +70,17 @@ end
 -- --------------------------------------------------------
 function fmwidgets:progressView(left, top, width, value, isAnimated)
 	local child = progressView:new(self, left, top, width, value, isAnimated)
+	table.insert(self.childs, child)
+	return child
+end
+
+-- --------------------------------------------------------
+--
+-- grid
+-- 
+-- --------------------------------------------------------
+function fmwidgets:grid(x, y, rows, columns)
+	local child = grid:new(self, x, y, rows, columns)
 	table.insert(self.childs, child)
 	return child
 end
