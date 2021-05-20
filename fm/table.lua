@@ -15,7 +15,7 @@ local table = {}
 -- constructor
 --
 -- --------------------------------------------------------
-function table:new(parent, left, top, width, height, rowRenderer)
+function table:new(parent, left, top, width, height, rowRenderer, isLocked, rowHeight)
 	local o = {
 		parent = parent,
 		theme = parent.theme,
@@ -23,7 +23,9 @@ function table:new(parent, left, top, width, height, rowRenderer)
 		top = top or 0,
 		width = width or 0,
 		height = height or 0,
-		rowRenderer = rowRenderer 
+		rowRenderer = rowRenderer,
+		isLocked = isLocked or true,
+		rowHeight = rowHeight or 35
 	}
 
 	o.tableView = widget.newTableView(
@@ -33,10 +35,13 @@ function table:new(parent, left, top, width, height, rowRenderer)
 		height = o.height,
 		width = o.width,
 		onRowRender = o.rowRenderer,
+		isLocked = o.isLocked,
+		backgroundColor = {unpack(o.theme.bg)},
+		noLines = true,
 		listener = scrollListener
 	})
 
-	o.rowHeight = 30
+	o.parent.view:insert(o.tableView)
 
 	setmetatable(o, self)
 	self.__index = self
@@ -49,10 +54,22 @@ end
 -- 
 -- --------------------------------------------------------
 function table:insertRow(params, isCategory)
-	print(self.tableView:getNumRows())
+	local odd = false
+
+	if self.tableView:getNumRows() % 2 == 1 then 
+		odd = true 
+	end
+
+	local rowColor = {default = {unpack(self.theme.tableView.lineEven)}}
+
+	if odd then
+		rowColor = {default =  {unpack(self.theme.tableView.lineOdd)}}
+	end
+
 	self.tableView:insertRow(
 	{	
 		isCategory = isCategory or false,
+		rowColor = rowColor,
 		rowHeight = self.rowHeight,
 		params = params
 	})

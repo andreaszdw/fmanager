@@ -13,6 +13,7 @@ de.decimalSeparator = ","
 de.currencySign = "€"
 de.foot = "Fuss"
 de.keeper = "Torwart"
+de.name = "Name"
 
 
 local default = {}
@@ -30,6 +31,7 @@ default.decimalSeparator = "."
 default.currencySign = "$"
 default.foot = "Fuss"
 default.keeper ="Keeper"
+default.name = "Name"
 
 local i18n = {}
 

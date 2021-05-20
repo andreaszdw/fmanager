@@ -12,6 +12,7 @@ local composer = require("composer")
 local widget = require("widget")
 local i18n = require("i18n")
 local fmwidgets = require("fm.widgets")
+local singleText = require("fm.singletext")
 local CPlayer = require("doc.player")
 
 local strings = i18n.getStrings()
@@ -122,8 +123,8 @@ function scene:create(event)
 	bgRect:setStrokeColor(unpack(theme.stroke))
 	bgRect:setFillColor(1, 1, 1, 0)
 
-	-- this is the left side
-	-- the rect for the player image
+	-- player image and rect
+	-- the rect 
 	local playerImage = display.newRect(self.view, 10, 10, 300, 450)
 	playerImage.strokeWidth = 2
 	playerImage:setFillColor(unpack(theme.green))
@@ -131,90 +132,13 @@ function scene:create(event)
 	playerImage.anchorX = 0
 	playerImage.anchorY = 0
 
-	-- the player image
+	-- the image
 	local image = display.newImage(self.view, docPlayer.imageFile)
 	image.x = 310/2
 	image.y = 460/2
 
-	local nextLine = 480
-	local centerLine = 160
-	local left = 10
-	local tab = 100
-	local width = 304
-	local height = 30
-	local fontSize = 20
-	local lineGap = 2
-
-	-- bgRect for player name 
-	local rectPlayerName = display.newRect(self.view, centerLine, nextLine, width, height)
-	rectPlayerName:setFillColor(unpack(theme.lineEven))
-	-- the player name
-	local playerText = fmw:singleText(docPlayer.name, centerLine, nextLine, fontSize)
-
-	nextLine = nextLine + height + lineGap
-
-	-- bgRect for age
-	local rectAge = display.newRect(self.view, centerLine, nextLine, width, height)
-	rectAge:setFillColor(unpack(theme.lineOdd))
-	-- the player age
-	local ageText = fmw:singleText(strings.age, left, nextLine, fontSize)
-	ageText:setAnchor(0, 0.5)
-	local ageYears = fmw:singleText(": " .. docPlayer.age .. " " .. strings.years, tab, nextLine, fontSize)
-	ageYears:setAnchor(0, 0.5)
-	
-	nextLine = nextLine + height + lineGap
-
-	-- contract
-	local rectContract = display.newRect(self.view, centerLine, nextLine, width, height)
-	rectContract:setFillColor(unpack(theme.lineEven))
-	local contractText = fmw:singleText(strings.contract, left, nextLine, fontSize)
-	contractText:setAnchor(0, 0.5)
-	local contractYears = fmw:singleText(": " .. docPlayer.contract .. " " .. strings.years, tab, nextLine, fontSize)
-	contractYears:setAnchor(0, 0.5)
-
-	nextLine = nextLine + height + lineGap
-
-	-- salary
-	local rectSalary = display.newRect(self.view, centerLine, nextLine, width, height)
-	rectSalary:setFillColor(unpack(theme.lineOdd))
-	local salaryText = fmw:singleText(strings.salary, left, nextLine, fontSize)
-	salaryText:setAnchor(0, 0.5)
-	local salaryAmount = fmw:singleText(": " .. i18n.currencyFormat(docPlayer.salary, 0, "suf"), tab, nextLine, fontSize)
-	salaryAmount:setAnchor(0, 0.5)
-
-	nextLine = nextLine + height + lineGap
-
-	-- foot
-	local rectFoot = display.newRect(self.view, centerLine, nextLine, width, height)
-	rectFoot:setFillColor(unpack(theme.lineEven))
-	local footText = fmw:singleText(strings.foot, left, nextLine, fontSize)
-	footText:setAnchor(0, 0.5)
-	local foot = fmw:singleText(": " .. docPlayer.foot, tab, nextLine, fontSize)
-	foot:setAnchor(0, 0.5)
-	
-	nextLine = nextLine + height + lineGap
-
-	-- position skills
-	local rectKeeper = display.newRect(self.view, centerLine, nextLine, width, height)
-	rectKeeper:setFillColor(unpack(theme.lineOdd))
-	local keeperText = fmw:singleText(strings.keeper, left, nextLine, fontSize)
-	keeperText:setAnchor(0, 0.5)
-	local keeperStars = display.newImage(self.view, "assets/images/stars/fuel40x38.png")
-	keeperStars.x = tab + 50
-	keeperStars.y = nextLine
-	local keeperStars2 = display.newImage(self.view, "assets/images/stars/fuel40x38.png")
-	keeperStars2.x = tab + 50 + 50
-	keeperStars2.y = nextLine
-
-
-	-- --
-	local progressView = fmw:progressView(400, 400, 400, 0.5, false)
-
-	local backButton = fmw:button("Zurück", goBack)
-	local tmpW = backButton:getWidth()
-	local tmpH = backButton:getHeight()
-	backButton:setPosition(1280 - tmpW/2 - gap, 720 - tmpH/2 - gap)
-
+	-- here comes tableView with player info
+	-- name, age, contract, salary
 	-- ----------------------------------------------------
 	-- 
 	-- onRowRender 
@@ -224,27 +148,41 @@ function scene:create(event)
 		local row = event.row
 		local title = row.params.title 
 		local value = row.params.value
+		local x = 5
+		local y = 5
+		local tab = 80
+		local fontSize = 14
 
 		local rowHeight = row.contentHeight		
 		local rowWidth = row.contentWidth 
 
-		local rowTitle = display.newText(row, title, 0, 0, nil, 14)
-		rowTitle:setFillColor(1, 0, 0, 1)
-		rowTitle.anchorX = 0
-		rowTitle.anchorY = 0
+		row.backgroundColor = {1, 0, 0}
 
-		local rowValue = display.newText(row, value, 50, 0, nil, 14)
-		rowValue:setFillColor(0, 1, 0, 1)
-		rowValue.anchorX = 0 
-		rowValue.anchorY = 0
+		-- here I must use singleText directly, not via wigedts/fmw because
+		-- the parent must be the row of the parent tableView
+		local rowTitle = singleText:new(row, title, x, y, fontSize)
+		rowTitle:setAnchor(0, 0)
+		
+		local rowValue = singleText:new(row, value, tab, y, fontSize)
+		rowValue:setAnchor(0, 0)
+		rowValue:setFillColor(fmw.theme.labelWhite)
 	end
 
-	local tableView = fmw:table(400, 400, 200, 300, onRowRender)
+	-- new table
+	local tableView = fmw:table(10, 470, 300, 240, onRowRender)
 
-	tableView:insertRow({title = "Name", value = "Klaas Gärtner"})
-	tableView:insertRow({title = "Name", value = "Fritz Merkel"})
-	tableView:insertRow({title = "Name", value = "August Oeyster"})
-	tableView:insertRow({title = "Name", value = "Kai Birne"})
+	-- insert rows
+	tableView:insertRow({title = strings.name, value = docPlayer.name})
+	tableView:insertRow({title = strings.age, value = docPlayer.age})
+	tableView:insertRow({title = strings.contract, value = docPlayer.contract .. " " .. strings.years})
+	tableView:insertRow({title = strings.salary, value = i18n.currencyFormat(docPlayer.salary, 0, "suf")})
+	tableView:insertRow({title = strings.foot, value = docPlayer.foot})
+
+	-- the back button
+	local backButton = fmw:button("Zurück", goBack)
+	local tmpW = backButton:getWidth()
+	local tmpH = backButton:getHeight()
+	backButton:setPosition(1280 - tmpW/2 - gap, 720 - tmpH/2 - gap)
 
 	-- put the view in the local sceneView, so it can be changed on resize
 	sceneView = self.view
