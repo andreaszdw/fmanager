@@ -21,12 +21,13 @@ function player:new()
 		contract = contract or 3,
 		salary = salary or 125000,
 		imageFile = imageFile or "assets/images/player/BürgerLarsDietrich.png",
-		foot = foot or "L",
-		-- position skills - this is a star system
-		keeper = keeper or 1,
-		defender = defender or 1,
-		midfielder = midfielder or 1,
-		attacker = attacker or 1,
+		foot = foot or "b",
+		-- position 
+		-- k = Keeper
+		-- d = Defender
+		-- m = Midfield
+		-- a = Attacker
+		position = position or "m",
 		-- sport skills - this is a percentage system
 		fitness = fitness or 0.5,
 		speed = speed or 0.5,

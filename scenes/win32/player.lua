@@ -101,12 +101,6 @@ end
 -- --------------------------------------------------------
 function scene:create(event)
 
-	-- local imageFile = "assets/images/player/BürgerLarsDietrich.png"
-	-- local nameText = "Bürger Lars Dietrich"
-	-- local age = 18
-	-- local contract = 3
-	-- local salary = 1000000
-
 	local docPlayer = CPlayer:new()
 
 	local fmw = fmwidgets:new(self.view)
@@ -141,10 +135,10 @@ function scene:create(event)
 	-- name, age, contract, salary
 	-- ----------------------------------------------------
 	-- 
-	-- onRowRender 
+	-- dataRender 
 	--
 	-- ----------------------------------------------------
-	local function onRowRender(event)
+	local function dataRender(event)
 		local row = event.row
 		local title = row.params.title 
 		local value = row.params.value
@@ -169,14 +163,40 @@ function scene:create(event)
 	end
 
 	-- new table
-	local tableView = fmw:table(10, 470, 300, 240, onRowRender)
+	local dataTable = fmw:table(10, 470, 300, 240, dataRender)
+
+	local pos = docPlayer.position
+	local posValue = ""
+	if pos == "k" then 
+		posValue = strings.keeper 
+	elseif pos == "m" then 
+		posValue = strings.midfielder
+	elseif pos == "d" then 
+		posValue = strings.defender 
+	elseif pos == "a" then 
+		posValue = strings.attacker 
+	end
+
+	local contractValue = docPlayer.contract .. " " .. strings.years
+	local salaryValue = i18n.currencyFormat(docPlayer.salary, 0, "suf")
+
+	local foot = docPlayer.foot
+	local footValue = ""
+	if foot == "l" then 
+		footValue = strings.left 
+	elseif foot == "r" then 
+		footValue = strings.right 
+	elseif foot == "b" then 
+		footValue = strings.both 
+	end
 
 	-- insert rows
-	tableView:insertRow({title = strings.name, value = docPlayer.name})
-	tableView:insertRow({title = strings.age, value = docPlayer.age})
-	tableView:insertRow({title = strings.contract, value = docPlayer.contract .. " " .. strings.years})
-	tableView:insertRow({title = strings.salary, value = i18n.currencyFormat(docPlayer.salary, 0, "suf")})
-	tableView:insertRow({title = strings.foot, value = docPlayer.foot})
+	dataTable:insertRow({title = strings.name, value = docPlayer.name})
+	dataTable:insertRow({title = strings.age, value = docPlayer.age})
+	dataTable:insertRow({title = strings.position, value = posValue})
+	dataTable:insertRow({title = strings.contract, value = contractValue})
+	dataTable:insertRow({title = strings.salary, value = salaryValue})
+	dataTable:insertRow({title = strings.foot, value = footValue})
 
 	-- the back button
 	local backButton = fmw:button("Zurück", goBack)

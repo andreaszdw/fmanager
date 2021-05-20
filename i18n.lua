@@ -13,7 +13,15 @@ de.decimalSeparator = ","
 de.currencySign = "€"
 de.foot = "Fuss"
 de.keeper = "Torwart"
+de.defender = "Verteidiger"
+de.midfielder = "Mittelfeld"
+de.attacker = "Stürmer"
+de.position = "Position"
 de.name = "Name"
+de.left = "links"
+de.right = "rechts"
+de.both = "links/rechts"
+
 
 
 local default = {}
@@ -29,9 +37,16 @@ default.digitGrouping = 3
 default.groupingSeparator = ","
 default.decimalSeparator = "."
 default.currencySign = "$"
-default.foot = "Fuss"
+default.foot = "Foot"
 default.keeper ="Keeper"
+default.defender = "Defender"
+default.midfielder = "Midfield"
+default.attacker = "Attacker"
+default.postition = "Position"
 default.name = "Name"
+default.left = "left"
+default.right = "right"
+default.both = "left/right"
 
 local i18n = {}
 
