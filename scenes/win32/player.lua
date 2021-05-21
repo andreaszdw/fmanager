@@ -126,15 +126,40 @@ function scene:create(event)
 	-- the rect 
 	local playerImage = display.newRect(self.view, 10, 10, 300, 450)
 	playerImage.strokeWidth = 2
-	playerImage:setFillColor(unpack(theme.green))
+	playerImage:setFillColor(unpack(theme.imageBg))
 	playerImage:setStrokeColor(unpack(theme.stroke))
 	playerImage.anchorX = 0
 	playerImage.anchorY = 0
 
 	-- the image
 	local image = display.newImage(self.view, docPlayer.imageFile)
-	image.x = 310/2
-	image.y = 460/2
+	image.x = 160
+	image.y = 150
+
+	-- the potential in stars
+	local potentialGroup = display.newGroup()
+	local potential = math.floor(10 * docPlayer.potential)
+	local rating = math.floor(10 * docPlayer.rating)
+	local starX = 0
+	local starY = 0
+	for i=1, potential do
+		local star
+		if rating >= i then 
+			star = display.newImage(potentialGroup, theme.fullStar)
+		else  
+			star = display.newImage(potentialGroup, theme.emptyStar)
+		end		
+		star.x = starX 
+		star.y = starY
+		starX = starX + 28
+	end
+	
+	potentialGroup.x = 160
+	potentialGroup.y = 420
+	potentialGroup.anchorX = 0.5
+	potentialGroup.anchorY = 0.5
+	potentialGroup.anchorChildren = true
+	table.insert(self.view, potentialGroup)
 
 	-- here comes tableView with player info
 	-- name, age, contract, salary

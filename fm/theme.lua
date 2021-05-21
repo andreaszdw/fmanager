@@ -10,6 +10,7 @@ local theme = {
 	label = d,
 	labelWhite = e,
 	stroke = d,
+	imageBg = b,
 	green = {0/255, 255/255, 0/255},
 	
 	tableView = {
@@ -26,6 +27,9 @@ local theme = {
 		strokeColor = {default=c, over=c},
 		strokeWidth = 2
 	},
+
+	emptyStar = "assets/images/stars/empty25x24.png",
+	fullStar = "assets/images/stars/full25x24.png",
 
 	font = "fm/assets/fonts/ubuntu/Ubuntu-R.ttf",
 
