@@ -29,15 +29,15 @@ function player:new()
 		-- a = Attacker
 		position = position or "m",
 		-- sport skills - this is a percentage system
-		fitness = fitness or 0.5,
-		speed = speed or 0.5,
-		stamina = stamina or 0.5,
+		fitness = fitness or 0.88,
+		speed = speed or 0.65,
+		stamina = stamina or 0.95,
 		-- football skills - percentage
-		passing = passing or 0.5,
-		header = header or 0.5,
-		shot = shot or 0.5,
-		tackle = tackle or 0.5,
-		tactic = tactic or 0.7564,
+		passing = passing or 0.83,
+		header = header or 0.65,
+		shot = shot or 0.65,
+		tackle = tackle or 0.35,
+		tactic = tactic or 0.83,
 		-- potential/rating - percentage
 		potential = potential or 0.8, -- this is the possible rating
 		rating = 0.3 -- rating

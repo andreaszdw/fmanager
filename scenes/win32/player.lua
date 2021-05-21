@@ -240,6 +240,7 @@ function scene:create(event)
 			local valuePercent = string.format("%.0f", row.params.value * 100) .. " %"
 			local valueText = singleText:new(row, valuePercent, tab2, y, fontSize)
 			valueText:setAnchor(0, 0)
+			valueText:setFillColor(fmw.theme.labelWhite)
 		end
 	end
 
