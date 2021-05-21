@@ -37,7 +37,7 @@ function player:new()
 		header = header or 0.5,
 		shot = shot or 0.5,
 		tackle = tackle or 0.5,
-		tactic = tactic or 0.5,
+		tactic = tactic or 0.7544,
 		-- potential/rating - percentage
 		potential = potential or 0.8, -- this is the possible rating
 		rating = 0.3 -- rating

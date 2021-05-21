@@ -29,7 +29,8 @@ local de = {
 	passing = "Pass",
 	header = "Kopfball",
 	shot = "Schuss",
-	tackle = "Zweikampf"
+	tackle = "Zweikampf",
+	tactic = "Taktik"
 }
 
 local default = {
@@ -63,7 +64,8 @@ local default = {
 	passing = "Passing",
 	header = "Header",
 	shot = "Shot",
-	tackle = "Tackling"
+	tackle = "Tackling",
+	tactic = "Tactic"
 }
 
 local i18n = {}

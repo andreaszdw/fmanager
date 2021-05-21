@@ -217,6 +217,7 @@ function scene:create(event)
 		local x = 5
 		local y = 10
 		local tab = 80
+		local tab2 = 380
 		local fontSize = 14
 		local headerSize = 22
 
@@ -234,11 +235,15 @@ function scene:create(event)
 			rowTitle:setAnchor(0, 0)
 
 			local valueView = progressView:new(row, tab, 5, 300, row.params.value)
+
+			local valuePercent = math.ceil(100 * row.params.value) .. " %"
+			local valueText = singleText:new(row, valuePercent, tab2, y, fontSize)
+			valueText:setAnchor(0, 0)
 		end
 	end
 
 	-- new table
-	local skillTable = fmw:table(320, 10, 450, 400, skillRender, 40)
+	local skillTable = fmw:table(320, 10, 450, 440, skillRender, 40)
 
 	skillTable:insertRow({header = strings.physicalSkills})
 	skillTable:insertRow({title = strings.fitness, value = docPlayer.fitness})
@@ -250,6 +255,7 @@ function scene:create(event)
 	skillTable:insertRow({title = strings.header, value = docPlayer.header})
 	skillTable:insertRow({title = strings.shot, value = docPlayer.shot})
 	skillTable:insertRow({title = strings.tackle, value = docPlayer.tackle})
+	skillTable:insertRow({title = strings.tactic, value = docPlayer.tactic})
 
 
 	-- the back button

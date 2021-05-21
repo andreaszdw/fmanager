@@ -1,16 +1,14 @@
--- component color
--- color.adobe.com/de/create/color-wheel
-
-local a = {15/255, 35/255, 80/255}
-local b = {35/255, 55/255, 100/255}
-local c = {45/255, 65/255, 120/255}
-local d = {254/255, 145/255, 3/255}
+local a = {2/255, 44/255, 67/255}
+local b = {5/255, 63/255, 94/255}
+local c = {17/255, 81/255, 115/255}
+local d = {255/255, 215/255, 0/255}
+local e = {255/255, 255/255, 255/255}
 
 local theme = {
 	bg = a,
 	fill = a,
 	label = d,
-	labelWhite = {255, 255, 255},
+	labelWhite = e,
 	stroke = d,
 	green = {0/255, 255/255, 0/255},
 	
@@ -24,8 +22,8 @@ local theme = {
 		height = 40,
 		cornerRadius = 10,
 		labelColor = {default=d, over=d},
-		fillColor = {default=a, over=b},
-		strokeColor = {default=d, over=d},
+		fillColor = {default=b, over=b},
+		strokeColor = {default=c, over=c},
 		strokeWidth = 2
 	},
 
