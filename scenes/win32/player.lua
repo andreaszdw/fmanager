@@ -238,7 +238,7 @@ function scene:create(event)
 	end
 
 	-- new table
-	local skillTable = fmw:table(320, 10, 450, 300, skillRender, 40)
+	local skillTable = fmw:table(320, 10, 450, 400, skillRender, 40)
 
 	skillTable:insertRow({header = strings.physicalSkills})
 	skillTable:insertRow({title = strings.fitness, value = docPlayer.fitness})
@@ -246,6 +246,10 @@ function scene:create(event)
 	skillTable:insertRow({title = strings.stamina, value = docPlayer.stamina})
 	skillTable:insertRow({empty})
 	skillTable:insertRow({header = strings.footballSkills})
+	skillTable:insertRow({title = strings.passing, value = docPlayer.passing})
+	skillTable:insertRow({title = strings.header, value = docPlayer.header})
+	skillTable:insertRow({title = strings.shot, value = docPlayer.shot})
+	skillTable:insertRow({title = strings.tackle, value = docPlayer.tackle})
 
 
 	-- the back button

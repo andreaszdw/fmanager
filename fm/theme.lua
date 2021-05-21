@@ -1,23 +1,31 @@
+-- component color
+-- color.adobe.com/de/create/color-wheel
+
+local a = {15/255, 35/255, 80/255}
+local b = {35/255, 55/255, 100/255}
+local c = {45/255, 65/255, 120/255}
+local d = {254/255, 145/255, 3/255}
+
 local theme = {
-	bg = {28/255, 38/255, 33/255},
-	fill = {55/255, 55/255, 55/255},
-	label = {255/255, 146/255, 3/255},
+	bg = a,
+	fill = a,
+	label = d,
 	labelWhite = {255, 255, 255},
-	stroke = {255/255, 146/255, 3/255},
+	stroke = d,
 	green = {0/255, 255/255, 0/255},
 	
 	tableView = {
-		lineEven = {38/255, 48/255, 43/255},
-		lineOdd = {18/255, 28/255, 23/255}
+		lineEven = b,
+		lineOdd = c
 	},
 	
 	button = {
 		width = 150,
 		height = 40,
 		cornerRadius = 10,
-		labelColor = {default={255/255, 146/255, 3/255}, over={255/255, 146/255, 3/255}},
-		fillColor = {default={55/255, 55/255, 55/255}, over={55/255, 55/255, 55/255}},
-		strokeColor = {default={255/255, 146/255, 3/255}, over={255/255, 146/255, 3/255}},
+		labelColor = {default=d, over=d},
+		fillColor = {default=a, over=b},
+		strokeColor = {default=d, over=d},
 		strokeWidth = 2
 	},
 
