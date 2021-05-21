@@ -236,7 +236,8 @@ function scene:create(event)
 
 			local valueView = progressView:new(row, tab, 5, 300, row.params.value)
 
-			local valuePercent = math.ceil(100 * row.params.value) .. " %"
+			-- print the percent, without decimals
+			local valuePercent = string.format("%.0f", row.params.value * 100) .. " %"
 			local valueText = singleText:new(row, valuePercent, tab2, y, fontSize)
 			valueText:setAnchor(0, 0)
 		end
