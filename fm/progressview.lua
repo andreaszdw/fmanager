@@ -16,9 +16,11 @@ local progress = {}
 -- --------------------------------------------------------
 function progress:new(parent, left, top, width, value, isAnimated)
 
+	local theme = require("fm.theme")
+
 	local o = {
 		parent = parent,
-		theme = parent.theme,
+		theme = parent.theme or theme,
 		label = label,
 		left = left or 0,
 		top =  top or 0,
@@ -51,8 +53,10 @@ function progress:new(parent, left, top, width, value, isAnimated)
 	}
 	)
 
+	local view = parent.view or parent
+
 	o.progressView:setProgress(o.value)
-	o.parent.view:insert(o.progressView)
+	view:insert(o.progressView)
 
 	setmetatable(o, self)
 	self.__index = self

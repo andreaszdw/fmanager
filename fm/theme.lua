@@ -36,12 +36,12 @@ local theme = {
         omf = 2,
         orf = 3,
         ow = 64,
-        oh = 64,
+        oh = 32,
         ilf = 4,
         imf = 5,
         irf = 6,
         fw = 64,
-        fh = 64,
+        fh = 32
 	}
 }
 

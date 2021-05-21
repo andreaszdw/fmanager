@@ -21,6 +21,11 @@ de.name = "Name"
 de.left = "links"
 de.right = "rechts"
 de.both = "links/rechts"
+de.fitness = "Fitness"
+de.physicalSkills = "Körperliche Eigenschaften"
+de.speed = "Schnelligkeit"
+de.stamina = "Ausdauer"
+de.footballSkills = "Fussballerische Eigenschaften"
 
 
 
@@ -42,11 +47,16 @@ default.keeper ="Keeper"
 default.defender = "Defender"
 default.midfielder = "Midfield"
 default.attacker = "Attacker"
-default.postition = "Position"
+default.position = "Position"
 default.name = "Name"
 default.left = "left"
 default.right = "right"
 default.both = "left/right"
+default.fitness = "Fitness"
+default.physicalSkills = "Physical Skills"
+default.speed = "Speed"
+default.stamina = "Stamina"
+default.footballSkills = "Football Skills"
 
 local i18n = {}
 

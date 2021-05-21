@@ -79,8 +79,8 @@ end
 -- grid
 -- 
 -- --------------------------------------------------------
-function fmwidgets:table(left, top, width, height, rowRenderer)
-	local child = tableView:new(self, left, top, width, height, rowRenderer)
+function fmwidgets:table(left, top, width, height, rowRenderer, rowHeight, isLocked)
+	local child = tableView:new(self, left, top, width, height, rowRenderer, rowHeight, isLocked)
 	table.insert(self.childs, child)
 	return child
 end

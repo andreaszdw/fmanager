@@ -13,6 +13,7 @@ local widget = require("widget")
 local i18n = require("i18n")
 local fmwidgets = require("fm.widgets")
 local singleText = require("fm.singletext")
+local progressView = require("fm.progressview")
 local CPlayer = require("doc.player")
 
 local strings = i18n.getStrings()
@@ -111,6 +112,10 @@ function scene:create(event)
 
 	display.setDefault("background", unpack(theme.bg))
 
+	local bgImage = display.newImage(self.view, "assets/images/bg/bg1.jpg")
+	bgImage.x = centerX
+	bgImage.y = centerY
+
 	-- this is the rect for the view
 	local bgRect = display.newRect(self.view, 640, 360, 1280, 720)
 	bgRect.strokeWidth = 2
@@ -197,6 +202,51 @@ function scene:create(event)
 	dataTable:insertRow({title = strings.contract, value = contractValue})
 	dataTable:insertRow({title = strings.salary, value = salaryValue})
 	dataTable:insertRow({title = strings.foot, value = footValue})
+
+	-- tableview with the player skills
+	--
+	-- ----------------------------------------------------
+	--
+	-- skillRender
+	-- 
+	-- ----------------------------------------------------
+	local function skillRender(event)
+		local row = event.row
+		-- local title = row.params.title 
+		-- local value = row.params.value
+		local x = 5
+		local y = 10
+		local tab = 80
+		local fontSize = 14
+		local headerSize = 22
+
+		if row.params.empty then
+			-- do nothing
+		end
+
+		if row.params.header then 
+			local rowHeader = singleText:new(row, row.params.header, row.width*0.5, y, headerSize)
+			rowHeader:setAnchor(0.5, 0)
+		end
+
+		if row.params.title then 
+			local rowTitle = singleText:new(row, row.params.title, x, y, fontSize)
+			rowTitle:setAnchor(0, 0)
+
+			local valueView = progressView:new(row, tab, 5, 300, row.params.value)
+		end
+	end
+
+	-- new table
+	local skillTable = fmw:table(320, 10, 450, 300, skillRender, 40)
+
+	skillTable:insertRow({header = strings.physicalSkills})
+	skillTable:insertRow({title = strings.fitness, value = docPlayer.fitness})
+	skillTable:insertRow({title = strings.speed, value = docPlayer.speed})
+	skillTable:insertRow({title = strings.stamina, value = docPlayer.stamina})
+	skillTable:insertRow({empty})
+	skillTable:insertRow({header = strings.footballSkills})
+
 
 	-- the back button
 	local backButton = fmw:button("Zurück", goBack)

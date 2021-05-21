@@ -15,7 +15,7 @@ local table = {}
 -- constructor
 --
 -- --------------------------------------------------------
-function table:new(parent, left, top, width, height, rowRenderer, isLocked, rowHeight)
+function table:new(parent, left, top, width, height, rowRenderer, rowHeight, isLocked)
 	local o = {
 		parent = parent,
 		theme = parent.theme,
