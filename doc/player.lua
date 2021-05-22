@@ -39,7 +39,7 @@ function player:new()
 		tackle = tackle or 0.35,
 		tactic = tactic or 0.83,
 		-- potential/rating - percentage
-		potential = potential or 0.8, -- this is the possible rating
+		potential = potential or 1.0, -- this is the possible rating
 		rating = 0.5 -- rating
 	}
 	setmetatable(o, self)

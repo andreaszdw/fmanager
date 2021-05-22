@@ -138,28 +138,29 @@ function scene:create(event)
 
 	-- the potential in stars
 	local potentialGroup = display.newGroup()
-	local potential = math.floor(10 * docPlayer.potential)
-	local rating = math.floor(10 * docPlayer.rating)
-	local starX = 0
-	local starY = 0
-	for i=1, potential do
-		local star
-		if rating >= i then 
-			star = display.newImage(potentialGroup, theme.fullStar)
-		else  
-			star = display.newImage(potentialGroup, theme.emptyStar)
-		end		
-		star.x = starX 
-		star.y = starY
-		starX = starX + 28
-	end
-	
 	potentialGroup.x = 160
 	potentialGroup.y = 420
 	potentialGroup.anchorX = 0.5
 	potentialGroup.anchorY = 0.5
 	potentialGroup.anchorChildren = true
 	table.insert(self.view, potentialGroup)
+	local potential = math.floor(10 * docPlayer.potential)
+	local rating = math.floor(10 * docPlayer.rating)
+	print(-potential * 14 + 160)
+	local starX = -potential * 14 + 174
+	local starY = 420
+	for i=1, potential do
+		local star
+		if rating >= i then 
+			star = display.newImage(self.view, theme.fullStar)
+		else  
+			star = display.newImage(self.view, theme.emptyStar)
+		end		
+		star.x = starX
+		star.y = starY
+		starX = starX + 28
+	end
+	
 
 	-- here comes tableView with player info
 	-- name, age, contract, salary
