@@ -252,7 +252,7 @@ function scene:create(event)
 		end
 
 		if row.params.header then 
-			local rowHeader = singleText:new(row, row.params.header, row.width*0.5, y, headerSize)
+			local rowHeader = singleText:new(row, row.params.header, row.width*0.5, y-2, headerSize)
 			rowHeader:setAnchor(0.5, 0)
 		end
 
@@ -273,12 +273,12 @@ function scene:create(event)
 	-- new table
 	local skillTable = fmw:table(320, 10, 450, 440, skillRender, 40)
 
-	skillTable:insertRow({header = strings.physicalSkills})
+	skillTable:insertRow({header = strings.skills})
+	skillTable:insertRow({header = strings.physical})
 	skillTable:insertRow({title = strings.fitness, value = docPlayer.fitness})
 	skillTable:insertRow({title = strings.speed, value = docPlayer.speed})
 	skillTable:insertRow({title = strings.stamina, value = docPlayer.stamina})
-	skillTable:insertRow({empty})
-	skillTable:insertRow({header = strings.footballSkills})
+	skillTable:insertRow({header = strings.football})
 	skillTable:insertRow({title = strings.passing, value = docPlayer.passing})
 	skillTable:insertRow({title = strings.header, value = docPlayer.header})
 	skillTable:insertRow({title = strings.shot, value = docPlayer.shot})
