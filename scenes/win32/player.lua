@@ -138,28 +138,29 @@ function scene:create(event)
 
 	-- the potential in stars
 	local potentialGroup = display.newGroup()
-	local potential = math.floor(10 * docPlayer.potential)
-	local rating = math.floor(10 * docPlayer.rating)
-	local starX = 0
-	local starY = 0
-	for i=1, potential do
-		local star
-		if rating >= i then 
-			star = display.newImage(potentialGroup, theme.fullStar)
-		else  
-			star = display.newImage(potentialGroup, theme.emptyStar)
-		end		
-		star.x = starX 
-		star.y = starY
-		starX = starX + 28
-	end
-	
 	potentialGroup.x = 160
 	potentialGroup.y = 420
 	potentialGroup.anchorX = 0.5
 	potentialGroup.anchorY = 0.5
 	potentialGroup.anchorChildren = true
 	table.insert(self.view, potentialGroup)
+	local potential = math.floor(10 * docPlayer.potential)
+	local rating = math.floor(10 * docPlayer.rating)
+	print(-potential * 14 + 160)
+	local starX = -potential * 14 + 174
+	local starY = 420
+	for i=1, potential do
+		local star
+		if rating >= i then 
+			star = display.newImage(self.view, theme.fullStar)
+		else  
+			star = display.newImage(self.view, theme.emptyStar)
+		end		
+		star.x = starX
+		star.y = starY
+		starX = starX + 28
+	end
+	
 
 	-- here comes tableView with player info
 	-- name, age, contract, salary
@@ -251,7 +252,7 @@ function scene:create(event)
 		end
 
 		if row.params.header then 
-			local rowHeader = singleText:new(row, row.params.header, row.width*0.5, y, headerSize)
+			local rowHeader = singleText:new(row, row.params.header, row.width*0.5, y-2, headerSize)
 			rowHeader:setAnchor(0.5, 0)
 		end
 
@@ -272,12 +273,12 @@ function scene:create(event)
 	-- new table
 	local skillTable = fmw:table(320, 10, 450, 440, skillRender, 40)
 
-	skillTable:insertRow({header = strings.physicalSkills})
+	skillTable:insertRow({header = strings.skills})
+	skillTable:insertRow({header = strings.physical})
 	skillTable:insertRow({title = strings.fitness, value = docPlayer.fitness})
 	skillTable:insertRow({title = strings.speed, value = docPlayer.speed})
 	skillTable:insertRow({title = strings.stamina, value = docPlayer.stamina})
-	skillTable:insertRow({empty})
-	skillTable:insertRow({header = strings.footballSkills})
+	skillTable:insertRow({header = strings.football})
 	skillTable:insertRow({title = strings.passing, value = docPlayer.passing})
 	skillTable:insertRow({title = strings.header, value = docPlayer.header})
 	skillTable:insertRow({title = strings.shot, value = docPlayer.shot})
