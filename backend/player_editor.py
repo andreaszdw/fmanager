@@ -9,7 +9,8 @@ import tkinter as tk
 class Main(tk.Frame):
 
     def __init__(self):
-        super().__init__(width="600", height=600)
+        super().__init__()
+        self.master.geometry("800x600")
         self.initUI()
 
     def initUI(self):
