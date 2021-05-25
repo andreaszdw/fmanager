@@ -17,7 +17,7 @@ settings =
 	excludeFiles =
 	{
 		all = {
-			"music/*"			
+			"backend/*"			
 		},
 		win32 = {
 			"Icon*.icns",
