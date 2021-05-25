@@ -84,7 +84,26 @@ end
 --
 -- -------------------------------------------------------
 local function goPlayer(event)
-	composer.gotoScene("scenes.win32.player")
+	local options = {
+		params = {
+			status = "show"
+		}
+	}
+	composer.gotoScene("scenes.win32.player", options)
+end
+
+-- --------------------------------------------------------
+--
+-- newPlayer
+-- 
+-- --------------------------------------------------------
+local function newPlayer(event)
+	local options = {
+		params = {
+			status = "new"
+		}
+	}
+	composer.gotoScene("scenes.win32.player", options)
 end
 
 -- --------------------------------------------------------
@@ -124,8 +143,12 @@ function scene:create(event)
 
 	local welcomeText = fmwidgets:singleText(strings.welcome, 640, 120, 60)
 	nextElement = nextElement + welcomeText:getHeight()
+
 	local goPlayerButton = fmwidgets:button(strings.player, goPlayer, 640, nextElement)
 	nextElement = nextElement + goPlayerButton:getHeight() + gap
+
+	local newPlayerButton = fmwidgets:button(strings.newPlayer, newPlayer, 640, nextElement)
+	nextElement = nextElement + newPlayerButton:getHeight() + gap
 	
 	local quitButton = fmwidgets:button(strings.quit, quitApp)
 	local tmpW = quitButton:getWidth()

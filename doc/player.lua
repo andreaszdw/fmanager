@@ -40,11 +40,30 @@ function player:new()
 		tactic = tactic or 0.83,
 		-- potential/rating - percentage
 		potential = potential or 1.0, -- this is the possible rating
-		rating = 0.5 -- rating
+		rating = 0.5, -- rating
+		experience = 0
 	}
 	setmetatable(o, self)
 	self.__index = self
 	return o
+end
+
+-- --------------------------------------------------------
+--
+-- load player from sqlite
+--
+-- --------------------------------------------------------
+function player:loadFromDB(db, id)
+	print("load")
+end
+
+-- --------------------------------------------------------
+--
+-- save player to sqlite
+--
+-- --------------------------------------------------------
+function player:saveToDB(db, id)
+	print("save")
 end
 
 -- --------------------------------------------------------

@@ -2,6 +2,7 @@ local de = {
 	welcome = "Willkommen!",
 	back = "Zurück",
 	player = "Spieler",
+	newPlayer = "Neuer Spieler",
 	quit = "Beenden",
 	age = "Alter",
 	contract = "Vertrag",
@@ -31,13 +32,15 @@ local de = {
 	header = "Kopfball",
 	shot = "Schuss",
 	tackle = "Zweikampf",
-	tactic = "Taktik"
+	tactic = "Taktik",
+	experience = "Erfahrung"
 }
 
 local default = {
 	welcome = "Welcome!",
 	back = "Back",
 	player = "Player",
+	newPlayer = "New Player",
 	quit = "Quit",
 	age = "Age",
 	contract = "Contract",
@@ -67,7 +70,8 @@ local default = {
 	header = "Header",
 	shot = "Shot",
 	tackle = "Tackling",
-	tactic = "Tactic"
+	tactic = "Tactic",
+	experience = "Experience"
 }
 
 local i18n = {}

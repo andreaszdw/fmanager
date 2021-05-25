@@ -28,6 +28,11 @@ local centerY = height * 0.5
 
 local sceneView = 0
 
+
+local function show()
+	print("show me")
+end
+
 -- -------------------------------------------------------
 --
 -- centerSceneView
@@ -102,6 +107,8 @@ end
 -- --------------------------------------------------------
 function scene:create(event)
 
+	show()
+
 	local docPlayer = CPlayer:new()
 
 	local fmw = fmwidgets:new(self.view)
@@ -111,7 +118,6 @@ function scene:create(event)
 	local gap = 10
 
 	display.setDefault("background", unpack(theme.bg))
-
 	local bgImage = display.newImage(self.view, "assets/images/bg/bg1.jpg")
 	bgImage.x = centerX
 	bgImage.y = centerY
@@ -260,18 +266,25 @@ function scene:create(event)
 			local rowTitle = singleText:new(row, row.params.title, x, y, fontSize)
 			rowTitle:setAnchor(0, 0)
 
-			local valueView = progressView:new(row, tab, 5, 300, row.params.value)
+			if row.params.value then 
+				local valueView = progressView:new(row, tab, 5, 300, row.params.value)
 
-			-- print the percent, without decimals
-			local valuePercent = string.format("%.0f", row.params.value * 100) .. " %"
-			local valueText = singleText:new(row, valuePercent, tab2, y, fontSize)
-			valueText:setAnchor(0, 0)
-			valueText:setFillColor(fmw.theme.labelWhite)
+				-- print the percent, without decimals
+				local valuePercent = string.format("%.0f", row.params.value * 100) .. " %"
+				local valueText = singleText:new(row, valuePercent, tab2, y, fontSize)
+				valueText:setAnchor(0, 0)
+				valueText:setFillColor(fmw.theme.labelWhite)
+			end
+			if row.params.points then 
+				local pointsText = singleText:new(row, row.params.points, tab + 50, y, fontSize)
+				pointsText:setAnchor(0, 0)
+				pointsText:setFillColor(fmw.theme.labelWhite)
+			end
 		end
 	end
 
 	-- new table
-	local skillTable = fmw:table(320, 10, 450, 440, skillRender, 40)
+	local skillTable = fmw:table(320, 10, 450, 480, skillRender, 40)
 
 	skillTable:insertRow({header = strings.skills})
 	skillTable:insertRow({header = strings.physical})
@@ -284,6 +297,7 @@ function scene:create(event)
 	skillTable:insertRow({title = strings.shot, value = docPlayer.shot})
 	skillTable:insertRow({title = strings.tackle, value = docPlayer.tackle})
 	skillTable:insertRow({title = strings.tactic, value = docPlayer.tactic})
+	skillTable:insertRow({title = strings.experience, points = docPlayer.experience})
 
 
 	-- the back button
