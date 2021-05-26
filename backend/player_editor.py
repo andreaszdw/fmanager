@@ -3,41 +3,79 @@
 """
     player_editor.py
 """
+import wx
+import wx.grid as gridlib
 
-import tkinter as tk
-
-class Main(tk.Frame):
+class PlayerTable(gridlib.GridTableBase):
 
     def __init__(self):
         super().__init__()
-        # self.master.geometry("800x600")
-        self.initUI()
+        self.colLabels = ["Name", "Alter", "Vertrag", "Gehalt"]
 
-    def initUI(self):
-        name = "Egal Egal"
-        age = 17
-        contract = 2
-        salary = 14000
-        playerGrid = [
-            (name, "name"),
-            (age, "age"),
-            (contract, "contract"),
-            (salary, "salary")
+        self.dataTyps = [
+            gridlib.GRID_VALUE_STRING,
+            gridlib.GRID_VALUE_NUMBER,
+            gridlib.GRID_VALUE_NUMBER,
+            gridlib.GRID_VALUE_NUMBER
         ]
 
-        r = 0
-        for pg in playerGrid:
-            tmp_lbl = tk.Label(self, text=pg[1])
-            tmp_lbl.grid(row=r, column=0, padx="5", pady="5")
-            tmp_ent = tk.Entry(self, width=50)
-            tmp_ent.insert(0, pg[0])
-            tmp_ent.grid(row=r, column=1, padx=5, pady=5)
-            r += 1
+        self.data = [
+            ["Karl-Heinz Förster", 21, 3, 130009],
+            ["Werner Schneider", 25, 5, 800000]
+        ]
 
-        self.pack()
+    def GetNumberRows(self):
+        return len(self.data) + 1
+
+    def GetNumberCols(self):
+        return(len(self.data[0]))
+
+    def IsEmptyCell(self, row, col):
+        try:
+            return not self.data[row][col]
+        except IndexError:
+            return True
+
+    def GetValue(self, row, col):
+        try:
+            return self.data[row][col]
+        except IndexError:
+            return ''
+
+    def SetValue(self, row, col, value):
+        def innerSetValue(row, col, value):
+            try:
+                self.data[row][col] = value
+            except IndexError:
+                # add a new row
+                self.data.append([''] * self.GetNumberCols())
+                innerSetValue(row, col, value)
+
+                # tell the grid we've added a row
+                msg = gridlib.GridTableMessage(
+                    self,
+                    gridlib.GRIDTABLE_NOTIFY_ROWS_APPENDED,
+                    1
+                )
+
+                self.GetView().ProcessTableMessage(msg)
+        innerSetValue(row, col, value)
+
+
+class Main(wx.Frame):
+
+    def __init__(self, parent):
+        super().__init__(parent, -1, "Player Editor", size=(800, 600))
+        panel = wx.Panel(self, -1, style=0)
+        testText = wx.StaticText(panel, label="Test TEST")
+
+        boxSizer = wx.BoxSizer(wx.VERTICAL)
+        boxSizer.Add(testText)
+        panel.SetSizer(boxSizer)
 
 
 if __name__ == '__main__':
-    root = tk.Tk()
-    app = Main()
-    root.mainloop()
+    app = wx.App()
+    frame = Main(None)
+    frame.Show(True)
+    app.MainLoop()
