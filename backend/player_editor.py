@@ -10,18 +10,36 @@ class PlayerTableData(gridlib.GridTableBase):
 
     def __init__(self):
         super().__init__()
-        self.colLabels = ["Name", "Alter", "Vertrag", "Gehalt"]
+        self.colLabels = [
+            "Name", "Alter", "Vertrag", "Gehalt",
+            "Fuss", "Position", "Fitness", "Schnelligkeit",
+            "Ausdauer", "Passen", "Kopfball", "Schuss", "Zweikampf",
+            "Taktik", "Potential", "Rating", "Experience"]
 
         self.dataTypes = [
-            gridlib.GRID_VALUE_STRING,
+            gridlib.GRID_VALUE_STRING,  # Name
+            gridlib.GRID_VALUE_NUMBER,  # Alter
+            gridlib.GRID_VALUE_NUMBER,  # Vertrag
+            gridlib.GRID_VALUE_NUMBER,
+            gridlib.GRID_VALUE_CHOICE,
+            gridlib.GRID_VALUE_CHOICE,
+            gridlib.GRID_VALUE_NUMBER,
+            gridlib.GRID_VALUE_NUMBER,
+            gridlib.GRID_VALUE_NUMBER,
+            gridlib.GRID_VALUE_NUMBER,
+            gridlib.GRID_VALUE_NUMBER,
+            gridlib.GRID_VALUE_NUMBER,
+            gridlib.GRID_VALUE_NUMBER,
+            gridlib.GRID_VALUE_NUMBER,
             gridlib.GRID_VALUE_NUMBER,
             gridlib.GRID_VALUE_NUMBER,
             gridlib.GRID_VALUE_NUMBER
         ]
 
         self.data = [
-            ["Karl-Heinz Förster", 21, 3, 130009],
-            ["Werner Schneider", 25, 5, 800000]
+            ["A", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            ["B", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            ["C", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         ]
 
     def GetNumberRows(self):
@@ -87,9 +105,9 @@ class PlayerTableGrid(gridlib.Grid):
 
         self.SetTable(table, True)
 
-        self.SetRowLabelSize(0)
+        self.SetRowLabelSize(80)
         self.SetMargins(0, 0)
-        self.AutoSizeColumns(False)
+        self.AutoSizeColumns(True)
 
 
 class Main(wx.Frame):
@@ -97,11 +115,9 @@ class Main(wx.Frame):
     def __init__(self, parent):
         super().__init__(parent, -1, "Player Editor", size=(800, 600))
         panel = wx.Panel(self, -1, style=0)
-        testText = wx.StaticText(panel, label="Test TEST")
         playerGrid = PlayerTableGrid(panel)
         boxSizer = wx.BoxSizer(wx.VERTICAL)
-        boxSizer.Add(testText)
-        boxSizer.Add(playerGrid, 1, wx.GROW | wx.ALL, 5)
+        boxSizer.Add(playerGrid, 1, wx.EXPAND | wx.ALL, 5)
         panel.SetSizer(boxSizer)
 
 
