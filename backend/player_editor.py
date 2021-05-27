@@ -6,13 +6,13 @@
 import wx
 import wx.grid as gridlib
 
-class PlayerTable(gridlib.GridTableBase):
+class PlayerTableData(gridlib.GridTableBase):
 
     def __init__(self):
         super().__init__()
         self.colLabels = ["Name", "Alter", "Vertrag", "Gehalt"]
 
-        self.dataTyps = [
+        self.dataTypes = [
             gridlib.GRID_VALUE_STRING,
             gridlib.GRID_VALUE_NUMBER,
             gridlib.GRID_VALUE_NUMBER,
@@ -61,6 +61,36 @@ class PlayerTable(gridlib.GridTableBase):
                 self.GetView().ProcessTableMessage(msg)
         innerSetValue(row, col, value)
 
+    def GetColLabelValue(self, col):
+        return self.colLabels[col]
+
+    def GetTypeName(self, row, col):
+        return self.dataTypes[col]
+
+    def CanGetValueAs(self, row, col, typeName):
+        colType = self.dataTypes[col].split(':')[0]
+        if typeName == colType:
+            return True
+        else:
+            return False
+
+    def CanSetValueAs(self, row, col, typeName):
+        return self.CanGetValueAs(row, col, typeName)
+
+
+class PlayerTableGrid(gridlib.Grid):
+
+    def __init__(self, parent):
+        super().__init__(parent, -1)
+
+        table = PlayerTableData()
+
+        self.SetTable(table, True)
+
+        self.SetRowLabelSize(0)
+        self.SetMargins(0, 0)
+        self.AutoSizeColumns(False)
+
 
 class Main(wx.Frame):
 
@@ -68,9 +98,10 @@ class Main(wx.Frame):
         super().__init__(parent, -1, "Player Editor", size=(800, 600))
         panel = wx.Panel(self, -1, style=0)
         testText = wx.StaticText(panel, label="Test TEST")
-
+        playerGrid = PlayerTableGrid(panel)
         boxSizer = wx.BoxSizer(wx.VERTICAL)
         boxSizer.Add(testText)
+        boxSizer.Add(playerGrid, 1, wx.GROW | wx.ALL, 5)
         panel.SetSizer(boxSizer)
 
 
