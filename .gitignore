@@ -1,2 +1,4 @@
 fmanager.sublime-project
 fmanager.sublime-workspace
+
+backend/__pycache__/*
