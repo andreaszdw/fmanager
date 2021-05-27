@@ -27,7 +27,7 @@ class Player(object):
         self.rating = 0
         self.experience = 0
 
-    def loadFromDBbyID(self, id, cur):
+    def loadFromDBbyID(self, cur, id):
         sql = """
             SELECT * FROM Player WHERE id={}
         """.format(id)
@@ -54,6 +54,9 @@ class Player(object):
             self.potential = p[15]
             self.rating = p[16]
             self.experience = p[17]
+
+    def saveToDB(self, cur, id):
+        print(cur, id)
 
     def print(self):
         print("Name:           {}".format(self.name))
@@ -82,6 +85,8 @@ if __name__ == '__main__':
     con = sqlite3.connect("player.db")
     cur = con.cursor()
 
-    player.loadFromDBbyID(2, cur)
+    player.loadFromDBbyID(cur, 2)
 
     player.print()
+
+    player.saveToDB(cur, 2)
