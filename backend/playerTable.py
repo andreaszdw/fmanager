@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 
 """
-    player_editor.py
+    playerTable.py
 """
 import wx
 import wx.grid as gridlib
 
-class PlayerTableData(gridlib.GridTableBase):
+class Data(gridlib.GridTableBase):
 
     def __init__(self, colLabels, dataTypes, data):
         super().__init__()
@@ -70,12 +70,12 @@ class PlayerTableData(gridlib.GridTableBase):
         return self.CanGetValueAs(row, col, typeName)
 
 
-class PlayerTableGrid(gridlib.Grid):
+class Grid(gridlib.Grid):
 
     def __init__(self, parent, colLabels, dataTypes, data):
         super().__init__(parent, -1)
 
-        table = PlayerTableData(colLabels, dataTypes, data)
+        table = Data(colLabels, dataTypes, data)
 
         self.SetTable(table, True)
 
@@ -83,7 +83,7 @@ class PlayerTableGrid(gridlib.Grid):
         self.SetMargins(0, 0)
         self.AutoSizeColumns(False)
 
-        self.Bind(gridlib.EVT_GRID_CELL_LEFT_DCLICK, self.OnLeftDClick)
+        # self.Bind(gridlib.EVT_GRID_CELL_LEFT_DCLICK, self.OnLeftDClick)
 
     def OnLeftDClick(self, event):
         print(event.GetRow())
@@ -127,7 +127,7 @@ class Main(wx.Frame):
             ["C", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         ]
 
-        playerGrid = PlayerTableGrid(panel, colLabels, dataTypes, data)
+        playerGrid = Grid(panel, colLabels, dataTypes, data)
         boxSizer = wx.BoxSizer(wx.VERTICAL)
         boxSizer.Add(playerGrid, 1, wx.EXPAND | wx.ALL, 5)
         panel.SetSizer(boxSizer)
