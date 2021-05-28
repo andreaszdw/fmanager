@@ -8,6 +8,7 @@ import sqlite3
 class Player(object):
 
     def __init__(self):
+        self.id = None
         self.name = "Empty"
         self.age = 0
         self.contract = 0
@@ -29,13 +30,14 @@ class Player(object):
 
     def loadFromDBbyID(self, cur, id):
         sql = """
-            SELECT * FROM Player WHERE id={}
+            SELECT * FROM Player WHERE id={};
         """.format(id)
 
         cur.execute(sql)
         p = cur.fetchone()
 
         if p:
+            self.id = id
             self.name = p[0]
             self.age = p[1]
             self.contract = p[2]
@@ -55,10 +57,59 @@ class Player(object):
             self.rating = p[16]
             self.experience = p[17]
 
-    def saveToDB(self, cur, id):
-        print(cur, id)
+    def saveToDB(self, con, cur, id):
+
+        sql = ""
+        data = None
+
+        # this is a new entry
+        if id is None:
+            sql = """
+                INSERT INTO Player
+                (
+                name, age, contract, salary, imageFile, foot,
+                position, fitness, speed, stamina, passing,
+                header, shot, tackle, tactic, potential, rating, experience
+                )
+                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+            """
+
+            data = (
+                self.name, self.age, self.contract, self.salary,
+                self.imageFile, self.foot, self.position, self.fitness,
+                self.speed, self.stamina, self.passing, self.header,
+                self.shot, self.tackle, self.tactic, self.potential,
+                self.rating, self.experience
+            )
+
+        # this is an update 
+        else:
+            sql = """
+                UPDATE Player SET
+                name = ?, age = ?, contract = ?, salary = ?, imageFile = ?,
+                foot = ?, position = ?, fitness = ?, speed = ?, stamina = ?,
+                passing = ?, header = ?, shot = ?, tackle = ?, tactic = ?,
+                potential = ?, rating = ?, experience = ?
+                WHERE id = ?;
+            """
+
+            data = (
+                self.name, self.age, self.contract, self.salary,
+                self.imageFile, self.foot, self.position, self.fitness,
+                self.speed, self.stamina, self.passing, self.header,
+                self.shot, self.tackle, self.tactic, self.potential,
+                self.rating, self.experience, self.id
+            )
+
+        try:
+            cur.execute(sql, data)
+            con.commit()
+
+        except con.Error as error:
+            print("Failed to save player", error)
 
     def print(self):
+        print("ID:             {}".format(self.id))
         print("Name:           {}".format(self.name))
         print("Alter:          {}".format(self.age))
         print("Vertrag:        {}".format(self.contract))
@@ -85,8 +136,10 @@ if __name__ == '__main__':
     con = sqlite3.connect("player.db")
     cur = con.cursor()
 
-    player.loadFromDBbyID(cur, 2)
+    player.loadFromDBbyID(cur, 3)
+
+    player.name = "August Oyster"
 
     player.print()
 
-    player.saveToDB(cur, 2)
+    player.saveToDB(con, cur, player.id)
