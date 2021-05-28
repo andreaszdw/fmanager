@@ -8,11 +8,9 @@ import wx.grid as gridlib
 
 class Data(gridlib.GridTableBase):
 
-    def __init__(self, colLabels, dataTypes, data):
+    def __init__(self, colLabels, data):
         super().__init__()
         self.colLabels = colLabels
-
-        self.dataTypes = dataTypes
 
         self.data = data
 
@@ -56,26 +54,13 @@ class Data(gridlib.GridTableBase):
     def GetColLabelValue(self, col):
         return self.colLabels[col]
 
-    def GetTypeName(self, row, col):
-        return self.dataTypes[col]
-
-    def CanGetValueAs(self, row, col, typeName):
-        colType = self.dataTypes[col].split(':')[0]
-        if typeName == colType:
-            return True
-        else:
-            return False
-
-    def CanSetValueAs(self, row, col, typeName):
-        return self.CanGetValueAs(row, col, typeName)
-
 
 class Grid(gridlib.Grid):
 
-    def __init__(self, parent, colLabels, dataTypes, data):
+    def __init__(self, parent, colLabels, data):
         super().__init__(parent, -1)
 
-        table = Data(colLabels, dataTypes, data)
+        table = Data(colLabels, data)
 
         self.SetTable(table, True)
 
@@ -101,33 +86,13 @@ class Main(wx.Frame):
             "Ausdauer", "Passen", "Kopfball", "Schuss", "Zweikampf",
             "Taktik", "Potential", "Rating", "Experience"]
 
-        dataTypes = [
-            gridlib.GRID_VALUE_STRING,  # Name
-            gridlib.GRID_VALUE_NUMBER,  # Alter
-            gridlib.GRID_VALUE_NUMBER,  # Vertrag
-            gridlib.GRID_VALUE_NUMBER,
-            gridlib.GRID_VALUE_CHOICE,
-            gridlib.GRID_VALUE_CHOICE,
-            gridlib.GRID_VALUE_NUMBER,
-            gridlib.GRID_VALUE_NUMBER,
-            gridlib.GRID_VALUE_NUMBER,
-            gridlib.GRID_VALUE_NUMBER,
-            gridlib.GRID_VALUE_NUMBER,
-            gridlib.GRID_VALUE_NUMBER,
-            gridlib.GRID_VALUE_NUMBER,
-            gridlib.GRID_VALUE_NUMBER,
-            gridlib.GRID_VALUE_NUMBER,
-            gridlib.GRID_VALUE_NUMBER,
-            gridlib.GRID_VALUE_NUMBER
-        ]
-
         data = [
             ["A", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             ["B", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             ["C", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         ]
 
-        playerGrid = Grid(panel, colLabels, dataTypes, data)
+        playerGrid = Grid(panel, colLabels, data)
         boxSizer = wx.BoxSizer(wx.VERTICAL)
         boxSizer.Add(playerGrid, 1, wx.EXPAND | wx.ALL, 5)
         panel.SetSizer(boxSizer)

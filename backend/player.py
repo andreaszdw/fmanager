@@ -82,7 +82,7 @@ class Player(object):
                 self.rating, self.experience
             )
 
-        # this is an update 
+        # this is an update
         else:
             sql = """
                 UPDATE Player SET

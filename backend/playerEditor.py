@@ -7,6 +7,8 @@ import wx
 import wx.grid as gridlib
 
 import playerTable
+import player
+import sqlite3
 
 class Main(wx.Frame):
 
@@ -15,38 +17,20 @@ class Main(wx.Frame):
         panel = wx.Panel(self, -1, style=0)
 
         colLabels = [
-            "Name", "Alter", "Vertrag", "Gehalt",
+            "Name", "Alter", "Vertrag", "Gehalt", "image",
             "Fuss", "Position", "Fitness", "Schnelligkeit",
             "Ausdauer", "Passen", "Kopfball", "Schuss", "Zweikampf",
-            "Taktik", "Potential", "Rating", "Experience"]
+            "Taktik", "Potential", "Rating", "Experience", "id"]
 
-        dataTypes = [
-            gridlib.GRID_VALUE_STRING,  # Name
-            gridlib.GRID_VALUE_NUMBER,  # Alter
-            gridlib.GRID_VALUE_NUMBER,  # Vertrag
-            gridlib.GRID_VALUE_NUMBER,
-            gridlib.GRID_VALUE_CHOICE,
-            gridlib.GRID_VALUE_CHOICE,
-            gridlib.GRID_VALUE_NUMBER,
-            gridlib.GRID_VALUE_NUMBER,
-            gridlib.GRID_VALUE_NUMBER,
-            gridlib.GRID_VALUE_NUMBER,
-            gridlib.GRID_VALUE_NUMBER,
-            gridlib.GRID_VALUE_NUMBER,
-            gridlib.GRID_VALUE_NUMBER,
-            gridlib.GRID_VALUE_NUMBER,
-            gridlib.GRID_VALUE_NUMBER,
-            gridlib.GRID_VALUE_NUMBER,
-            gridlib.GRID_VALUE_NUMBER
-        ]
+        sql = "SELECT * FROM Player;"
 
-        data = [
-            ["A", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            ["B", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            ["C", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        ]
+        con = sqlite3.connect("player.db")
+        cur = con.cursor()
+        cur.execute(sql)
 
-        playerGrid = playerTable.Grid(panel, colLabels, dataTypes, data)
+        data = cur.fetchall()
+
+        playerGrid = playerTable.Grid(panel, colLabels, data)
         playerGrid.Bind(gridlib.EVT_GRID_CELL_LEFT_DCLICK, self.OnLeftDClick)
 
         boxSizer = wx.BoxSizer(wx.VERTICAL)
