@@ -30,16 +30,18 @@ class Main(wx.Frame):
 
         data = cur.fetchall()
 
-        playerGrid = playerTable.Grid(panel, colLabels, data)
-        playerGrid.Bind(gridlib.EVT_GRID_CELL_LEFT_DCLICK, self.OnLeftDClick)
+        self.playerGrid = playerTable.Grid(panel, colLabels, data)
+        self.playerGrid.Bind(
+            gridlib.EVT_GRID_CELL_LEFT_DCLICK,
+            self.OnLeftDClick)
 
         boxSizer = wx.BoxSizer(wx.VERTICAL)
-        boxSizer.Add(playerGrid, 1, wx.EXPAND | wx.ALL, 5)
+        boxSizer.Add(self.playerGrid, 1, wx.EXPAND | wx.ALL, 5)
         panel.SetSizer(boxSizer)
 
     def OnLeftDClick(self, event):
         print("here")
-        print(event.GetRow())
+        print(self.playerGrid.getValue(event.GetRow(), 18))
 
 
 if __name__ == '__main__':

@@ -60,18 +60,16 @@ class Grid(gridlib.Grid):
     def __init__(self, parent, colLabels, data):
         super().__init__(parent, -1)
 
-        table = Data(colLabels, data)
+        self.data = Data(colLabels, data)
 
-        self.SetTable(table, True)
+        self.SetTable(self.data, True)
 
         self.SetRowLabelSize(30)
         self.SetMargins(0, 0)
         self.AutoSizeColumns(False)
 
-        # self.Bind(gridlib.EVT_GRID_CELL_LEFT_DCLICK, self.OnLeftDClick)
-
-    def OnLeftDClick(self, event):
-        print(event.GetRow())
+    def getValue(self, row, col):
+        return self.data.GetValue(row, col)
 
 
 class Main(wx.Frame):
