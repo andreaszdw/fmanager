@@ -16,36 +16,41 @@ class PlayerDialog(wx.Dialog):
 
     def InitUI(self):
 
-        pr = 0
-        pc = 0
-
         panel = wx.Panel(self)
         sizer = wx.GridBagSizer(5, 5)
 
-        txtHeader = wx.StaticText(panel, label="Spielerdaten")
-        sizer.Add(
-            txtHeader, pos=(pr, pc), span=(1, 3),
-            flag=wx.ALL | wx.EXPAND, border=15)
-        pr += 1
+        self.name = wx.TextCtrl(panel)
+        self.age = wx.TextCtrl(panel)
+        self.contract = wx.TextCtrl(panel)
+        self.salary = wx.TextCtrl(panel)
 
-        txtName = wx.StaticText(panel, label="Name")
-        sizer.Add(txtName, pos=(pr, pc), flag=wx.LEFT, border=10)
-        pc += 1
+        data = (
+            ("Spieler Daten", "head"),
+            ("Name", "tc", self.name),
+            ("Alter", "tc", self.age),
+            ("Vertrag", "tc", self.contract),
+            ("Gehalt", "tc", self.salary))
 
-        tcName = wx.TextCtrl(panel)
-        sizer.Add(tcName, pos=(pr, pc), flag=wx.EXPAND | wx.TOP)
-        pr += 1
+        pr = 0
         pc = 0
 
-        txtAge = wx.StaticText(panel, label="Alter")
-        sizer.Add(
-            txtAge, pos=(pr, pc), flag=wx.LEFT, border=10)
-        pc += 1
+        for gData in data:
+            if(gData[1] == "head"):
+                tmpTxt = wx.StaticText(
+                    panel, label=gData[0], style=wx.ALIGN_CENTER)
+                sizer.Add(
+                    tmpTxt, pos=(pr, pc), span=(1, 3),
+                    flag=wx.ALL | wx.EXPAND, border=15)
+                pr += 1
 
-        tcAge = wx.TextCtrl(panel)
-        sizer.Add(tcAge, pos=(pr, pc), flag=wx.EXPAND | wx.TOP)
-        pr += 1
-        pc = 0
+            if(gData[1] == "tc"):
+                tmpTxt = wx.StaticText(panel, label=gData[0])
+                sizer.Add(tmpTxt, pos=(pr, pc), flag=wx.LEFT, border=10)
+                pc += 1
+
+                sizer.Add(gData[2], pos=(pr, pc), flag=wx.EXPAND | wx.TOP)
+                pr += 1
+                pc = 0
 
         panel.SetSizer(sizer)
         sizer.Fit(self)
