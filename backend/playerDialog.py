@@ -23,13 +23,17 @@ class PlayerDialog(wx.Dialog):
         self.age = wx.TextCtrl(panel)
         self.contract = wx.TextCtrl(panel)
         self.salary = wx.TextCtrl(panel)
+        self.foot = wx.TextCtrl(panel)
+        self.position = wx.TextCtrl(panel)
 
         data = (
             ("Spieler Daten", "head"),
             ("Name", "tc", self.name),
             ("Alter", "tc", self.age),
             ("Vertrag", "tc", self.contract),
-            ("Gehalt", "tc", self.salary))
+            ("Gehalt", "tc", self.salary),
+            ("Fuss", "tc", self.foot),
+            ("Position", "tc", self.position))
 
         pr = 0
         pc = 0
