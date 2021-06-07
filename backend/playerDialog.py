@@ -45,10 +45,11 @@ class PlayerDialog(wx.Dialog):
 
             if(gData[1] == "tc"):
                 tmpTxt = wx.StaticText(panel, label=gData[0])
-                sizer.Add(tmpTxt, pos=(pr, pc), flag=wx.LEFT, border=10)
+                sizer.Add(
+                    tmpTxt, pos=(pr, pc), flag=wx.LEFT | wx.RIGHT, border=10)
                 pc += 1
 
-                sizer.Add(gData[2], pos=(pr, pc), flag=wx.EXPAND | wx.TOP)
+                sizer.Add(gData[2], pos=(pr, pc), flag=wx.RIGHT, border=25)
                 pr += 1
                 pc = 0
 
