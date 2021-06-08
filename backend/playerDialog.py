@@ -12,6 +12,8 @@ class PlayerDialog(wx.Dialog):
     def __init__(self, parent, playerId, title="Spieler Dialog"):
         super().__init__(parent, title=title)
 
+        print(playerId)
+
         self.InitUI()
 
     def InitUI(self):
