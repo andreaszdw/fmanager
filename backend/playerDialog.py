@@ -9,10 +9,12 @@ import sqlite3
 
 class PlayerDialog(wx.Dialog):
 
-    def __init__(self, parent, playerId, title="Spieler Dialog"):
+    def __init__(self, parent, player, title="Spieler Dialog"):
         super().__init__(parent, title=title)
 
-        print(playerId)
+        print(player.name)
+
+        self.player = player
 
         self.InitUI()
 
@@ -21,8 +23,8 @@ class PlayerDialog(wx.Dialog):
         panel = wx.Panel(self)
         sizer = wx.GridBagSizer(5, 5)
 
-        self.name = wx.TextCtrl(panel)
-        self.age = wx.TextCtrl(panel)
+        self.name = wx.TextCtrl(panel, value=self.player.name)
+        self.age = wx.TextCtrl(panel, value=str(self.player.age))
         self.contract = wx.TextCtrl(panel)
         self.salary = wx.TextCtrl(panel)
         self.foot = wx.TextCtrl(panel)
@@ -67,8 +69,15 @@ class TestFrame(wx.Frame):
     def __init__(self, parent, title="TestFrame"):
         super().__init__(parent, title=title)
 
+        p = player.Player()
+
+        con = sqlite3.connect("player.db")
+        cur = con.cursor()
+
+        p.loadFromDBbyID(cur, 3)
+
         # show the dialog
-        pd = PlayerDialog(None, title="Spieler Dialog", playerId=1)
+        pd = PlayerDialog(None, title="Spieler Dialog", player=p)
         pd.ShowModal()
         pd.Destroy
 
