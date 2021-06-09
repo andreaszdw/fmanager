@@ -23,21 +23,45 @@ class PlayerDialog(wx.Dialog):
         panel = wx.Panel(self)
         sizer = wx.GridBagSizer(5, 5)
 
+        self.id = wx.TextCtrl(panel, value=str(self.player.id))
         self.name = wx.TextCtrl(panel, value=self.player.name)
         self.age = wx.TextCtrl(panel, value=str(self.player.age))
-        self.contract = wx.TextCtrl(panel)
-        self.salary = wx.TextCtrl(panel)
-        self.foot = wx.TextCtrl(panel)
-        self.position = wx.TextCtrl(panel)
+        self.contract = wx.TextCtrl(panel, value=str(self.player.contract))
+        self.salary = wx.TextCtrl(panel, value=str(self.player.salary))
+        self.foot = wx.TextCtrl(panel, value=str(self.player.foot))
+        self.position = wx.TextCtrl(panel, value=str(self.player.position))
+        self.fitness = wx.TextCtrl(panel, value=str(self.player.fitness))
+        self.speed = wx.TextCtrl(panel, value=str(self.player.speed))
+        self.stamina = wx.TextCtrl(panel, value=str(self.player.stamina))
+        self.passing = wx.TextCtrl(panel, value=str(self.player.passing))
+        self.header = wx.TextCtrl(panel, value=str(self.player.header))
+        self.shot = wx.TextCtrl(panel, value=str(self.player.shot))
+        self.tackle = wx.TextCtrl(panel, value=str(self.player.tackle))
+        self.tactic = wx.TextCtrl(panel, value=str(self.player.tactic))
+        self.potential = wx.TextCtrl(panel, value=str(self.player.potential))
+        self.rating = wx.TextCtrl(panel, value=str(self.player.rating))
+        self.experience = wx.TextCtrl(panel, value=str(self.player.experience))
 
         data = (
             ("Spieler Daten", "head"),
+            ("Spieler ID", "tc", self.id),
             ("Name", "tc", self.name),
             ("Alter", "tc", self.age),
             ("Vertrag", "tc", self.contract),
             ("Gehalt", "tc", self.salary),
             ("Fuss", "tc", self.foot),
-            ("Position", "tc", self.position))
+            ("Position", "tc", self.position),
+            ("Fitness", "tc", self.fitness),
+            ("Schnelligkeit", "tc", self.speed),
+            ("Ausdauer", "tc", self.stamina),
+            ("Passen", "tc", self.passing),
+            ("Kopfball", "tc", self.header),
+            ("Schuss", "tc", self.shot),
+            ("Zweikampf", "tc", self.tackle),
+            ("Taktik", "tc", self.tactic),
+            ("Potenzial", "tc", self.potential),
+            ("Rating", "tc", self.rating),
+            ("Erfahrung", "tc", self.experience))
 
         pr = 0
         pc = 0
@@ -74,7 +98,7 @@ class TestFrame(wx.Frame):
         con = sqlite3.connect("player.db")
         cur = con.cursor()
 
-        p.loadFromDBbyID(cur, 3)
+        p.loadFromDBbyID(cur, 2)
 
         # show the dialog
         pd = PlayerDialog(None, title="Spieler Dialog", player=p)

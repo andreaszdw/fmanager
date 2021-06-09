@@ -7,6 +7,7 @@ import wx
 import wx.grid as gridlib
 
 import playerTable
+import playerDialog
 import player
 import sqlite3
 
@@ -40,8 +41,16 @@ class Main(wx.Frame):
         panel.SetSizer(boxSizer)
 
     def OnLeftDClick(self, event):
-        print("here")
-        print(self.playerGrid.getValue(event.GetRow(), 18))
+        p = player.Player()
+
+        con = sqlite3.connect("player.db")
+        cur = con.cursor()
+
+        p.loadFromDBbyID(cur, self.playerGrid.getValue(event.GetRow(), 18))
+
+        pd = playerDialog.PlayerDialog(None, title=p.name, player=p)
+        pd.ShowModal()
+        pd.Destroy
 
 
 if __name__ == '__main__':
