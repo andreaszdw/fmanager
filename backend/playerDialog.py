@@ -22,7 +22,7 @@ class PlayerDialog(wx.Dialog):
 
         panel = wx.Panel(self)
 
-        gbSizer = wx.GridBagSizer(5, 5)
+        gbSizer = wx.GridBagSizer(10, 10)
 
         self.id = wx.TextCtrl(panel, value=str(self.player.id))
         self.image = wx.TextCtrl(panel, value=str(self.player.imageFile))
@@ -45,6 +45,7 @@ class PlayerDialog(wx.Dialog):
         self.exp = wx.TextCtrl(panel, value=str(self.player.experience))
 
         data = (
+            ("Spieler Daten", "head"),
             ("Spieler ID", "tc", self.id),
             ("Bild", "tc", self.image),
             ("Name", "tc", self.name),
@@ -63,44 +64,44 @@ class PlayerDialog(wx.Dialog):
             ("Taktik", "tc", self.tactic),
             ("Potenzial", "tc", self.potential),
             ("Rating", "tc", self.rating),
-            ("Erfahrung", "tc", self.exp))
+            ("Erfahrung", "tc", self.exp),
+            ("", "spacer"))
 
         pr = 0
         pc = 0
 
         for gData in data:
+            if(gData[1]) == "spacer":
+                tmpTxt = wx.StaticText(
+                    panel, label=gData[0], style=wx.ALIGN_CENTER)
+                gbSizer.Add(
+                    tmpTxt, pos=(pr, pc), span=(1, 3),
+                    flag=wx.ALL | wx.EXPAND, border=0)
+                pr += 1
+
             if(gData[1] == "head"):
                 tmpTxt = wx.StaticText(
                     panel, label=gData[0], style=wx.ALIGN_CENTER)
                 gbSizer.Add(
                     tmpTxt, pos=(pr, pc), span=(1, 3),
-                    flag=wx.ALL | wx.EXPAND, border=15)
+                    flag=wx.ALL | wx.EXPAND, border=5)
                 pr += 1
 
             if(gData[1] == "tc"):
                 tmpTxt = wx.StaticText(panel, label=gData[0])
                 gbSizer.Add(
-                    tmpTxt, pos=(pr, pc), flag=wx.LEFT | wx.RIGHT, border=15)
+                    tmpTxt, pos=(pr, pc), flag=wx.ALL, border=5)
                 pc += 1
 
                 gbSizer.Add(gData[2], pos=(pr, pc), flag=wx.RIGHT, border=15)
                 pr += 1
                 pc = 0
 
-        staticBox = wx.StaticBox(panel, label="Spieler Daten")
-        staticBoxSizer = wx.StaticBoxSizer(staticBox, wx.VERTICAL)
-        staticBoxSizer.Add(gbSizer, 1, wx.EXPAND | wx.ALL, 25)
+        panel.SetSizer(gbSizer)
 
-        # panelSizer 
-        panelSizer = wx.BoxSizer(wx.VERTICAL)
-        panelSizer.Add(staticBoxSizer, 1, wx.EXPAND | wx.ALL, 25)
-        panel.SetSizerAndFit(panelSizer)
-
-        # add the panel to the main sizer
         mainSizer = wx.BoxSizer(wx.VERTICAL)
-        mainSizer.Add(gbSizer, proportion=1, flag=wx.ALL | wx.EXPAND, border=25)
+        mainSizer.Add(panel, border=10)
         self.SetSizerAndFit(mainSizer)
-        #self.Layout()
 
 class TestFrame(wx.Frame):
 
