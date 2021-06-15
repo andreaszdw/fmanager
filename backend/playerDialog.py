@@ -21,49 +21,91 @@ class PlayerDialog(wx.Dialog):
 
         panel = wx.Panel(self)
 
-        '''self.id = wx.TextCtrl(panel, value=str(self.player.id))
-        self.name = wx.TextCtrl(panel, value=self.player.name)
-        self.age = wx.TextCtrl(panel, value=str(self.player.age))
-        self.contract = wx.TextCtrl(panel, value=str(self.player.contract))
-        self.salary = wx.TextCtrl(panel, value=str(self.player.salary))
-        self.foot = wx.TextCtrl(panel, value=str(self.player.foot))
-        self.position = wx.TextCtrl(panel, value=str(self.player.position))'''
+        gbSizer = wx.GridBagSizer(5, 5)
 
-        mainSizer = wx.BoxSizer(wx.HORIZONTAL)
-        firstHBox = wx.BoxSizer(wx.HORIZONTAL)
+        sRow = 0
+        sCol = 0
 
         # the player image
         ip = pathlib.Path.cwd() / "assets" / "player" / self.player.imageFile
 
         pImage = wx.StaticBitmap(
             panel, bitmap=wx.Bitmap(str(ip), wx.BITMAP_TYPE_PNG))
-        firstHBox.Add(pImage, flag=wx.EXPAND | wx.ALL, border=15)
+        gbSizer.Add(
+            pImage, pos=(sRow, sCol), flag=wx.ALL, border=15)
+
+        sCol += 1
+
+        gbSizerPD = wx.GridBagSizer(5, 5)
+
+        self.id = wx.TextCtrl(panel, value=str(self.player.id))
+        self.name = wx.TextCtrl(panel, value=self.player.name)
+        self.age = wx.TextCtrl(panel, value=str(self.player.age))
+        self.contract = wx.TextCtrl(panel, value=str(self.player.contract))
+        self.salary = wx.TextCtrl(panel, value=str(self.player.salary))
+        self.foot = wx.TextCtrl(panel, value=str(self.player.foot))
+        self.position = wx.TextCtrl(panel, value=str(self.player.position))
+        self.potential = wx.TextCtrl(panel, value=str(self.player.potential))
+        self.rating = wx.TextCtrl(panel, value=str(self.player.rating))
 
         data = (
-            ("Spieler ID", "tc"),  # self.id),
-            ("Name", "tc"),  # self.name),
-            ("Alter", "tc"),  # self.age),
-            ("Vertrag", "tc"),  # self.contract),
-            ("Gehalt", "tc"),  # self.salary),
-            ("Fuss", "tc"),  # self.foot),
-            ("Position", "tc"))  # self.position))
+            ("Spieler Daten", "head"),
+            ("Spieler ID", "tc", self.id),
+            ("Name", "tc", self.name),
+            ("Alter", "tc", self.age),
+            ("Vertrag", "tc", self.contract),
+            ("Gehalt", "tc", self.salary),
+            ("Fuss", "tc", self.foot),
+            ("Position", "tc", self.position),
+            ("Potenzial", "tc", self.potential),
+            ("Rating", "tc", self.rating))
 
-        firstVBox = wx.BoxSizer(wx.VERTICAL)
+        self.addToGridBagSizer(panel, gbSizerPD, data)
+
+        gbSizer.Add(gbSizerPD, pos=(sRow, sCol))
+
+        panel.SetSizer(gbSizer)
+
+        mainSizer = wx.BoxSizer(wx.VERTICAL)
+        mainSizer.Add(panel, flag=wx.ALL, border=5)
+        self.SetSizerAndFit(mainSizer)
+
+    def addToGridBagSizer(self, panel, gbs, data):
+        tmpRow = 0
+        tmpCol = 0
 
         for d in data:
-            tmpTxt = wx.StaticText(panel, label=d[0])
-            firstVBox.Add(
-                tmpTxt, flag=wx.ALL | wx.EXPAND, border=5)
 
-        firstHBox.Add(firstVBox, flag=wx.ALL | wx.EXPAND, border=5)
-        mainSizer.Add(firstHBox, flag=wx.ALL | wx.EXPAND, border=10)
-        mainSizer.Layout()
+            if(d[1]) == "spacer":
+                tmpTxt = wx.StaticText(
+                    panel, label=d[0], style=wx.ALIGN_CENTER)
+                gbs.Add(
+                    tmpTxt, pos=(tmpRow, tmpCol),
+                    flag=wx.ALL | wx.EXPAND, border=0)
+                tmpRow += 1
 
-        panel.SetSizer(mainSizer)
+            if(d[1] == "head"):
+                tmpTxt = wx.StaticText(
+                    panel, label=d[0], style=wx.ALIGN_CENTER)
+                font = wx.Font(
+                    10, wx.FONTFAMILY_DEFAULT,
+                    wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD)
+                wx.Font()
+                tmpTxt.SetFont(font)
+                gbs.Add(
+                    tmpTxt, pos=(tmpRow, tmpCol),
+                    flag=wx.ALL | wx.EXPAND, border=5)
+                tmpRow += 1
 
-        panelSizer = wx.BoxSizer(wx.VERTICAL)
-        panelSizer.Add(panel)
-        self.SetSizerAndFit(panelSizer)
+            if(d[1] == "tc"):
+                tmpTxt = wx.StaticText(panel, label=d[0])
+                gbs.Add(
+                    tmpTxt, pos=(tmpRow, tmpCol), flag=wx.ALL, border=5)
+
+                tmpCol += 1
+                gbs.Add(d[2], pos=(tmpRow, tmpCol), flag=wx.RIGHT, border=5)
+                tmpRow += 1
+                tmpCol = 0
 
 
 class TestFrame(wx.Frame):
