@@ -46,9 +46,7 @@ class PlayerDialog(wx.Dialog):
             ("Vertrag", "tc"),  # self.contract),
             ("Gehalt", "tc"),  # self.salary),
             ("Fuss", "tc"),  # self.foot),
-            ("Position", "tc"),  # self.position))
-            ("sjdflaslfjsl", "tc"),
-            ("sjflsflaslflasf", "tc"))
+            ("Position", "tc"))  # self.position))
 
         firstVBox = wx.BoxSizer(wx.VERTICAL)
 
