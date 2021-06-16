@@ -79,7 +79,6 @@ class PlayerDialog(wx.Dialog):
         # new gridbagsizer properties
         propGbs = wx.GridBagSizer(5, 5)
 
-
         # new staticBox properties
         staticBoxProp = wx.StaticBoxSizer(wx.VERTICAL, panel, "Eigenschaften")
 
@@ -98,7 +97,9 @@ class PlayerDialog(wx.Dialog):
         staticBoxProp.Add(propGbs, flag=wx.ALL | wx.EXPAND, border=15)
 
         # add it to the mainGbs
-        mainGbs.Add(staticBoxProp, pos=(sRow, sCol), span=(1, 2), flag=wx.ALL | wx.EXPAND, border=5)
+        mainGbs.Add(
+            staticBoxProp, pos=(sRow, sCol), span=(1, 2),
+            flag=wx.ALL | wx.EXPAND, border=5)
 
         # set the panel sizer
         panel.SetSizer(mainGbs)
