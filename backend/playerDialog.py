@@ -21,23 +21,27 @@ class PlayerDialog(wx.Dialog):
 
         panel = wx.Panel(self)
 
-        gbSizer = wx.GridBagSizer(5, 5)
+        mainGbs = wx.GridBagSizer(5, 5)  # this is the main gridbagsizer
 
         sRow = 0
         sCol = 0
 
-        # the player image
+        # the player image, add to mainGbs
         ip = pathlib.Path.cwd() / "assets" / "player" / self.player.imageFile
-
         pImage = wx.StaticBitmap(
             panel, bitmap=wx.Bitmap(str(ip), wx.BITMAP_TYPE_PNG))
-        gbSizer.Add(
+        mainGbs.Add(
             pImage, pos=(sRow, sCol), flag=wx.ALL, border=15)
 
         sCol += 1
 
-        gbSizerPD = wx.GridBagSizer(5, 5)
+        # new gridbagsizer for personal data
+        pdGbs = wx.GridBagSizer(5, 5)
 
+        # staticbox for personal data
+        staticBoxPD = wx.StaticBoxSizer(wx.VERTICAL, panel, "Spielerdaten")
+
+        # widgets for personal data
         self.id = wx.TextCtrl(panel, value=str(self.player.id))
         self.name = wx.TextCtrl(panel, value=self.player.name)
         self.age = wx.TextCtrl(panel, value=str(self.player.age))
@@ -49,7 +53,6 @@ class PlayerDialog(wx.Dialog):
         self.rating = wx.TextCtrl(panel, value=str(self.player.rating))
 
         data = (
-            ("Spieler Daten", "head"),
             ("Spieler ID", "tc", self.id),
             ("Name", "tc", self.name),
             ("Alter", "tc", self.age),
@@ -60,12 +63,19 @@ class PlayerDialog(wx.Dialog):
             ("Potenzial", "tc", self.potential),
             ("Rating", "tc", self.rating))
 
-        self.addToGridBagSizer(panel, gbSizerPD, data)
+        # let a function add the data
+        self.addToGridBagSizer(panel, pdGbs, data)
 
-        gbSizer.Add(gbSizerPD, pos=(sRow, sCol))
+        # add it into the staticbox
+        staticBoxPD.Add(pdGbs, flag=wx.ALL, border=15)
 
-        panel.SetSizer(gbSizer)
+        # add it to the mainGbs
+        mainGbs.Add(staticBoxPD, pos=(sRow, sCol), flag=wx.ALL, border=5)
 
+        # set the panel sizer
+        panel.SetSizer(mainGbs)
+
+        # the sizer for the dialog
         mainSizer = wx.BoxSizer(wx.VERTICAL)
         mainSizer.Add(panel, flag=wx.ALL, border=5)
         self.SetSizerAndFit(mainSizer)
