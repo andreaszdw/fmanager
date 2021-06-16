@@ -72,6 +72,34 @@ class PlayerDialog(wx.Dialog):
         # add it to the mainGbs
         mainGbs.Add(staticBoxPD, pos=(sRow, sCol), flag=wx.ALL, border=5)
 
+        # new row, col at 0
+        sRow += 1
+        sCol = 0
+
+        # new gridbagsizer properties
+        propGbs = wx.GridBagSizer(5, 5)
+
+
+        # new staticBox properties
+        staticBoxProp = wx.StaticBoxSizer(wx.VERTICAL, panel, "Eigenschaften")
+
+        # widgets for properties
+        self.fitness = wx.TextCtrl(panel, value=str(self.player.fitness))
+        self.speed = wx.TextCtrl(panel, value=str(self.player.speed))
+
+        properties = (
+            ("Fitness", "tc", self.fitness),
+            ("Schnelligkeit", "tc", self.speed))
+
+        # add it to the properties sizer
+        self.addToGridBagSizer(panel, propGbs, properties)
+
+        # add it to the staticbox
+        staticBoxProp.Add(propGbs, flag=wx.ALL | wx.EXPAND, border=15)
+
+        # add it to the mainGbs
+        mainGbs.Add(staticBoxProp, pos=(sRow, sCol), span=(1, 2), flag=wx.ALL | wx.EXPAND, border=5)
+
         # set the panel sizer
         panel.SetSizer(mainGbs)
 
