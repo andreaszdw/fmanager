@@ -101,7 +101,7 @@ class PlayerDialog(wx.Dialog):
         self.addToGridBagSizer(panel, phyGbs, physProp)
 
         # add it to the staticbox
-        staticBoxProp.Add(phyGbs, flag=wx.ALL | wx.EXPAND, border=15)
+        staticBoxProp.Add(phyGbs, flag=wx.ALL | wx.EXPAND, border=5)
 
         # football football properties
         fbGbs = wx.GridBagSizer(5, 5)
@@ -119,12 +119,26 @@ class PlayerDialog(wx.Dialog):
 
         self.addToGridBagSizer(panel, fbGbs, fbProp)
 
-        staticBoxProp.Add(fbGbs, flag=wx.ALL | wx.EXPAND, border=15)
+        staticBoxProp.Add(fbGbs, flag=wx.ALL | wx.EXPAND, border=5)
 
         # add it to the mainGbs
         mainGbs.Add(
             staticBoxProp, pos=(sRow, sCol), span=(1, 2),
             flag=wx.ALL | wx.EXPAND, border=5)
+
+        sRow += 1
+
+        # buttons
+        buttonBox = wx.BoxSizer(wx.HORIZONTAL)
+
+        okButton = wx.Button(panel, wx.ID_ANY, "Ok")
+        buttonBox.Add(okButton)
+        abortButton = wx.Button(panel, wx.ID_ANY, "Abbrechen")
+        buttonBox.Add(abortButton)
+
+        mainGbs.Add(
+            buttonBox, pos=(sRow, sCol), span=(1, 2),
+            flag=wx.ALIGN_RIGHT, border=5)
 
         # set the panel sizer
         panel.SetSizer(mainGbs)
