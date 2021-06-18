@@ -77,24 +77,49 @@ class PlayerDialog(wx.Dialog):
         sCol = 0
 
         # new gridbagsizer properties
-        propGbs = wx.GridBagSizer(5, 5)
+        #propGbs = wx.GridBagSizer(5, 5)
 
         # new staticBox properties
-        staticBoxProp = wx.StaticBoxSizer(wx.VERTICAL, panel, "Eigenschaften")
+        staticBoxProp = wx.StaticBoxSizer(wx.HORIZONTAL, panel, "Eigenschaften")
 
-        # widgets for properties
+        # physical propertis
+        phyGbs = wx.GridBagSizer(5, 5)
+
+        # widgets for physProp
         self.fitness = wx.TextCtrl(panel, value=str(self.player.fitness))
         self.speed = wx.TextCtrl(panel, value=str(self.player.speed))
+        self.stamina = wx.TextCtrl(panel, value=str(self.player.stamina))
+        self.tactic = wx.TextCtrl(panel, value=str(self.player.tactic))
 
-        properties = (
+        physProp = (
             ("Fitness", "tc", self.fitness),
-            ("Schnelligkeit", "tc", self.speed))
+            ("Schnelligkeit", "tc", self.speed),
+            ("Ausdauer", "tc", self.stamina),
+            ("Taktik", "tc", self.tactic))
 
         # add it to the properties sizer
-        self.addToGridBagSizer(panel, propGbs, properties)
+        self.addToGridBagSizer(panel, phyGbs, physProp)
 
         # add it to the staticbox
-        staticBoxProp.Add(propGbs, flag=wx.ALL | wx.EXPAND, border=15)
+        staticBoxProp.Add(phyGbs, flag=wx.ALL | wx.EXPAND, border=15)
+
+        # football football properties
+        fbGbs = wx.GridBagSizer(5, 5)
+
+        self.passing = wx.TextCtrl(panel, value=str(self.player.passing))
+        self.header = wx.TextCtrl(panel, value=str(self.player.header))
+        self.shot = wx.TextCtrl(panel, value=str(self.player.shot))
+        self.tackle = wx.TextCtrl(panel, value=str(self.player.tackle))
+
+        fbProp = (
+            ("Passen", "tc", self.passing),
+            ("Kopfball", "tc", self.header),
+            ("Schuss", "tc", self.shot),
+            ("Zweikamp", "tc", self.tackle))
+
+        self.addToGridBagSizer(panel, fbGbs, fbProp)
+
+        staticBoxProp.Add(fbGbs, flag=wx.ALL | wx.EXPAND, border=15)
 
         # add it to the mainGbs
         mainGbs.Add(
