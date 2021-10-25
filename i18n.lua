@@ -83,7 +83,7 @@ function i18n.getStrings()
 	local lang = system.getPreference("locale", "country")
 
 	if lang == "DE" then 
-		return de
+		return default
 	else
 		return default
 	end
