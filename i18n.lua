@@ -83,7 +83,7 @@ function i18n.getStrings()
 	local lang = system.getPreference("locale", "country")
 
 	if lang == "DE" then 
-		return default
+		return de
 	else
 		return default
 	end
@@ -131,7 +131,7 @@ function i18n.currencyFormat(number, decimal, useSign)
 
 	local useLang = ""
 	if lang == "DE" then 
-		useLang = de 
+		useLang = de
 	else
 		useLange = default 
 	end

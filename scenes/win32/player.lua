@@ -301,7 +301,7 @@ function scene:create(event)
 
 
 	-- the back button
-	local backButton = fmw:button("Zurück", goBack)
+	local backButton = fmw:button(strings.back, goBack)
 	local tmpW = backButton:getWidth()
 	local tmpH = backButton:getHeight()
 	backButton:setPosition(1280 - tmpW/2 - gap, 720 - tmpH/2 - gap)
