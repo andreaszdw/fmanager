@@ -85,7 +85,7 @@ end
 --
 -- -------------------------------------------------------
 local function onResize(event)
-	centerSceneView()
+	-- centerSceneView()
 end
 
 -- -------------------------------------------------------
@@ -316,7 +316,7 @@ function scene:show(event)
 	local phase = event.phase
 
 	if (phase == "will") then
-		centerSceneView()
+		-- centerSceneView()
 	elseif (phase == "did") then
 		-- add listeners
 		Runtime:addEventListener("enterFrame", onUpdate)
