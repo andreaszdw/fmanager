@@ -9,7 +9,7 @@ application =
 	{	
 		scale = "letterbox",
 		width = 1280,
-		height = 720,
+		height = 960,
 		fps = 30
 	},
 }
