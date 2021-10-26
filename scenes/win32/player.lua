@@ -268,6 +268,7 @@ function scene:create(event)
 
 			if row.params.value then 
 				local valueView = progressView:new(row, tab, 5, 300, row.params.value)
+				local valueView = progressView:new(row, tab, 5, 280, 0)
 
 				-- print the percent, without decimals
 				local valuePercent = string.format("%.0f", row.params.value * 100) .. " %"
