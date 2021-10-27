@@ -23,16 +23,6 @@ local centerY = height * 0.5
 
 local sceneView = 0
 
--- -------------------------------------------------------
---
--- centerSceneView
---
--- -------------------------------------------------------
-local function centerSceneView()
-	sceneView.x = (display.pixelWidth - 1280)/2
-	sceneView.y = (display.pixelHeight - 720)/2
-end
-
 -- --------------------------------------------------------
 --
 -- update
@@ -67,15 +57,6 @@ end
 --
 -- -------------------------------------------------------
 local function onMouse(event)
-end
-
--- -------------------------------------------------------
---
--- onResize 
---
--- -------------------------------------------------------
-local function onResize(event)
-	-- centerSceneView()
 end
 
 -- -------------------------------------------------------
@@ -165,13 +146,12 @@ function scene:show(event)
 	local phase = event.phase
 
 	if (phase == "will") then
-		-- centerSceneView()
+
 	elseif (phase == "did") then
 		-- add listeners
 		Runtime:addEventListener("enterFrame", onUpdate)
 		Runtime:addEventListener("key", onKey)
 		Runtime:addEventListener("mouse", onMouse)
-		Runtime:addEventListener("resize", onResize)
 	end
 end
 
@@ -185,7 +165,6 @@ function scene:hide(event)
 		Runtime:removeEventListener("enterFrame", onUpdate)
 		Runtime:removeEventListener("key", onKey)
 		Runtime:removeEventListener("mouse", onMouse)
-		Runtime:removeEventListener("resize", onResize)
 	elseif phase == "did" then 
 	end
 end
