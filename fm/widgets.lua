@@ -7,6 +7,7 @@
 -- --------------------------------------------------------
 
 local button = require("fm.button")
+local pbutton = require("fm.pbutton")
 local singleText = require("fm.singletext")
 local progressView = require("fm.progressview")
 local tableView = require("fm.table")
@@ -48,6 +49,17 @@ end
 -- --------------------------------------------------------
 function fmwidgets:button(label, onEvent, x, y, width, height)
 	local child = button:new(self, label, onEvent, x, y, width, height)
+	table.insert(self.childs, child)
+	return child
+end
+
+-- --------------------------------------------------------
+--
+-- pbutton
+--
+-- --------------------------------------------------------
+function fmwidgets:pbutton(label, onEvent, x, y, width, height)
+	local child = pbutton:new(self, label, onEvent, x, y, width, height)
 	table.insert(self.childs, child)
 	return child
 end

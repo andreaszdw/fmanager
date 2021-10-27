@@ -25,7 +25,8 @@ local theme = {
 		labelColor = {default=d, over=d},
 		fillColor = {default=b, over=b},
 		strokeColor = {default=c, over=c},
-		strokeWidth = 2
+		strokeWidth = 2,
+		pButtonX = 5
 	},
 
 	emptyStar = "assets/images/stars/empty25x24.png",

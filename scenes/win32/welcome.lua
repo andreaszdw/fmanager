@@ -123,13 +123,13 @@ function scene:create(event)
 	local welcomeText = fmwidgets:singleText(strings.welcome, 640, 120, 60)
 	nextElement = nextElement + welcomeText:getHeight()
 
-	local goPlayerButton = fmwidgets:button(strings.player, goPlayer, 640, nextElement)
+	local goPlayerButton = fmwidgets:pbutton(strings.player, goPlayer, 640, nextElement)
 	nextElement = nextElement + goPlayerButton:getHeight() + gap
 
-	local newPlayerButton = fmwidgets:button(strings.newPlayer, newPlayer, 640, nextElement)
+	local newPlayerButton = fmwidgets:pbutton(strings.newPlayer, newPlayer, 640, nextElement)
 	nextElement = nextElement + newPlayerButton:getHeight() + gap
 	
-	local quitButton = fmwidgets:button(strings.quit, quitApp)
+	local quitButton = fmwidgets:pbutton(strings.quit, quitApp)
 	local tmpW = quitButton:getWidth()
 	local tmpH = quitButton:getHeight()
 	quitButton:setPosition(1280 - tmpW/2 - gap, 720 - tmpH/2 - gap)
