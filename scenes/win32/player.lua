@@ -21,10 +21,11 @@ local strings = i18n.getStrings()
 -- new scene
 local scene = composer.newScene()
 
-local width = display.pixelWidth 
-local height = display.pixelHeight
+local width = display.contentWidth 
+local height = display.contentHeight
 local centerX = width * 0.5 
 local centerY = height * 0.5
+print(centerY)
 
 local sceneView = 0
 
@@ -90,7 +91,7 @@ function scene:create(event)
 
 	local gap = 10
 
-	display.setDefault("background", unpack(theme.bg))
+	display.setDefault("background", 0, 0, 0)
 	local bgImage = display.newImage(self.view, "assets/images/bg/bg1.jpg")
 	bgImage.x = centerX
 	bgImage.y = centerY
@@ -99,7 +100,7 @@ function scene:create(event)
 	local bgRect = display.newRect(self.view, 640, 360, 1280, 720)
 	bgRect.strokeWidth = 2
 	bgRect:setStrokeColor(unpack(theme.stroke))
-	bgRect:setFillColor(1, 1, 1, 0)
+	bgRect:setFillColor(unpack(theme.bg), 0)
 
 	-- player image and rect
 	-- the rect 
@@ -239,13 +240,27 @@ function scene:create(event)
 			local rowTitle = singleText:new(row, row.params.title, x, y, fontSize)
 			rowTitle:setAnchor(0, 0)
 
-			if row.params.value then 
-				local valueView = progressView:new(row, tab, 5, 300, row.params.value)
-				local valueView = progressView:new(row, tab, 5, 280, 0)
+			if row.params.value then
+				-- this is the max width of the progressview
+				local pvWidth = 300
+
+				-- draw a background rect
+				local pvBgRectLength = pvWidth - 56 - 56 + 9 -- here look in the sheet for progressview to get the right values
+				local pvBgRect = display.newRect(row, tab + 56, 8, pvBgRectLength, row.height - 14)
+				pvBgRect:setFillColor(0, 0, 0, 0.5)
+				pvBgRect.anchorX = 0
+				pvBgRect.anchorY = 0
+
+				-- draw the width of progressview in dependance of the max value
+				local length = pvWidth * row.params.max
+
+				local valueView = progressView:new(row, tab, 5, length, row.params.value / row.params.max)
 
 				-- print the percent, without decimals
-				local valuePercent = string.format("%.0f", row.params.value * 100) .. " %"
-				local valueText = singleText:new(row, valuePercent, tab2, y, fontSize)
+				local valuePercent = string.format("%.0f", row.params.value * 100)
+				local mostPossible = string.format("%.0f", row.params.max * 100)
+				local valueString = valuePercent .. " / " .. mostPossible
+				local valueText = singleText:new(row, valueString, tab2, y, fontSize)
 				valueText:setAnchor(0, 0)
 				valueText:setFillColor(fmw.theme.labelWhite)
 			end
@@ -258,19 +273,19 @@ function scene:create(event)
 	end
 
 	-- new table
-	local skillTable = fmw:table(320, 10, 450, 480, skillRender, 40)
+	local skillTable = fmw:table(320, 10, 460, 480, skillRender, 40)
 
 	skillTable:insertRow({header = strings.skills})
 	skillTable:insertRow({header = strings.physical})
-	skillTable:insertRow({title = strings.fitness, value = docPlayer.fitness})
-	skillTable:insertRow({title = strings.speed, value = docPlayer.speed})
-	skillTable:insertRow({title = strings.stamina, value = docPlayer.stamina})
+	skillTable:insertRow({title = strings.fitness, value = docPlayer.fitness, max = docPlayer.maxFitness})
+	skillTable:insertRow({title = strings.stamina, value = docPlayer.stamina, max = docPlayer.maxFitness})
 	skillTable:insertRow({header = strings.football})
-	skillTable:insertRow({title = strings.passing, value = docPlayer.passing})
-	skillTable:insertRow({title = strings.header, value = docPlayer.header})
-	skillTable:insertRow({title = strings.shot, value = docPlayer.shot})
-	skillTable:insertRow({title = strings.tackle, value = docPlayer.tackle})
-	skillTable:insertRow({title = strings.tactic, value = docPlayer.tactic})
+	skillTable:insertRow({title = strings.speed, value = docPlayer.speed, max = docPlayer.maxSpeed})
+	skillTable:insertRow({title = strings.passing, value = docPlayer.passing, max = docPlayer.maxPassing})
+	skillTable:insertRow({title = strings.header, value = docPlayer.header, max = docPlayer.maxHeader})
+	skillTable:insertRow({title = strings.shot, value = docPlayer.shot, max = docPlayer.maxShot})
+	skillTable:insertRow({title = strings.tackle, value = docPlayer.tackle, max = docPlayer.maxTackle})
+	skillTable:insertRow({title = strings.tactic, value = docPlayer.tactic, max = docPlayer.maxTactic})
 	skillTable:insertRow({title = strings.experience, points = docPlayer.experience})
 
 

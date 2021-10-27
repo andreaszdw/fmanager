@@ -16,8 +16,8 @@ local strings = i18n.getStrings()
 -- new scene
 local scene = composer.newScene()
 
-local width = display.pixelWidth 
-local height = display.pixelHeight
+local width = display.contentHeight
+local height = display.contentWidth
 local centerX = width * 0.5 
 local centerY = height * 0.5
 
@@ -111,12 +111,12 @@ function scene:create(event)
 
 	local theme = fmwidgets:getTheme()
 
-	display.setDefault("background", unpack(theme.bg))
+	display.setDefault("background", 0, 0, 0)
 
 	local bgRect = display.newRect(self.view, 640, 360, 1280, 720)
 	bgRect.strokeWidth = 2
 	bgRect:setStrokeColor(unpack(theme.stroke))
-	bgRect:setFillColor(1, 1, 1, 0)
+	bgRect:setFillColor(unpack(theme.bg))
 
 	local counter = 0
 	local nextElement = 120
