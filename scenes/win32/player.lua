@@ -25,7 +25,6 @@ local width = display.contentWidth
 local height = display.contentHeight
 local centerX = width * 0.5 
 local centerY = height * 0.5
-print(centerY)
 
 local sceneView = 0
 

@@ -41,8 +41,8 @@ settings =
     	enableMaximizeButton = false,
     	titleText = 
     	{
-    		default = "fmanager",
-    		["de"] = "fmanager"
+    		default = "For the game!",
+    		["de"] = "For the game!"
     	}
     },
 }
