@@ -33,7 +33,10 @@ local de = {
 	shot = "Schuss",
 	tackle = "Zweikampf",
 	tactic = "Taktik",
-	experience = "Erfahrung"
+	experience = "Erfahrung",
+	load = "Laden",
+	selectFile = "Datei wählen",
+	singleFilterDescription = "Spielstand"
 }
 
 local default = {
@@ -71,7 +74,10 @@ local default = {
 	shot = "Shot",
 	tackle = "Tackling",
 	tactic = "Tactic",
-	experience = "Experience"
+	experience = "Experience",
+	load = "Load",
+	selectFile = "Select File",
+	singleFilterDescription = "Save game file"
 }
 
 local i18n = {}
