@@ -44,11 +44,5 @@ settings =
     		default = "For the game!",
     		["de"] = "For the game!"
     	}
-    },plugins =
-	{
-		["plugin.tinyFileDialogs"] =
-		{
-			publisherId = "com.revolt64"
-		},
-	},
+    },
 }

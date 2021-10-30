@@ -12,7 +12,6 @@ local i18n = require("i18n")
 local fmw = require("fm.widgets")
 
 local strings = i18n.getStrings()
-local tfd = require("plugin.tinyFileDialogs")
 
 -- new scene
 local scene = composer.newScene()
@@ -23,8 +22,6 @@ local centerX = width * 0.5
 local centerY = height * 0.5
 
 local sceneView = 0
-
-local userHomeDocumentsPath = isWindows and "%HOMEPATH%\\Documents\\" or os.getenv("HOME")
 
 -- --------------------------------------------------------
 --
@@ -62,19 +59,6 @@ end
 local function onMouse(event)
 end
 
--- --------------------------------------------------------
---
--- newPlayer
--- 
--- --------------------------------------------------------
-local function newPlayer(event)
-	local options = {
-		params = {
-			status = "new"
-		}
-	}
-	composer.gotoScene("scenes.win32.player", options)
-end
 
 -- --------------------------------------------------------
 --
@@ -93,17 +77,8 @@ end
 --
 -- --------------------------------------------------------
 local function loadGame(event)
-	local selectFile =
-		tfd.openFileDialog(
-		{
-			title = strings.selectFile,
-			initialPath = userHomeDocumentsPath,
-			filters = {"*.*"},
-			singleFilterDescription = strings.singleFilterDescription,
-			multiSelect = False
-		}
-	)
-	print(selectFile)
+	print(system.ResourceDirectory)
+	print(system.DocumentsDirectory)
 end
 
 -- --------------------------------------------------------
