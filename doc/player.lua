@@ -29,6 +29,7 @@ function player:new()
 		-- a = Attacker
 		position = position or "m",
 		-- sport skills - this is a percentage system
+		-- max... is the percentage, the player could reach
 		fitness = fitness or 0.88,
 		maxFitness = 1.0,
 		stamina = stamina or 0.95,
@@ -47,6 +48,7 @@ function player:new()
 		tactic = tactic or 0.85,
 		maxTactic = 0.85,
 		-- potential/rating - percentage
+		-- this must be a calculation, later...
 		potential = potential or 1.0, -- this is the possible rating
 		rating = 0.5, -- rating
 		experience = 0
