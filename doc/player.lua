@@ -8,17 +8,6 @@
 
 local player = {}
 
-local function calcPotRat(o)	
-	tmpMax = o.maxFitness + o.maxStamina + o.maxSpeed + o.maxPassing + o.maxHeader + o.maxShot + o.maxTackle + o.maxTactic
-	tmpValues = o.fitness + o.stamina + o.speed + o.passing + o.header + o.shot + o.tackle + o.tactic
-	print(tmpMax .. " " .. tmpValues)
-	pot = tmpMax / 8
-	print(pot)
-	rat = tmpValues / 8
-	print(rat)
-	return pot, rat
-end
-
 -- --------------------------------------------------------
 --
 -- constructor
@@ -61,10 +50,27 @@ function player:new()
 		experience = 0
 	}
 	
-	o.potential, o.rating = calcPotRat(o)
+	-- calc potential and rating
+	tmpMax = o.maxFitness + o.maxStamina + o.maxSpeed + o.maxPassing + o.maxHeader + o.maxShot + o.maxTackle + o.maxTactic
+	tmpValues = o.fitness + o.stamina + o.speed + o.passing + o.header + o.shot + o.tackle + o.tactic
+	o.potential = tmpMax / 8
+	o.rating = tmpValues / 8
+
 	setmetatable(o, self)
 	self.__index = self
 	return o
+end
+
+-- --------------------------------------------------------
+--
+-- calc potential and rating of player
+--
+-- --------------------------------------------------------
+function player:calcPotRat()
+	tmpMax = self.maxFitness + self.maxStamina + self.maxSpeed + self.maxPassing + self.maxHeader + self.maxShot + self.maxTackle + self.maxTactic
+	tmpValues = self.fitness + self.stamina + self.speed + self.passing + self.header + self.shot + self.tackle + self.tactic
+	self.potential = tmpMax / 8
+	self.rating = tmpValues / 8
 end
 
 -- --------------------------------------------------------
@@ -74,6 +80,7 @@ end
 -- --------------------------------------------------------
 function player:loadFromDB(db, id)
 	print("load")
+	self:calcPotRat()
 end
 
 -- --------------------------------------------------------
