@@ -16,6 +16,7 @@ local player = {}
 function player:new()
 
 	local o = {
+		id = nil,
 		name = name or "Egal Egal",
 		age = age or 17, -- this is the normal starting age
 		contract = contract or 3,

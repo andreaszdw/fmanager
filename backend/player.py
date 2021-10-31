@@ -9,21 +9,29 @@ class Player(object):
 
     def __init__(self):
         self.id = None
-        self.name = "Empty"
+        self.name = None
         self.age = 0
         self.contract = 0
         self.salary = 0
-        self.imageFile = "Empty"
+        self.imageFile = None
         self.foot = 0
-        self.position = "Empty"
-        self.fitness = 8
-        self.speed = 8
-        self.stamina = 8
-        self.passing = 8
-        self.header = 8
+        self.position = None
+        self.fitness = 0
+        self.maxFitness = 1.0
+        self.stamina = 0
+        self.maxStamina = 1.0
+        self.speed = 0
+        self.maxSpeed = 0
+        self.passing = 0
+        self.maxPassing = 0
+        self.header = 0
+        self.maxHeader = 0
         self.shot = 0
+        self.maxShot = 0
         self.tackle = 0
+        self.maxTackle = 9
         self.tactic = 0
+        self.maxTactic = 0
         self.potential = 0
         self.rating = 0
         self.experience = 0
