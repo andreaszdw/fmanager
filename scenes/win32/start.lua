@@ -106,7 +106,7 @@ function scene:create(event)
 	local loadButton = fmwidgets:pbutton(strings.load, loadGame, 1280/2, nextElement)
 	nextElement = nextElement + loadButton:getHeight() + gap
 
-	local quitButton = fmwidgets:pbutton(strings.load, quitApp)
+	local quitButton = fmwidgets:pbutton(strings.quit, quitApp)
 	local tmpW = quitButton:getWidth()
 	local tmpH = quitButton:getHeight()
 	quitButton:setPosition(1280 - tmpW/2 - gap, 720 - tmpH/2 - gap)

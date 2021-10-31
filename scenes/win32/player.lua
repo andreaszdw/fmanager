@@ -125,12 +125,12 @@ function scene:create(event)
 	table.insert(self.view, potentialGroup)
 	local potential = math.floor(10 * docPlayer.potential)
 	local rating = math.floor(10 * docPlayer.rating)
-	print(-potential * 14 + 160)
 	local starX = -potential * 14 + 174
 	local starY = 420
 	for i=1, potential do
 		local star
 		if rating >= i then 
+			print(potential .. " " .. rating)
 			star = display.newImage(self.view, theme.fullStar)
 		else  
 			star = display.newImage(self.view, theme.emptyStar)

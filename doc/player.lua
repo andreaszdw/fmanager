@@ -8,6 +8,17 @@
 
 local player = {}
 
+local function calcPotRat(o)	
+	tmpMax = o.maxFitness + o.maxStamina + o.maxSpeed + o.maxPassing + o.maxHeader + o.maxShot + o.maxTackle + o.maxTactic
+	tmpValues = o.fitness + o.stamina + o.speed + o.passing + o.header + o.shot + o.tackle + o.tactic
+	print(tmpMax .. " " .. tmpValues)
+	pot = tmpMax / 8
+	print(pot)
+	rat = tmpValues / 8
+	print(rat)
+	return pot, rat
+end
+
 -- --------------------------------------------------------
 --
 -- constructor
@@ -30,29 +41,27 @@ function player:new()
 		position = position or "m",
 		-- sport skills - this is a percentage system
 		-- max... is the percentage, the player could reach
-		fitness = fitness or 0.88,
-		maxFitness = 1.0,
-		stamina = stamina or 0.95,
-		maxStamina = 1.0,
+		fitness = fitness or 1.0,
+		maxFitness = 1.0, -- this is always 1.0
+		stamina = stamina or 1.0,
+		maxStamina = 1.0, -- this is always 1.0
 		-- football skills - percentage
-		speed = speed or 0.65,
-		maxSpeed = 0.95,
-		passing = passing or 0.83,
-		maxPassing = 0.9,
-		header = header or 0.65,
-		maxHeader = 0.7,
-		shot = shot or 0.65,
-		maxShot = 0.85,
-		tackle = tackle or 0.35,
-		maxTackle = 0.5,
-		tactic = tactic or 0.85,
-		maxTactic = 0.85,
-		-- potential/rating - percentage
-		-- this must be a calculation, later...
-		potential = potential or 1.0, -- this is the possible rating
-		rating = 0.5, -- rating
+		speed = speed or 1.0,
+		maxSpeed = 1.0,
+		passing = passing or 1.0,
+		maxPassing = 1.0,
+		header = header or 1.0,
+		maxHeader = 1.0,
+		shot = shot or 1.0,
+		maxShot = 1.0,
+		tackle = tackle or 0.9,
+		maxTackle = 0.95,
+		tactic = tactic or 0.2,
+		maxTactic = 0.5,
 		experience = 0
 	}
+	
+	o.potential, o.rating = calcPotRat(o)
 	setmetatable(o, self)
 	self.__index = self
 	return o
