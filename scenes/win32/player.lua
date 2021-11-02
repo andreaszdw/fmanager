@@ -115,10 +115,10 @@ function scene:create(event)
 	image.x = 160
 	image.y = 150
 
-	local pathFlag = "assets/images/flags/"..docPlayer.country..".png"
+	local pathFlag = "assets/images/flags/"..docPlayer.country.."@3x.png"
 	flagImage = display.newImage(self.view, pathFlag)
 	flagImage.x = 46
-	flagImage.y = 35
+	flagImage.y = 36
 
 	-- the potential in stars
 	local potentialGroup = display.newGroup()
