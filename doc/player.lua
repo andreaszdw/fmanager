@@ -19,6 +19,7 @@ function player:new()
 		id = nil,
 		name = name or "Egal Egal",
 		age = age or 17, -- this is the normal starting age
+		country = "de",
 		contract = contract or 3,
 		salary = salary or 125000,
 		imageFile = imageFile or "assets/images/player/BürgerLarsDietrich.png",
