@@ -3,10 +3,53 @@
 from pathlib import Path
 from random import randint
 from player import Player
+import sqlite3
 
 def generate_players():
 
-    path = Path.cwd() / "assets" / "names"    
+    path = Path.cwd() / "assets" / "names"
+    db = Path.cwd() / "player.db"
+
+    # create db
+    con = sqlite3.connect(db)
+    cur = con.cursor()
+    cur.execute(
+        """
+            CREATE TABLE IF NOT EXISTS "player" (
+            "id"    INTEGER,
+            "name"  TEXT,
+            "country"   TEXT,
+            "age"   INTEGER,
+            "contract"  INTEGER,
+            "salary"    INTEGER,
+            "imageFile" TEXT,
+            "foot"  TEXT,
+            "position"  INTEGER,
+            "fitness"   REAL,
+            "maxFitness"    REAL,
+            "speed" INTEGER,
+            "maxSpeed"  INTEGER,
+            "stamina"   INTEGER,
+            "maxStamina"    INTEGER,
+            "passing"   INTEGER,
+            "maxPassing"    REAL,
+            "header"    REAL,
+            "maxHeader" REAL,
+            "shot"  REAL,
+            "maxShot"   REAL,
+            "tackle"    REAL,
+            "maxTackle" REAL,
+            "tactic"    REAL,
+            "maxTactic" REAL,
+            "potential" REAL,
+            "rating"    REAL,
+            "experience"    INTEGER,
+            PRIMARY KEY("id")
+            )
+        """
+    )
+    con.commit()
+
     players_list = path / "names"
 
     no = 800 # the number of players
@@ -102,6 +145,8 @@ def generate_players():
         tmpValues = np.fitness + np.stamina + np.speed + np.passing + np.header + np.shot + np.tackle + np.tactic
         np.potential = round(tmpMax / 8, 1)
         np.rating = round(tmpValues / 8, 1)
+
+        np.saveToDB(con, cur, None)
 
         counter += 1
         

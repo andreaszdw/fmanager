@@ -76,18 +76,21 @@ class Player(object):
             sql = """
                 INSERT INTO Player
                 (
-                name, age, contract, salary, imageFile, foot,
-                position, fitness, speed, stamina, passing,
-                header, shot, tackle, tactic, potential, rating, experience
+                name, country, age, contract, salary, imageFile, foot,
+                position, fitness, maxFitness, speed, maxSpeed,
+                stamina, maxStamina, passing, maxPassing, 
+                header, maxHeader, shot, maxShot, tackle, maxTackle,
+                tactic, maxTactic, potential, rating, experience
                 )
-                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
             """
 
             data = (
-                self.name, self.age, self.contract, self.salary,
-                self.imageFile, self.foot, self.position, self.fitness,
-                self.speed, self.stamina, self.passing, self.header,
-                self.shot, self.tackle, self.tactic, self.potential,
+                self.name, self.country, self.age, self.contract, self.salary,
+                self.imageFile, self.foot, self.position, self.fitness, self.maxFitness,
+                self.speed, self.maxSpeed, self.stamina, self.maxStamina, self.passing, 
+                self.maxPassing, self.header, self.maxHeader, self.shot, self.maxShot,
+                self.tackle, self.maxTackle,self.tactic, self.maxTactic, self.potential,
                 self.rating, self.experience
             )
 
@@ -95,18 +98,21 @@ class Player(object):
         else:
             sql = """
                 UPDATE Player SET
-                name = ?, age = ?, contract = ?, salary = ?, imageFile = ?,
-                foot = ?, position = ?, fitness = ?, speed = ?, stamina = ?,
-                passing = ?, header = ?, shot = ?, tackle = ?, tactic = ?,
-                potential = ?, rating = ?, experience = ?
+                name = ?, country = ?, age = ?, contract = ?, salary = ?, imageFile = ?,
+                foot = ?, position = ?, fitness = ?, maxFitness, speed = ?,
+                maxSpeed = ?, stamina = ?, maxStamina = ?, passing = ?,
+                maxPassing = ?,header = ?, maxHeader = ?, shot = ?, maxShot = ?,
+                tackle = ?, maxTackle = ?, tactic = ?, maxTactic = ?, potential = ?,
+                rating = ?, experience = ?
                 WHERE id = ?;
             """
 
             data = (
-                self.name, self.age, self.contract, self.salary,
-                self.imageFile, self.foot, self.position, self.fitness,
-                self.speed, self.stamina, self.passing, self.header,
-                self.shot, self.tackle, self.tactic, self.potential,
+                self.name, self.country, self.age, self.contract, self.salary, self.imageFile,
+                self.foot, self.position, self.fitness, self.maxFitness, self.speed,
+                self.maxSpeed, self.stamina, self.maxStamina, self.passing, 
+                self.maxPassing, self.header, self.maxHeader, self.shot, self.maxShot,
+                self.tackle, self.maxTackle,self.tactic, self.maxTactic, self.potential,
                 self.rating, self.experience, self.id
             )
 
