@@ -10,6 +10,7 @@ class Player(object):
     def __init__(self):
         self.id = None
         self.name = None
+        self.country = None
         self.age = 0
         self.contract = 0
         self.salary = 0
@@ -29,7 +30,7 @@ class Player(object):
         self.shot = 0
         self.maxShot = 0
         self.tackle = 0
-        self.maxTackle = 9
+        self.maxTackle = 0
         self.tactic = 0
         self.maxTactic = 0
         self.potential = 0
@@ -117,25 +118,34 @@ class Player(object):
             print("Failed to save player", error)
 
     def print(self):
-        print("ID:             {}".format(self.id))
-        print("Name:           {}".format(self.name))
-        print("Alter:          {}".format(self.age))
-        print("Vertrag:        {}".format(self.contract))
-        print("Gehalt:         {}".format(self.salary))
-        print("Bild-Datei:     {}".format(self.imageFile))
-        print("Fuss:           {}".format(self.foot))
-        print("Position:       {}".format(self.position))
-        print("Fitness:        {}".format(self.fitness))
-        print("Schnelligkeit:  {}".format(self.speed))
-        print("Ausdauer:       {}".format(self.stamina))
-        print("Passen:         {}".format(self.passing))
-        print("Kopfball:       {}".format(self.header))
-        print("Schuss:         {}".format(self.shot))
-        print("Zweikampf:      {}".format(self.tackle))
-        print("Taktik:         {}".format(self.tactic))
-        print("Potential:      {}".format(self.potential))
-        print("Rating:         {}".format(self.rating))
-        print("Erfahrung:      {}".format(self.experience))
+        print("ID:                 {}".format(self.id))
+        print("Name:               {}".format(self.name))
+        print("Land:               {}".format(self.country))
+        print("Alter:              {}".format(self.age))
+        print("Vertrag:            {}".format(self.contract))
+        print("Gehalt:             {}".format(self.salary))
+        print("Bild-Datei:         {}".format(self.imageFile))
+        print("Fuss:               {}".format(self.foot))
+        print("Position:           {}".format(self.position))
+        print("Fitness:            {}".format(self.fitness))
+        print("Fitness (m):        {}".format(self.maxFitness))
+        print("Schnelligkeit:      {}".format(self.speed))
+        print("Schnelligkeit (m):  {}".format(self.maxSpeed))
+        print("Ausdauer:           {}".format(self.stamina))
+        print("Ausdauer (m):       {}".format(self.maxStamina))
+        print("Passen:             {}".format(self.passing))
+        print("Passen (m):         {}".format(self.maxPassing))
+        print("Kopfball:           {}".format(self.header))
+        print("Kopfball (m):       {}".format(self.maxHeader))
+        print("Schuss:             {}".format(self.shot))
+        print("Schuss (m):         {}".format(self.maxShot))
+        print("Zweikampf:          {}".format(self.tackle))
+        print("Zweikampf (m):      {}".format(self.maxTackle))
+        print("Taktik:             {}".format(self.tactic))
+        print("Taktik (m):         {}".format(self.maxTactic))
+        print("Potential:          {}".format(self.potential))
+        print("Rating:             {}".format(self.rating))
+        print("Erfahrung:          {}".format(self.experience))
 
 
 if __name__ == '__main__':

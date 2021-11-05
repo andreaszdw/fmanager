@@ -3,7 +3,7 @@
 from pathlib import Path
 from random import randint
 
-def generate_names(no, first, last, save=None):
+def generate_names(no, first, last, nation, save=None):
 
         names = list()
 
@@ -23,22 +23,29 @@ def generate_names(no, first, last, save=None):
             last = l_lines[randint(0, n_l - 1)]
             names.append(first + " " + last)
 
+        # remove duplicates
+        len(names) != len(set(names))
+
         if save != None:
-        	f = open(save, "w", encoding="UTF-8")
-        	for n in names:
-        		f.write(n + "\n")
-        	f.close()
+            f = open(save, "w", encoding="UTF-8")
+            for n in names:
+                f.write(n + " - " + nation + "\n")
+            f.close()
+
+        print(str(len(names)) + " Namen erstellt")
 
         return names
 
 
 if __name__ == "__main__":
 
-	path = Path.cwd() / "assets" / "names"
+    path = Path.cwd() / "assets" / "names"
 
-	first = path / "NL_first"
-	last = path / "NL_last"
+    no = 100
+    first = path / "GB-ENG_first"
+    last = path / "GB-ENG_last"
+    nation = "GB-ENG"
 
-	save = path / "NL_names"
+    save = path / "GB-ENG_names"
 
-	names = generate_names(100, first, last, save)
+    names = generate_names(no, first, last, nation, save)

@@ -1,61 +1,45 @@
 #!/usr/bin/python
 
+from pathlib import Path
 from random import randint
 from player import Player
-from math import floor
 
+def generate_players():
 
-class main():
+    path = Path.cwd() / "assets" / "names"    
+    players_list = path / "names"
 
-    def __init__(self, no):
+    no = "all"
+    
+    # open file, read list, remove whitespace and split string    
+    file = open(players_list, "r", encoding="UTF-8") # utf-8
+    lines = file.readlines()
+    lines = [line.rstrip() for line in lines] # remove whitespace characters
+    lines = [line.split(" - ") for line in lines]
 
-        self.no = no
+    # if no == "all", make list for complete list
+    if no == "all":
+        no = len(lines)
 
-        age_min_max = (17, 28)
-        image = "empty"
-        country_mix = (
-            (60, "DE"),
-            (10, "BR"),
-            (15, "NL"),
-            (30, "AT"))
+    # new player list
+    players = list()
 
-        pos_mix = (
-            (0.1, "k"),
-            (0.3, "d"),
-            (0.4, "m"),
-            (0.2, "a"))
+    for n in range(no):
+        # pick one randomly and append in player list
+        i = randint(0, len(lines) - 1)
+        players.append(lines[i])
+        del lines[i] # delete from names list, so there are no duplicates
 
-        self.d_names = self.generate_names()
+    for p in players:
+        np = Player()
+        np.name = p[0]
+        np.country = p[1]
+        np.print()
+        print(" ")
 
-        for n in self.names:
-            p = Player()
-            p.name = n
-            p.age = randint(17, 28)
-            p.image = image
-
-    def generate_names(self):
-
-        names = list()
-
-        # read the file into list
-        file_fn = open(self.first_list, "r", encoding="UTF-8") # utf-8
-        f_lines = file_fn.readlines()
-        f_lines = [line.rstrip() for line in f_lines] # remove whitespace characters
-        n_f = len(f_lines) # the number of names
-
-        file_ln = open(self.last_list, "r", encoding="UTF-8")
-        l_lines = file_ln.readlines()
-        l_lines = [line.strip() for line in l_lines]
-        n_l =  len(l_lines)
-
-        for no in range(0, self.no):
-            first = f_lines[randint(0, n_f - 1)]
-            last = l_lines[randint(0, n_l - 1)]
-            names.append(first + " " + last)
-
-        return names
+    return players
 
 
 if __name__ == "__main__":
 
-    main(100)
+    players = generate_players()
