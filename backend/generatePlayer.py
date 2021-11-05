@@ -21,9 +21,10 @@ def generate_players():
     midfield = 288
     attacker = 160
 
-    # which foot, percentage
-    right_foot = 70
-    left_foot = 90
+    # which foot
+    right_foot = 70 # 0 - 70
+    left_foot = 90 # 71 - 90
+    # the rest is both_foot
     
     # open file, read list, remove whitespace and split string    
     file = open(players_list, "r", encoding="UTF-8") # utf-8
@@ -73,6 +74,34 @@ def generate_players():
 
         if counter > goal + defender + midfield:
             np.position = "a"
+
+        np.fitness = randint(3, 10) / 10
+
+        np.maxStamina = randint(3, 10) / 10
+        np.stamina = randint(2, np.maxStamina * 10) / 10
+
+        np.maxSpeed = randint(3, 10) / 10
+        np.speed = randint(2, np.maxSpeed * 10) / 10
+
+        np.maxPassing = randint(3, 10) / 10
+        np.passing = randint(2, np.maxPassing * 10) / 10
+
+        np.maxHeader = randint(3, 10) / 10
+        np.header = randint(2, np.maxHeader * 10) / 10
+
+        np.maxShot = randint(3, 10) / 10
+        np.shot = randint(2, np.maxShot * 10) / 10
+
+        np.maxTackle = randint(3, 10) / 10
+        np.tackle = randint(2, np.maxTackle * 10) / 10
+
+        np.maxTactic = randint(3, 10) / 10
+        np.tactic = randint(2, np.maxTactic * 10) / 10
+
+        tmpMax = np.maxFitness + np.maxStamina + np.maxSpeed + np.maxPassing + np.maxHeader + np.maxShot + np.maxTackle + np.maxTactic
+        tmpValues = np.fitness + np.stamina + np.speed + np.passing + np.header + np.shot + np.tackle + np.tactic
+        np.potential = round(tmpMax / 8, 1)
+        np.rating = round(tmpValues / 8, 1)
 
         counter += 1
         
