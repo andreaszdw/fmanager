@@ -7,7 +7,7 @@ import sqlite3
 
 class face(object):
 
-    def __init__(self, face="", hair="", brows="", eyes, nose, mouth):
+    def __init__(self, face="", hair="", brows="", eyes="eyes", nose="nose", mouth="mouse"):
         self.face = ""
         self.hair = ""
         self.brows = ""
