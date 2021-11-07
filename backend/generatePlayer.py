@@ -7,7 +7,7 @@ import sqlite3
 
 def generate_players():
 
-    path = Path.cwd() / "assets" / "names"
+    path = Path.cwd() / "names" / "assets" / "names"
     db = Path.cwd() / "player.db"
 
     # create db
@@ -150,9 +150,6 @@ def generate_players():
 
         counter += 1
         
-        np.print()
-        print(" ")
-
     return players
 
 
