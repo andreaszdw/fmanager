@@ -4,13 +4,16 @@ from pathlib import Path
 from random import randint
 import sqlite3
 import json
+import pyglet
 
 
-class face(object):
+class Face(object):
 
-    def __init__(self, face="", hair="", brows="", eyes="eyes", nose="nose", mouth="mouse"):
-        self.face = ""
+    def __init__(self, head="", hair="", brows="", eyes="eyes", nose="nose", mouth="mouse"):
+        self.head = ""
         self.hair = ""
+        self.hairX = 0
+        self.hairY = 0
         self.eyeBrows = ""
         self.eyes = ""
         self.nose = ""
@@ -22,11 +25,56 @@ def generate():
     f = (open(imagesFile, "r"))
     images = json.load(f)
 
-    print(len(images["heads"]))
+    fri = randint(0, len(images["heads"]) - 1)
+    hri = randint(0, len(images["hairs"]) - 1)
 
-    for h in images["heads"]:
+    tmpFace = Face()
+    tmpFace.head = images["heads"][fri]
+    tmpFace.hair = images["hairs"][hri]["image"]
+    tmpFace.hairX = images["hairs"][hri]["x"]
+    tmpFace.hairY = images["hairs"][hri]["y"]
+
+
+    return tmpFace
+
+
+class FaceWindow(pyglet.window.Window):
+
+    def __init__(self):
+        super(FaceWindow, self).__init__()
+
+        f = generate()
+
+        self.batch = pyglet.graphics.Batch()
+
+        self.headGroup = pyglet.graphics.OrderedGroup(0)
+        self.hairGroup = pyglet.graphics.OrderedGroup(1)
+
+        self.createFace(f)
+
+    def createFace(self, f):
+        images = Path.cwd() / "assets"
+
+        center_x = self.width // 2
+        center_y = self.height // 2
+
+        headImage = pyglet.image.load(images / f.head)
+        headImage.anchor_x = headImage.width // 2
+        headImage.anchor_y = headImage.height // 2        
+        self.headSprite = pyglet.sprite.Sprite(headImage, batch=self.batch, x=center_x, y=center_y, group=self.headGroup)
+
+        hairImage = pyglet.image.load(images / f.hair)
+        hairImage.anchor_x = hairImage.width // 2
+        hairImage.anchor_y = hairImage.height // 2
+
+        self.hairSprite = pyglet.sprite.Sprite(hairImage, batch=self.batch, x=center_x+f.hairX, y=center_y+f.hairY, group=self.hairGroup)
+
+    def on_draw(self):
+        self.clear()
+        self.batch.draw()
         
 
 if __name__ == "__main__":
 
-    generate()
+    window = FaceWindow()
+    pyglet.app.run()
