@@ -2,8 +2,9 @@
 
 from pathlib import Path
 from random import randint
-from player import Player
 import sqlite3
+import json
+
 
 class face(object):
 
@@ -16,8 +17,15 @@ class face(object):
         self.mouth = ""
 
 def generate():
-    pass
+    imagesFile = Path.cwd() / "assets" / "facesImages.json"
 
+    f = (open(imagesFile, "r"))
+    images = json.load(f)
+
+    print(len(images["heads"]))
+
+    for h in images["heads"]:
+        
 
 if __name__ == "__main__":
 
