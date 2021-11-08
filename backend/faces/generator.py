@@ -10,7 +10,7 @@ class face(object):
     def __init__(self, face="", hair="", brows="", eyes="eyes", nose="nose", mouth="mouse"):
         self.face = ""
         self.hair = ""
-        self.brows = ""
+        self.eyeBrows = ""
         self.eyes = ""
         self.nose = ""
         self.mouth = ""
