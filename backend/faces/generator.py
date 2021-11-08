@@ -53,16 +53,20 @@ class FaceWindow(pyglet.window.Window):
         self.createFace(f)
 
     def createFace(self, f):
+        # the path of the images
         images = Path.cwd() / "assets"
 
+        # calc the center
         center_x = self.width // 2
         center_y = self.height // 2
 
+        # the head
         headImage = pyglet.image.load(images / f.head)
         headImage.anchor_x = headImage.width // 2
         headImage.anchor_y = headImage.height // 2        
         self.headSprite = pyglet.sprite.Sprite(headImage, batch=self.batch, x=center_x, y=center_y, group=self.headGroup)
 
+        # the hair
         hairImage = pyglet.image.load(images / f.hair)
         hairImage.anchor_x = hairImage.width // 2
         hairImage.anchor_y = hairImage.height // 2
