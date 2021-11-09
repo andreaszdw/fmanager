@@ -14,12 +14,22 @@ class Face(object):
         self.hair = ""
         self.hairX = 0
         self.hairY = 0
-        self.eyeBrows = ""
+        self.brows = ""
+        self.browsLX = 0
+        self.browsLY = 0
+        self.browsRX = 0
+        self.browsRY = 0
         self.eyes = ""
+        self.eyesLX = 0
+        self.eyesLY = 0
+        self.eyesRX = 0
+        self.eyesRY = 0
         self.nose = ""
         self.noseX = 0
         self.noseY = 0
         self.mouth = ""
+        self.mouthX = 0
+        self.mouthY = 0
 
 def generate():
     tmpFace = Face()
@@ -36,7 +46,7 @@ def generate():
     tmpFace.head = images["tints"][tintKey]["head"]
     tmpFace.nose = images["tints"][tintKey]["nose"][noseKey]
     tmpFace.noseX = randint(-3, 3)
-    tmpFace.noseY = randint(-3, 3)
+    tmpFace.noseY = randint(-3, 3) - 10
 
     # hair and brows
     hairRi = randint(0, len(images["hairs"]) - 1)
@@ -50,6 +60,27 @@ def generate():
     tmpFace.hair = images["hairs"][hairColor]["hair"][hairKey]["image"]
     tmpFace.hairX = images["hairs"][hairColor]["hair"][hairKey]["x"]
     tmpFace.hairY = images["hairs"][hairColor]["hair"][hairKey]["y"]
+
+    browKey = randint(0, len(images["hairs"][hairColor]["brows"]) - 1)
+    tmpFace.brows = images["hairs"][hairColor]["brows"][browKey]
+    tmpFace.browsLX = randint(-4, 4) - 30
+    tmpFace.browsLY = randint(-4, 4) + 30
+    tmpFace.browsRX = randint(-4, 4) + 30
+    tmpFace.browsRY = randint(-4, 4) + 30
+
+    # the eyes
+    eyeKey = randint(0, len(images["eyes"]) - 1)
+    tmpFace.eyes = images["eyes"][eyeKey]
+    tmpFace.eyesLX = randint(-4, 4) - 30
+    tmpFace.eyesLY = randint(-4, 4) + 10
+    tmpFace.eyesRX = randint(-4, 4) + 30
+    tmpFace.eyesRY = randint(-4, 4) + 10
+
+    # the mouth
+    mouthKey = randint(0, len(images["mouth"]) - 1)
+    tmpFace.mouth = images["mouth"][mouthKey]
+    tmpFace.mouthX = randint(-5, 5)
+    tmpFace.mouthY = randint(-5, 5) - 40
 
     return tmpFace
 
@@ -92,8 +123,31 @@ class FaceWindow(pyglet.window.Window):
         hairImage = pyglet.image.load(images / f.hair)
         hairImage.anchor_x = hairImage.width // 2
         hairImage.anchor_y = hairImage.height // 2
-
         self.hairSprite = pyglet.sprite.Sprite(hairImage, batch=self.batch, x=center_x+f.hairX, y=center_y+f.hairY, group=self.fgGroup)
+
+        # the brows
+        leftBrowsImage = pyglet.image.load(images / f.brows)
+        leftBrowsImage.anchor_x = leftBrowsImage.width // 2
+        leftBrowsImage.anchor_y = leftBrowsImage.height // 2
+        self.browsSpriteLeft = pyglet.sprite.Sprite(leftBrowsImage, batch=self.batch, x=center_x+f.browsLX, y=center_y+f.browsLY, group=self.fgGroup)
+        rightBrowsImage = leftBrowsImage.get_texture().get_transform(True)
+        rightBrowsImage.anchor_x = rightBrowsImage.width // 2
+        rightBrowsImage.anchor_y = rightBrowsImage.height // 2
+        self.browsSpriteRight = pyglet.sprite.Sprite(rightBrowsImage, batch=self.batch, x=center_x+f.browsRX, y=center_y+f.browsRY, group=self.fgGroup)
+
+        # the eyes
+        eyeImage = pyglet.image.load(images / f.eyes)
+        eyeImage.anchor_x = eyeImage.width // 2
+        eyeImage.anchor_y = eyeImage.height // 2
+        self.eyeSpriteLeft = pyglet.sprite.Sprite(eyeImage, batch=self.batch, x=center_x+f.eyesLX, y=center_y+f.eyesLY, group=self.fgGroup)
+        self.eyeSpriteRight = pyglet.sprite.Sprite(eyeImage, batch=self.batch, x=center_x+f.eyesRX, y=center_y+f.eyesRY, group=self.fgGroup)
+
+        # the mouth
+        mouthImage = pyglet.image.load(images / f.mouth)
+        mouthImage.anchor_x = mouthImage.width // 2
+        mouthImage.anchor_y = mouthImage.height // 2
+        self.mouthSprite = pyglet.sprite.Sprite(mouthImage, batch=self.batch, x=center_x+f.mouthX, y=center_y+f.mouthY, group=self.fgGroup)
+
 
     def on_draw(self):
         self.clear()
