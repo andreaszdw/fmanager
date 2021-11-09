@@ -1,109 +1,234 @@
 {
-	"heads": 
-	[
-		"tint1_head.png",
-		"tint2_head.png",
-		"tint3_head.png",
-		"tint4_head.png",
-		"tint5_head.png",
-		"tint6_head.png",
-		"tint7_head.png",
-		"tint8_head.png"
-	],
+	"tints": 
+	{
+		"tint1":
+			{ "head": "tint1_head.png", "nose":
+				[
+					"tint1Nose1.png",
+					"tint1Nose2.png",
+					"tint1Nose3.png"
+				]
+			},
+		"tint2":
+			{ "head": "tint2_head.png", "nose":
+				[
+					"tint2Nose1.png",
+					"tint2Nose2.png",
+					"tint2Nose3.png"
+				]
+			},
+		"tint3":
+			{ "head": "tint3_head.png", "nose":
+				[
+					"tint3Nose1.png",
+					"tint3Nose2.png",
+					"tint3Nose3.png"
+				]
+			},
+		"tint4":
+			{ "head": "tint4_head.png", "nose":
+				[
+					"tint4Nose1.png",
+					"tint4Nose2.png",
+					"tintNose3.png"
+				]
+			},
+		"tint5":
+			{ "head": "tint5_head.png", "nose":
+				[
+					"tint5Nose1.png",
+					"tint5Nose2.png",
+					"tint5Nose3.png"
+				]
+			},
+		"tint6":
+			{ "head": "tint6_head.png", "nose":
+				[
+					"tint6Nose1.png",
+					"tint6Nose2.png",
+					"tint6Nose3.png"
+				]
+			},
+		"tint7":
+			{ "head": "tint7_head.png", "nose":
+				[
+					"tint7Nose1.png",
+					"tint7Nose2.png",
+					"tint7Nose3.png"
+				]
+			},
+		"tint8":
+			{ "head": "tint8_head.png", "nose":
+				[
+					"tint8Nose1.png",
+					"tint8Nose2.png",
+					"tint8Nose3.png"
+				]
+			}
+	},
 	"hairs":
-	[
-		{ "image" :"blackMan1.png", "x": 2, "y": 49 },
-		{ "image" :"blackMan2.png", "x": 0, "y": 49 },
-		{ "image" :"blackMan3.png", "x": 0, "y": 49 },
-		{ "image" :"blackMan4.png", "x": 0, "y": 49 },
-		{ "image" :"blackMan5.png", "x": 6, "y": 49 },
-		{ "image" :"blackMan6.png", "x": 1, "y": 49 },
-		{ "image" :"blackMan7.png", "x": 1, "y": 49 },
-		{ "image" :"blackMan8.png", "x": 1, "y": 15 },
-		{ "image" :"blondeMan1.png", "x": 2, "y": 49 },
-		{ "image" :"blondeMan2.png", "x": 0, "y": 49 },
-		{ "image" :"blondeMan3.png", "x": 0, "y": 49 },
-		{ "image" :"blondeMan4.png", "x": 0, "y": 49 },
-		{ "image" :"blondeMan5.png", "x": 6, "y": 49 },
-		{ "image" :"blondeMan6.png", "x": 1, "y": 49 },
-		{ "image" :"blondeMan7.png", "x": 1, "y": 49 },
-		{ "image" :"blondeMan8.png", "x": 1, "y": 15 },
-		{ "image" :"brown1Man1.png", "x": 2, "y": 49 },
-		{ "image" :"brown1Man2.png", "x": 0, "y": 49 },
-		{ "image" :"brown1Man3.png", "x": 0, "y": 49 },
-		{ "image" :"brown1Man4.png", "x": 0, "y": 49 },
-		{ "image" :"brown1Man5.png", "x": 6, "y": 49 },
-		{ "image" :"brown1Man6.png", "x": 1, "y": 49 },
-		{ "image" :"brown1Man7.png", "x": 1, "y": 49 },
-		{ "image" :"brown1Man8.png", "x": 1, "y": 15 },
-		{ "image" :"brown2Man1.png", "x": 2, "y": 49 },
-		{ "image" :"brown2Man2.png", "x": 0, "y": 49 },
-		{ "image" :"brown2Man3.png", "x": 0, "y": 49 },
-		{ "image" :"brown2Man4.png", "x": 0, "y": 49 },
-		{ "image" :"brown2Man5.png", "x": 6, "y": 49 },
-		{ "image" :"brown2Man6.png", "x": 1, "y": 49 },
-		{ "image" :"brown2Man7.png", "x": 1, "y": 49 },
-		{ "image" :"brown2Man8.png", "x": 1, "y": 15 },
-		{ "image" :"greyMan1.png", "x": 2, "y": 49 },
-		{ "image" :"greyMan2.png", "x": 0, "y": 49 },
-		{ "image" :"greyMan3.png", "x": 0, "y": 49 },
-		{ "image" :"greyMan4.png", "x": 0, "y": 49 },
-		{ "image" :"greyMan5.png", "x": 6, "y": 49 },
-		{ "image" :"greyMan6.png", "x": 1, "y": 49 },
-		{ "image" :"greyMan7.png", "x": 1, "y": 49 },
-		{ "image" :"greyMan8.png", "x": 1, "y": 15 },
-		{ "image" :"redMan1.png", "x": 2, "y": 49 },
-		{ "image" :"redMan2.png", "x": 0, "y": 49 },
-		{ "image" :"redMan3.png", "x": 0, "y": 49 },
-		{ "image" :"redMan4.png", "x": 0, "y": 49 },
-		{ "image" :"redMan5.png", "x": 6, "y": 49 },
-		{ "image" :"redMan6.png", "x": 1, "y": 49 },
-		{ "image" :"redMan7.png", "x": 1, "y": 49 },
-		{ "image" :"redMan8.png", "x": 1, "y": 15 },
-		{ "image" :"tanMan1.png", "x": 2, "y": 49 },
-		{ "image" :"tanMan2.png", "x": 0, "y": 49 },
-		{ "image" :"tanMan3.png", "x": 0, "y": 49 },
-		{ "image" :"tanMan4.png", "x": 0, "y": 49 },
-		{ "image" :"tanMan5.png", "x": 6, "y": 49 },
-		{ "image" :"tanMan6.png", "x": 1, "y": 49 },
-		{ "image" :"tanMan7.png", "x": 1, "y": 49 },
-		{ "image" :"tanMan8.png", "x": 1, "y": 15 },
-		{ "image" :"whiteMan1.png", "x": 2, "y": 49 },
-		{ "image" :"whiteMan2.png", "x": 0, "y": 49 },
-		{ "image" :"whiteMan3.png", "x": 0, "y": 49 },
-		{ "image" :"whiteMan4.png", "x": 0, "y": 49 },
-		{ "image" :"whiteMan5.png", "x": 6, "y": 49 },
-		{ "image" :"whiteMan6.png", "x": 1, "y": 49 },
-		{ "image" :"whiteMan7.png", "x": 1, "y": 49 },
-		{ "image" :"whiteMan8.png", "x": 1, "y": 15 }
-	],
-	"eyeBrows":
-	[
-		"blackBrow1.png",
-		"blackBrow2.png",
-		"blackBrow3.png",
-		"blondeBrow1.png",
-		"blondeBrow2.png",
-		"blondeBrow3.png",
-		"brown1Brow1.png",
-		"brown1Brow2.png",
-		"brown1Brow3.png",
-		"brown2Brow1.png",
-		"brown2Brow2.png",
-		"brown2Brow3.png",
-		"greyBrow1.png",
-		"greyBrow2.png",
-		"greyBrow3.png",
-		"redBrow1.png",
-		"redBrow2.png",
-		"redBrow3.png",
-		"tanBrow1.png",
-		"tanBrow2.png",
-		"tanBrow3.png",
-		"whiteBrow1.png",
-		"whiteBrow2.png",
-		"whiteBrow3.png"
-	],
+	{	
+		"black": 
+		{
+			"hair": 
+			[
+				{ "image": "blackMan1.png", "x": 2, "y": 49 },
+				{ "image": "blackMan2.png", "x": 0, "y": 49 },
+				{ "image": "blackMan3.png", "x": 0, "y": 49 },
+				{ "image": "blackMan4.png", "x": 0, "y": 49 },
+				{ "image": "blackMan5.png", "x": 6, "y": 49 },
+				{ "image": "blackMan6.png", "x": 1, "y": 49 },
+				{ "image": "blackMan7.png", "x": 1, "y": 49 },
+				{ "image": "blackMan8.png", "x": 1, "y": 15 }
+			],
+			"brows":
+			[
+				"blackBrow1.png",
+				"blackBrow2.png",
+				"blackBrow3.png"
+			],
+		},
+		"blonde": 
+		{
+			"hair":
+			[
+				{ "image" :"blondeMan1.png", "x": 2, "y": 49 },
+				{ "image" :"blondeMan2.png", "x": 0, "y": 49 },
+				{ "image" :"blondeMan3.png", "x": 0, "y": 49 },
+				{ "image" :"blondeMan4.png", "x": 0, "y": 49 },
+				{ "image" :"blondeMan5.png", "x": 6, "y": 49 },
+				{ "image" :"blondeMan6.png", "x": 1, "y": 49 },
+				{ "image" :"blondeMan7.png", "x": 1, "y": 49 },
+				{ "image" :"blondeMan8.png", "x": 1, "y": 15 }
+			],
+			"brows":
+			[
+				"blondeBrow1.png",
+				"blondeBrow2.png",
+				"blondeBrow3.png"
+			]
+		},
+		"brown1": 
+		{
+			"hair":
+			[
+				{ "image" :"brown1Man1.png", "x": 2, "y": 49 },
+				{ "image" :"brown1Man2.png", "x": 0, "y": 49 },
+				{ "image" :"brown1Man3.png", "x": 0, "y": 49 },
+				{ "image" :"brown1Man4.png", "x": 0, "y": 49 },
+				{ "image" :"brown1Man5.png", "x": 6, "y": 49 },
+				{ "image" :"brown1Man6.png", "x": 1, "y": 49 },
+				{ "image" :"brown1Man7.png", "x": 1, "y": 49 },
+				{ "image" :"brown1Man8.png", "x": 1, "y": 15 }
+			],
+			"brows":
+			[
+				"brown1Brow1.png",
+				"brown1Brow2.png",
+				"brown1Brow3.png"
+			]
+		},
+		"brown2": 
+		{
+			"hair":
+			[
+				{ "image" :"brown2Man1.png", "x": 2, "y": 49 },
+				{ "image" :"brown2Man2.png", "x": 0, "y": 49 },
+				{ "image" :"brown2Man3.png", "x": 0, "y": 49 },
+				{ "image" :"brown2Man4.png", "x": 0, "y": 49 },
+				{ "image" :"brown2Man5.png", "x": 6, "y": 49 },
+				{ "image" :"brown2Man6.png", "x": 1, "y": 49 },
+				{ "image" :"brown2Man7.png", "x": 1, "y": 49 },
+				{ "image" :"brown2Man8.png", "x": 1, "y": 15 }	
+			],
+			"brows":
+			[
+				"brown2Brow1.png",
+				"brown2Brow2.png",
+				"brown2Brow3.png"
+			]
+		},
+		"grey":
+		{
+			"hair":
+			[
+				{ "image" :"greyMan1.png", "x": 2, "y": 49 },
+				{ "image" :"greyMan2.png", "x": 0, "y": 49 },
+				{ "image" :"greyMan3.png", "x": 0, "y": 49 },
+				{ "image" :"greyMan4.png", "x": 0, "y": 49 },
+				{ "image" :"greyMan5.png", "x": 6, "y": 49 },
+				{ "image" :"greyMan6.png", "x": 1, "y": 49 },
+				{ "image" :"greyMan7.png", "x": 1, "y": 49 },
+				{ "image" :"greyMan8.png", "x": 1, "y": 15 }
+			],
+			"brows":
+			[
+				"greyBrow1.png",
+				"greyBrow2.png",
+				"greyBrow3.png"
+			]
+		},
+		"red":
+		{
+			"hair":
+			[
+				{ "image" :"redMan1.png", "x": 2, "y": 49 },
+				{ "image" :"redMan2.png", "x": 0, "y": 49 },
+				{ "image" :"redMan3.png", "x": 0, "y": 49 },
+				{ "image" :"redMan4.png", "x": 0, "y": 49 },
+				{ "image" :"redMan5.png", "x": 6, "y": 49 },
+				{ "image" :"redMan6.png", "x": 1, "y": 49 },
+				{ "image" :"redMan7.png", "x": 1, "y": 49 },
+				{ "image" :"redMan8.png", "x": 1, "y": 15 }
+			],
+			"brows":
+			[
+				"redBrow1.png",
+				"redBrow2.png",
+				"redBrow3.png"
+			]
+		},
+		"tan":
+		{
+			"hair":
+			[
+				{ "image" :"tanMan1.png", "x": 2, "y": 49 },
+				{ "image" :"tanMan2.png", "x": 0, "y": 49 },
+				{ "image" :"tanMan3.png", "x": 0, "y": 49 },
+				{ "image" :"tanMan4.png", "x": 0, "y": 49 },
+				{ "image" :"tanMan5.png", "x": 6, "y": 49 },
+				{ "image" :"tanMan6.png", "x": 1, "y": 49 },
+				{ "image" :"tanMan7.png", "x": 1, "y": 49 },
+				{ "image" :"tanMan8.png", "x": 1, "y": 15 }
+			],
+			"brows":
+			[
+				"tanBrow1.png",
+				"tanBrow2.png",
+				"tanBrow3.png"
+			]
+		},
+		"white":
+		{
+			"hair":
+			[
+				{ "image" :"whiteMan1.png", "x": 2, "y": 49 },
+				{ "image" :"whiteMan2.png", "x": 0, "y": 49 },
+				{ "image" :"whiteMan3.png", "x": 0, "y": 49 },
+				{ "image" :"whiteMan4.png", "x": 0, "y": 49 },
+				{ "image" :"whiteMan5.png", "x": 6, "y": 49 },
+				{ "image" :"whiteMan6.png", "x": 1, "y": 49 },
+				{ "image" :"whiteMan7.png", "x": 1, "y": 49 },
+				{ "image" :"whiteMan8.png", "x": 1, "y": 15 }	
+			],
+			"brows":
+			[
+				"whiteBrow1.png",
+				"whiteBrow2.png",
+				"whiteBrow3.png"
+			]
+		}
+	},
 	"eyes":
 	[
 		"eyeBlack_large.png",
@@ -126,32 +251,5 @@
 		"mouth_straight.png",
 		"mouth_teethLower.png",
 		"mouth_teethUpper.png"
-	],
-	"noses":
-	[
-		"tint1Nose1.png",
-		"tint1Nose2.png",
-		"tint1Nose3.png",
-		"tint2Nose1.png",
-		"tint2Nose2.png",
-		"tint2Nose3.png",
-		"tint3Nose1.png",
-		"tint3Nose2.png",
-		"tint3Nose3.png",
-		"tint4Nose1.png",
-		"tint4Nose2.png",
-		"tint4Nose3.png",
-		"tint5Nose1.png",
-		"tint5Nose2.png",
-		"tint5Nose3.png",
-		"tint6Nose1.png",
-		"tint6Nose2.png",
-		"tint6Nose3.png",
-		"tint7Nose1.png",
-		"tint7Nose2.png",
-		"tint7Nose3.png",
-		"tint8Nose1.png",
-		"tint8Nose2.png",
-		"tint8Nose3.png"
 	]
 }
