@@ -22,28 +22,34 @@ class Face(object):
         self.mouth = ""
 
 def generate():
+    tmpFace = Face()
+    
     imagesFile = Path.cwd() / "assets" / "facesImages.json"
 
     f = (open(imagesFile, "r"))
     images = json.load(f)
 
-    # tint
+    # tint, head and nose
     tintRi = str(randint(1, len(images["tints"])))
     tintKey = "tint" + tintRi
     noseKey = randint(0, len(images["tints"][tintKey]["nose"]) - 1)
-
-    # hair
-    hairRi = randint(0, len(images["hairs"]) - 1)
-
-    tmpFace = Face()
     tmpFace.head = images["tints"][tintKey]["head"]
-    tmpFace.hair = images["hairs"][hairRi]["image"]
-    tmpFace.hairX = images["hairs"][hairRi]["x"]
-    tmpFace.hairY = images["hairs"][hairRi]["y"]
     tmpFace.nose = images["tints"][tintKey]["nose"][noseKey]
     tmpFace.noseX = randint(-3, 3)
     tmpFace.noseY = randint(-3, 3)
 
+    # hair and brows
+    hairRi = randint(0, len(images["hairs"]) - 1)
+    counter = 0
+    for h in images["hairs"]:
+        if counter == hairRi:
+            hairColor = h
+        counter += 1
+    hairKey = randint(0, len(images["hairs"][hairColor]["hair"]) - 1)
+
+    tmpFace.hair = images["hairs"][hairColor]["hair"][hairKey]["image"]
+    tmpFace.hairX = images["hairs"][hairColor]["hair"][hairKey]["x"]
+    tmpFace.hairY = images["hairs"][hairColor]["hair"][hairKey]["y"]
 
     return tmpFace
 
