@@ -31,6 +31,10 @@ class Face(object):
         self.mouthX = 0
         self.mouthY = 0
 
+    def print(self):
+        print(self.head)
+        print(self.hair)
+
 def generate():
     tmpFace = Face()
     
@@ -81,6 +85,7 @@ def generate():
     tmpFace.mouth = images["mouth"][mouthKey]
     tmpFace.mouthX = randint(-5, 5)
     tmpFace.mouthY = randint(-5, 5) - 40
+    tmpFace.print()
 
     return tmpFace
 
@@ -156,5 +161,6 @@ class FaceWindow(pyglet.window.Window):
 
 if __name__ == "__main__":
 
-    window = FaceWindow()
-    pyglet.app.run()
+    generate()
+    #window = FaceWindow()
+    #pyglet.app.run()
