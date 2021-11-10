@@ -14,7 +14,7 @@ class Player(object):
         self.age = 0
         self.contract = 0
         self.salary = 0
-        self.imageFile = None
+        self.image_id = None
         self.foot = 0
         self.position = None
         self.fitness = 0
@@ -48,23 +48,32 @@ class Player(object):
         if p:
             self.id = id
             self.name = p[0]
-            self.age = p[1]
-            self.contract = p[2]
-            self.salary = p[3]
-            self.imageFile = p[4]
-            self.foot = p[5]
-            self.position = p[6]
-            self.fitness = p[7]
-            self.speed = p[8]
-            self.stamina = p[9]
-            self.passing = p[10]
-            self.header = p[11]
-            self.shot = p[12]
-            self.tackle = p[13]
-            self.tactic = p[14]
-            self.potential = p[15]
-            self.rating = p[16]
-            self.experience = p[17]
+            self.country = p[1]
+            self.age = p[2]
+            self.contract = p[3]
+            self.salary = p[4]
+            self.image_id = p[5]
+            self.foot = p[6]
+            self.position = p[7]
+            self.fitness = p[8]
+            self.maxFitness = p[9]
+            self.speed = p[10]
+            self.maxSpeed = p[11]
+            self.stamina = p[12]
+            self.maxStamina = p[13]
+            self.passing = p[14]
+            self.maxPassing = p[15]
+            self.header = p[16]
+            self.maxHeader = p[17]
+            self.shot = p[18]
+            self.maxShot = p[19]
+            self.tackle = p[20]
+            self.maxTackle = p[21]
+            self.tactic = p[22]
+            self.maxTactic = p[23]
+            self.potential = p[24]
+            self.rating = p[25]
+            self.experience = p[26]
 
     def saveToDB(self, con, cur, id):
 
@@ -76,7 +85,7 @@ class Player(object):
             sql = """
                 INSERT INTO Player
                 (
-                name, country, age, contract, salary, imageFile, foot,
+                name, country, age, contract, salary, image_id, foot,
                 position, fitness, maxFitness, speed, maxSpeed,
                 stamina, maxStamina, passing, maxPassing, 
                 header, maxHeader, shot, maxShot, tackle, maxTackle,
@@ -87,7 +96,7 @@ class Player(object):
 
             data = (
                 self.name, self.country, self.age, self.contract, self.salary,
-                self.imageFile, self.foot, self.position, self.fitness, self.maxFitness,
+                self.image_id, self.foot, self.position, self.fitness, self.maxFitness,
                 self.speed, self.maxSpeed, self.stamina, self.maxStamina, self.passing, 
                 self.maxPassing, self.header, self.maxHeader, self.shot, self.maxShot,
                 self.tackle, self.maxTackle,self.tactic, self.maxTactic, self.potential,
@@ -98,7 +107,7 @@ class Player(object):
         else:
             sql = """
                 UPDATE Player SET
-                name = ?, country = ?, age = ?, contract = ?, salary = ?, imageFile = ?,
+                name = ?, country = ?, age = ?, contract = ?, salary = ?, image_id = ?,
                 foot = ?, position = ?, fitness = ?, maxFitness, speed = ?,
                 maxSpeed = ?, stamina = ?, maxStamina = ?, passing = ?,
                 maxPassing = ?,header = ?, maxHeader = ?, shot = ?, maxShot = ?,
@@ -108,7 +117,7 @@ class Player(object):
             """
 
             data = (
-                self.name, self.country, self.age, self.contract, self.salary, self.imageFile,
+                self.name, self.country, self.age, self.contract, self.salary, self.image_id,
                 self.foot, self.position, self.fitness, self.maxFitness, self.speed,
                 self.maxSpeed, self.stamina, self.maxStamina, self.passing, 
                 self.maxPassing, self.header, self.maxHeader, self.shot, self.maxShot,
@@ -130,7 +139,7 @@ class Player(object):
         print("Alter:              {}".format(self.age))
         print("Vertrag:            {}".format(self.contract))
         print("Gehalt:             {}".format(self.salary))
-        print("Bild-Datei:         {}".format(self.imageFile))
+        print("Bild-Datei:         {}".format(self.image_id))
         print("Fuss:               {}".format(self.foot))
         print("Position:           {}".format(self.position))
         print("Fitness:            {}".format(self.fitness))

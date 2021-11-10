@@ -9,7 +9,8 @@ import pyglet
 
 class Face(object):
 
-    def __init__(self, head="", hair="", brows="", eyes="eyes", nose="nose", mouth="mouse"):
+    def __init__(self):
+        self.id = None
         self.head = ""
         self.hair = ""
         self.hairX = 0
@@ -30,6 +31,51 @@ class Face(object):
         self.mouth = ""
         self.mouthX = 0
         self.mouthY = 0
+
+    def saveToDB(self, con, cur, id):
+        sql = ""
+        data = None
+
+        # this is a new entry
+        if id is None:
+            sql = """
+                INSERT INTO Faces
+                (
+                head, hair, hairX, hairY, brows, browsLX, browsLY, browsRX, browsRY,
+                eyes, eyesLX, eyesLY, eyesRX, eyesRY, nose, noseX, noseY, mouth, mouthX, mouthY
+                )
+                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+            """
+
+            data = (
+                self.head, self.hair, self.hairX, self.hairY, self.brows, self.browsLX, self.browsLY, self.browsRX,
+                self.browsRY, self.eyes, self.eyesLX, self.eyesLY, self.eyesRX, self.eyesRY, self.nose, self.noseX,
+                self.noseY, self.mouth, self.mouthX, self.mouthY
+            )
+
+        # this is an update
+        else:
+            sql = """
+                UPDATE Faces SET
+                head = ?, hair = ?, hairX = ?, hairY = ?, brows = ?, browsLX = ?, browsLY = ?,
+                browsRX = ?, browsRY = ?, eyes = ?, eyesLX = ?, eyesLY = ?, eyesRX = ?, eyesRY = ?,
+                nose = ?, noseX = ?, noseY = ?, mouth = ?, mouthX = ?, mouthY = ?,
+                WHERE id = ?;
+            """
+
+            data = (
+                self.head, self.hair, self.hairX, self.hairY, self.brows, self.browsLX, self.browsLY, self.browsRX,
+                self.browsRY, self.eyes, self.eyesLX, self.eyesLY, self.eyesRX, self.eyesRY, self.nose, self.noseX,
+                self.noseY, self.mouth, self.mouthX, self.mouthY, self.id
+            )
+
+        try:
+            cur.execute(sql, data)
+            con.commit()
+
+        except con.Error as error:
+            print("Failed to save face", error)
+
 
     def print(self):
         print(self.head)
@@ -85,9 +131,48 @@ def generate():
     tmpFace.mouth = images["mouth"][mouthKey]
     tmpFace.mouthX = randint(-5, 5)
     tmpFace.mouthY = randint(-5, 5) - 40
-    tmpFace.print()
-
     return tmpFace
+
+def generate_faces():
+    path = Path.cwd() / "names" / "assets" / "names"
+    db = Path.cwd().parent / "player.db"
+
+    # create db
+    con = sqlite3.connect(db)
+    cur = con.cursor()
+    cur.execute(
+        """
+            CREATE TABLE IF NOT EXISTS "faces" (
+            "id"    INTEGER,
+            "head"  TEXT,
+            "hair"  TEXT,
+            "hairX" INTEGER,
+            "hairY" INTEGER,
+            "brows" TEXT,
+            "browsLX" INTEGER,
+            "browsLY" INTEGER,
+            "browsRX" INTEGER,
+            "browsRY" INTEGER,
+            "eyes" TEXT,
+            "eyesLX" INTEGER,
+            "eyesLY" INTEGER,
+            "eyesRX" INTEGER,
+            "eyesRY" INTEGER,
+            "nose" TEXT,
+            "noseX" INTEGER,
+            "noseY" INTEGER,
+            "mouth" TEXT,
+            "mouthX" INTEGER,
+            "mouthY" INTEGER,
+            PRIMARY KEY("id")
+            )
+        """
+    )
+    con.commit()
+
+    for i in range(800):
+        face = generate()
+        face.saveToDB(con, cur, None)
 
 
 class FaceWindow(pyglet.window.Window):
@@ -161,6 +246,6 @@ class FaceWindow(pyglet.window.Window):
 
 if __name__ == "__main__":
 
-    generate()
+    generate_faces()
     #window = FaceWindow()
     #pyglet.app.run()

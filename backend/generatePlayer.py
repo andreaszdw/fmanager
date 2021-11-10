@@ -22,7 +22,7 @@ def generate_players():
             "age"   INTEGER,
             "contract"  INTEGER,
             "salary"    INTEGER,
-            "imageFile" TEXT,
+            "image_id" INTEGER,
             "foot"  TEXT,
             "position"  INTEGER,
             "fitness"   REAL,
@@ -94,6 +94,7 @@ def generate_players():
         np.name = p[0]
         np.country = p[1]
         np.age = randint(age[0], age[1])
+        np.image_id = counter + 1
         
         # calc the foot        
         foot = randint(0, 99)
