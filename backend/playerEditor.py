@@ -18,10 +18,11 @@ class Main(wx.Frame):
         panel = wx.Panel(self, -1, style=0)
 
         colLabels = [
-            "Name", "Alter", "Vertrag", "Gehalt", "image",
-            "Fuss", "Position", "Fitness", "Schnelligkeit",
-            "Ausdauer", "Passen", "Kopfball", "Schuss", "Zweikampf",
-            "Taktik", "Potential", "Rating", "Experience", "id"]
+            "id", "Name", "Land", "Alter", "Vertrag", "Gehalt", "image_id",
+            "Fuss", "Position", "Fitness", "MaxFitness", "Schnelligkeit", "MaxSchnelligkeit",
+            "Ausdauer", "MaxAusdauer", "Passen", "MaxPassen", "Kopfball", "MaxKopfball", 
+            "Schuss", "MaxSchuss", "Zweikampf", "MaxZweikamp", "Taktik", "MaxTaktik", 
+            "Potential", "Rating", "Experience"]
 
         sql = "SELECT * FROM Player;"
 
@@ -41,12 +42,13 @@ class Main(wx.Frame):
         panel.SetSizer(boxSizer)
 
     def OnLeftDClick(self, event):
+        print("click")
         p = player.Player()
 
         con = sqlite3.connect("player.db")
         cur = con.cursor()
 
-        p.loadFromDBbyID(cur, self.playerGrid.getValue(event.GetRow(), 18))
+        p.loadFromDBbyID(cur, self.playerGrid.getValue(event.GetRow(), 0))
 
         pd = playerDialog.PlayerDialog(None, title=p.name, player=p)
         pd.ShowModal()

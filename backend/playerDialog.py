@@ -27,6 +27,7 @@ class PlayerDialog(wx.Dialog):
         sCol = 0
 
         # the player image, add to mainGbs
+        '''
         ip = pathlib.Path.cwd() / "assets" / "player" / self.player.imageFile
         pImage = wx.StaticBitmap(
             panel, bitmap=wx.Bitmap(str(ip), wx.BITMAP_TYPE_PNG))
@@ -34,6 +35,7 @@ class PlayerDialog(wx.Dialog):
             pImage, pos=(sRow, sCol), flag=wx.ALL, border=15)
 
         sCol += 1
+        '''
 
         # new gridbagsizer for personal data
         pdGbs = wx.GridBagSizer(5, 5)
@@ -44,6 +46,7 @@ class PlayerDialog(wx.Dialog):
         # widgets for personal data
         self.id = wx.TextCtrl(panel, value=str(self.player.id))
         self.name = wx.TextCtrl(panel, value=self.player.name)
+        self.country = wx.TextCtrl(panel, value=self.player.country)
         self.age = wx.TextCtrl(panel, value=str(self.player.age))
         self.contract = wx.TextCtrl(panel, value=str(self.player.contract))
         self.salary = wx.TextCtrl(panel, value=str(self.player.salary))
@@ -55,6 +58,7 @@ class PlayerDialog(wx.Dialog):
         data = (
             ("Spieler ID", "tc", self.id),
             ("Name", "tc", self.name),
+            ("Land", "tc", self.country),
             ("Alter", "tc", self.age),
             ("Vertrag", "tc", self.contract),
             ("Gehalt", "tc", self.salary),
@@ -83,43 +87,59 @@ class PlayerDialog(wx.Dialog):
         staticBoxProp = wx.StaticBoxSizer(wx.HORIZONTAL, panel, "Eigenschaften")
 
         # physical propertis
-        phyGbs = wx.GridBagSizer(5, 5)
+        propsGbs = wx.GridBagSizer(5, 5)
 
         # widgets for physProp
         self.fitness = wx.TextCtrl(panel, value=str(self.player.fitness))
         self.speed = wx.TextCtrl(panel, value=str(self.player.speed))
         self.stamina = wx.TextCtrl(panel, value=str(self.player.stamina))
-        self.tactic = wx.TextCtrl(panel, value=str(self.player.tactic))
-
-        physProp = (
-            ("Fitness", "tc", self.fitness),
-            ("Schnelligkeit", "tc", self.speed),
-            ("Ausdauer", "tc", self.stamina),
-            ("Taktik", "tc", self.tactic))
-
-        # add it to the properties sizer
-        self.addToGridBagSizer(panel, phyGbs, physProp)
-
-        # add it to the staticbox
-        staticBoxProp.Add(phyGbs, flag=wx.ALL | wx.EXPAND, border=5)
-
-        # football football properties
-        fbGbs = wx.GridBagSizer(5, 5)
-
         self.passing = wx.TextCtrl(panel, value=str(self.player.passing))
         self.header = wx.TextCtrl(panel, value=str(self.player.header))
         self.shot = wx.TextCtrl(panel, value=str(self.player.shot))
         self.tackle = wx.TextCtrl(panel, value=str(self.player.tackle))
+        self.tactic = wx.TextCtrl(panel, value=str(self.player.tactic))
 
-        fbProp = (
+        props = (
+            ("Fitness", "tc", self.fitness),
+            ("Schnelligkeit", "tc", self.speed),
+            ("Ausdauer", "tc", self.stamina),
             ("Passen", "tc", self.passing),
             ("Kopfball", "tc", self.header),
             ("Schuss", "tc", self.shot),
-            ("Zweikamp", "tc", self.tackle))
+            ("Zweikampf", "tc", self.tackle),
+            ("Taktik", "tc", self.tactic))
 
-        self.addToGridBagSizer(panel, fbGbs, fbProp)
+        # add it to the properties sizer
+        self.addToGridBagSizer(panel, propsGbs, props)
 
-        staticBoxProp.Add(fbGbs, flag=wx.ALL | wx.EXPAND, border=5)
+        # add it to the staticbox
+        staticBoxProp.Add(propsGbs, flag=wx.ALL | wx.EXPAND, border=5)
+
+        # football football properties
+        maxPropsGbs = wx.GridBagSizer(5, 5)
+
+        self.maxFitness = wx.TextCtrl(panel, value=str(self.player.maxFitness))
+        self.maxSpeed = wx.TextCtrl(panel, value=str(self.player.maxSpeed))
+        self.maxStamina = wx.TextCtrl(panel, value=str(self.player.maxStamina))
+        self.maxPassing = wx.TextCtrl(panel, value=str(self.player.maxPassing))
+        self.maxHeader = wx.TextCtrl(panel, value=str(self.player.maxHeader))
+        self.maxShot = wx.TextCtrl(panel, value=str(self.player.maxShot))
+        self.maxTackle = wx.TextCtrl(panel, value=str(self.player.maxTackle))
+        self.maxTactic = wx.TextCtrl(panel, value=str(self.player.maxTactic))
+
+        maxProps = (
+            ("Fitness (Max)", "tc", self.maxFitness),
+            ("Schnelligkeit (Max)", "tc", self.maxSpeed),
+            ("Ausdauer (Max)", "tc", self.maxStamina),
+            ("Passen (Max)", "tc", self.maxPassing),
+            ("Kopfball (Max)", "tc", self.maxHeader),
+            ("Schuss (Max)", "tc", self.maxShot),
+            ("Zweikampf (Max)", "tc", self.maxTackle),
+            ("Taktik (Max)", "tc", self.maxTactic))
+
+        self.addToGridBagSizer(panel, maxPropsGbs, maxProps)
+
+        staticBoxProp.Add(maxPropsGbs, flag=wx.ALL | wx.EXPAND, border=5)
 
         # add it to the mainGbs
         mainGbs.Add(

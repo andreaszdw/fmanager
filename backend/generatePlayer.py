@@ -27,11 +27,11 @@ def generate_players():
             "position"  INTEGER,
             "fitness"   REAL,
             "maxFitness"    REAL,
-            "speed" INTEGER,
-            "maxSpeed"  INTEGER,
-            "stamina"   INTEGER,
-            "maxStamina"    INTEGER,
-            "passing"   INTEGER,
+            "speed" REAL,
+            "maxSpeed"  REAL,
+            "stamina"   REAL,
+            "maxStamina"    REAL,
+            "passing"   REAL,
             "maxPassing"    REAL,
             "header"    REAL,
             "maxHeader" REAL,
@@ -52,17 +52,17 @@ def generate_players():
 
     players_list = path / "names"
 
-    no = 800 # the number of players
+    no = 882 # the number of players
     
     # the age from to
     age = (17, 29)
 
     # the number of player types
     # per team 3 goal, 8 defender, 9 midfileder, 5 attacker
-    goal = 96
-    defender = 256
-    midfield = 288
-    attacker = 160
+    goal = 100
+    defender = 270
+    midfield = 322
+    attacker = 190
 
     # which foot
     right_foot = 70 # 0 - 70
@@ -121,7 +121,7 @@ def generate_players():
 
         np.fitness = randint(3, 10) / 10
 
-        np.maxStamina = randint(3, 10) / 10
+        # np.maxStamina = randint(3, 10) / 10
         np.stamina = randint(2, np.maxStamina * 10) / 10
 
         np.maxSpeed = randint(3, 10) / 10

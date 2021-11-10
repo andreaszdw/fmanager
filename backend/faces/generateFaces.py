@@ -170,7 +170,7 @@ def generate_faces():
     )
     con.commit()
 
-    for i in range(800):
+    for i in range(882):
         face = generate()
         face.saveToDB(con, cur, None)
 
