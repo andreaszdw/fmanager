@@ -75,8 +75,6 @@ class Player(object):
             self.rating = p[26]
             self.experience = p[27]
 
-            print("name", self.name)
-
     def saveToDB(self, con, cur, id):
 
         sql = ""

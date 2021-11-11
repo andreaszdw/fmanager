@@ -27,16 +27,23 @@ class PlayerDialog(wx.Dialog):
         sRow = 0
         sCol = 0
 
+        # here comes the player image
         con = sqlite3.connect("player.db")
         cur = con.cursor()
 
         face = Face()
         face.loadFromDBbyID(cur, self.player.image_id)
 
+        # the image files
         path = pathlib.Path.cwd() / "faces" / "assets"
         headPath = path / face.head
         hairPath = path / face.hair
+        browsPath = path / face.brows
+        eyesPath = path / face.eyes
+        nosePath = path / face.nose
+        mouthPath = path / face.mouth
 
+        # this is the bitmap
         w, h = 250, 250
         wh = w // 2
         hh = h // 2
@@ -44,16 +51,39 @@ class PlayerDialog(wx.Dialog):
         memDC = wx.MemoryDC()
         memDC.SelectObject(faceBitmap)
 
-        self.headImage = wx.Bitmap(str(headPath), wx.BITMAP_TYPE_PNG)
-        print(self.headImage.Width, self.headImage.Height)
-        x = self.headImage.Width // 2
-        y = self.headImage.Height // 2
-        memDC.DrawBitmap(self.headImage, wh - x, hh - y)
+        self.headBmp = wx.Bitmap(str(headPath), wx.BITMAP_TYPE_PNG)
+        x = self.headBmp.Width // 2
+        y = self.headBmp.Height // 2
+        memDC.DrawBitmap(self.headBmp, wh - x, hh - y)
         
-        self.hairImage = wx.Bitmap(str(hairPath), wx.BITMAP_TYPE_PNG)
-        x = self.hairImage.Width // 2
-        y = self.hairImage.Height // 2
-        memDC.DrawBitmap(self.hairImage, wh - x + face.hairX, hh - y - face.hairY)
+        self.hairBmp = wx.Bitmap(str(hairPath), wx.BITMAP_TYPE_PNG)
+        x = self.hairBmp.Width // 2
+        y = self.hairBmp.Height // 2
+        memDC.DrawBitmap(self.hairBmp, wh - x + face.hairX, hh - y - face.hairY)
+
+        self.browsImage = wx.Image(str(browsPath), wx.BITMAP_TYPE_PNG)
+        x = self.browsImage.Width // 2
+        y = self.browsImage.Height //2
+        self.leftBrowBmp = wx.Bitmap(self.browsImage)
+        memDC.DrawBitmap(self.leftBrowBmp, wh - x + face.browsLX, hh - y - face.browsLY)
+        self.rightBrowBmp = wx.Bitmap(self.browsImage.Mirror())
+        memDC.DrawBitmap(self.rightBrowBmp, wh - x + face.browsRX, hh - y - face.browsRY)
+
+        self.eyesBmp = wx.Bitmap(str(eyesPath), wx.BITMAP_TYPE_PNG)
+        x = self.eyesBmp.Width // 2
+        y = self.eyesBmp.Height //2
+        memDC.DrawBitmap(self.eyesBmp, wh - x + face.eyesLX, hh - y - face.eyesLY)
+        memDC.DrawBitmap(self.eyesBmp, wh - x + face.eyesRX, hh - y - face.eyesRY)
+
+        self.noseBmp = wx.Bitmap(str(nosePath), wx.BITMAP_TYPE_PNG)
+        x = self.noseBmp.Width // 2
+        y = self.noseBmp.Height // 2
+        memDC.DrawBitmap(self.noseBmp, wh - x + face.noseX, hh - y - face.noseY)
+
+        self.mouthBmp = wx.Bitmap(str(mouthPath), wx.BITMAP_TYPE_PNG)
+        x = self.mouthBmp.Width // 2
+        y = self.mouthBmp.Height // 2
+        memDC.DrawBitmap(self.mouthBmp, wh - x + face.mouthX, hh - y - face.mouthY)
 
         # the player image, add to mainGbs
         pImage = wx.StaticBitmap(panel, bitmap=wx.Bitmap(faceBitmap))

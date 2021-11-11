@@ -57,7 +57,6 @@ class Main(wx.Frame):
         pd.Destroy
 
     def OnLabelLeftDclick(self,event):
-        print("label dclick")
         self.playerGrid.sortColumn(event.GetCol())
         self.playerGrid.reset()
 

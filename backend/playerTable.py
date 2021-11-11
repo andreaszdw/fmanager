@@ -107,14 +107,12 @@ class Grid(gridlib.Grid):
     def sortColumn(self, col):
 
         def sortKey(elem):
-            print(elem[col])
             return elem[col]
 
         name = self.data.colLabels[col]
         _data = []
 
         for row in self.data.data:
-            #print(row[col])
             _data.append(row)
 
         _data.sort(key=sortKey, reverse=self.sortReverse)
