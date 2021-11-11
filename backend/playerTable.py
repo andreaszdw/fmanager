@@ -99,6 +99,7 @@ class Grid(gridlib.Grid):
         self.SetRowLabelSize(30)
         self.SetMargins(0, 0)
         self.AutoSizeColumns(False)
+        self.sortReverse = False
 
     def getValue(self, row, col):
         return self.data.GetValue(row, col)
@@ -116,7 +117,12 @@ class Grid(gridlib.Grid):
             #print(row[col])
             _data.append(row)
 
-        _data.sort(key=sortKey)
+        _data.sort(key=sortKey, reverse=self.sortReverse)
+        
+        if self.sortReverse == False:
+            self.sortReverse = True
+        else:
+            self.sortReverse = False
 
         self.data.data = []
 

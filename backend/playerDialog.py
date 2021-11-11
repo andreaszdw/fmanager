@@ -151,8 +151,8 @@ class PlayerDialog(wx.Dialog):
         # buttons
         buttonBox = wx.BoxSizer(wx.HORIZONTAL)
 
-        okButton = wx.Button(panel, wx.ID_ANY, "Ok")
-        buttonBox.Add(okButton)
+        saveButton = wx.Button(panel, wx.ID_ANY, "Speichern")
+        buttonBox.Add(saveButton)
         abortButton = wx.Button(panel, wx.ID_ANY, "Abbrechen")
         buttonBox.Add(abortButton)
 

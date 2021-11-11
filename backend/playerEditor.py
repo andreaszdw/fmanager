@@ -45,7 +45,6 @@ class Main(wx.Frame):
         panel.SetSizer(boxSizer)
 
     def OnLeftDClick(self, event):
-        print("click")
         p = player.Player()
 
         con = sqlite3.connect("player.db")
