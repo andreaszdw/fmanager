@@ -7,6 +7,7 @@ import wx
 import player
 import sqlite3
 import pathlib
+from face import Face
 
 class PlayerDialog(wx.Dialog):
 
@@ -26,16 +27,39 @@ class PlayerDialog(wx.Dialog):
         sRow = 0
         sCol = 0
 
+        con = sqlite3.connect("player.db")
+        cur = con.cursor()
+
+        face = Face()
+        face.loadFromDBbyID(cur, self.player.image_id)
+
+        path = pathlib.Path.cwd() / "faces" / "assets"
+        headPath = path / face.head
+        hairPath = path / face.hair
+
+        w, h = 250, 250
+        wh = w // 2
+        hh = h // 2
+        faceBitmap = wx.Bitmap(w, h)
+        memDC = wx.MemoryDC()
+        memDC.SelectObject(faceBitmap)
+
+        self.headImage = wx.Bitmap(str(headPath), wx.BITMAP_TYPE_PNG)
+        print(self.headImage.Width, self.headImage.Height)
+        x = self.headImage.Width // 2
+        y = self.headImage.Height // 2
+        memDC.DrawBitmap(self.headImage, wh - x, hh - y)
+        
+        self.hairImage = wx.Bitmap(str(hairPath), wx.BITMAP_TYPE_PNG)
+        x = self.hairImage.Width // 2
+        y = self.hairImage.Height // 2
+        memDC.DrawBitmap(self.hairImage, wh - x + face.hairX, hh - y - face.hairY)
+
         # the player image, add to mainGbs
-        '''
-        ip = pathlib.Path.cwd() / "assets" / "player" / self.player.imageFile
-        pImage = wx.StaticBitmap(
-            panel, bitmap=wx.Bitmap(str(ip), wx.BITMAP_TYPE_PNG))
-        mainGbs.Add(
-            pImage, pos=(sRow, sCol), flag=wx.ALL, border=15)
+        pImage = wx.StaticBitmap(panel, bitmap=wx.Bitmap(faceBitmap))
+        mainGbs.Add(pImage, pos=(sRow, sCol), flag=wx.ALL, border=15)
 
         sCol += 1
-        '''
 
         # new gridbagsizer for personal data
         pdGbs = wx.GridBagSizer(5, 5)
