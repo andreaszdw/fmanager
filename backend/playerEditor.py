@@ -36,6 +36,9 @@ class Main(wx.Frame):
         self.playerGrid.Bind(
             gridlib.EVT_GRID_CELL_LEFT_DCLICK,
             self.OnLeftDClick)
+        
+        self.playerGrid.Bind(
+            gridlib.EVT_GRID_LABEL_LEFT_DCLICK, self.OnLabelLeftDclick)
 
         boxSizer = wx.BoxSizer(wx.VERTICAL)
         boxSizer.Add(self.playerGrid, 1, wx.EXPAND | wx.ALL, 5)
@@ -53,6 +56,11 @@ class Main(wx.Frame):
         pd = playerDialog.PlayerDialog(None, title=p.name, player=p)
         pd.ShowModal()
         pd.Destroy
+
+    def OnLabelLeftDclick(self,event):
+        print("label dclick")
+        self.playerGrid.sortColumn(event.GetCol())
+        self.playerGrid.reset()
 
 
 if __name__ == '__main__':
