@@ -13,5 +13,5 @@ class Team(object):
 
 	def addPlayer(self, player):
 
-		self.player.appedn(player)
+		self.player.append(player)
 		
