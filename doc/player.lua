@@ -16,7 +16,7 @@ local player = {}
 function player:new()
 
 	local o = {
-		id = id 0 or nil,
+		id = id or nil,
 		name = name or "Egal Egal",
 		age = age or 17, -- this is the normal starting age
 		country = "DE",
