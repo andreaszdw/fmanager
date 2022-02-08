@@ -15,6 +15,7 @@ local progress = {}
 --
 -- --------------------------------------------------------
 function progress:new(parent, left, top, width, value, isAnimated)
+	print(width)
 
 	local theme = require("fm.theme")
 
@@ -29,7 +30,7 @@ function progress:new(parent, left, top, width, value, isAnimated)
 		isAnimated = isAnimated or false
 	}
 
-	-- this is shorte to type
+	-- this is shorter to type
 	local t = o.theme.progressView
 	local sheet = graphics.newImageSheet(t.sheet, t.options)
 
@@ -46,10 +47,10 @@ function progress:new(parent, left, top, width, value, isAnimated)
         fillInnerRightFrame = t.irf,
         fillWidth = t.fw,
         fillHeight = t.fh,
-        left = o.left,
-        top = o.top,
-        width = o.width,
-        isAnimated = o.isAnimated
+        left = left,
+        top = top,
+        width = width,
+        isAnimated = isAnimated
 	}
 	)
 

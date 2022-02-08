@@ -43,12 +43,12 @@ function player:new()
 		maxPassing = 1.0,
 		header = header or 1.0,
 		maxHeader = 1.0,
-		shot = shot or 1.0,
+		shot = shot or 0.90,
 		maxShot = 1.0,
 		tackle = tackle or 0.9,
 		maxTackle = 0.95,
 		tactic = tactic or 0.2,
-		maxTactic = 0.5,
+		maxTactic = 0.6,
 		experience = 0
 	}
 	

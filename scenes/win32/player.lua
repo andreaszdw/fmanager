@@ -135,7 +135,7 @@ function scene:create(event)
 	for i=1, potential do
 		local star
 		if rating >= i then 
-			print(potential .. " " .. rating)
+			--print(potential .. " " .. rating)
 			star = display.newImage(self.view, theme.fullStar)
 		else  
 			star = display.newImage(self.view, theme.emptyStar)
@@ -257,6 +257,7 @@ function scene:create(event)
 
 				-- draw the width of progressview in dependance of the max value
 				local length = pvWidth * row.params.max
+				print(length)
 
 				local valueView = progressView:new(row, tab, 5, length, row.params.value / row.params.max)
 
