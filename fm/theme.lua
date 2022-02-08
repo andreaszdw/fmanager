@@ -38,10 +38,10 @@ local theme = {
 		sheet = "fm/assets/images/pv.png", --widget-progress-view-standard.png",
 		options = {
 			width = 5, --64,
-			height = 64,
-			numFrames = 4,
-			sheetContentWidth = 20,
-			sheetContenHeight = 64
+			height = 40,
+			numFrames = 6,
+			sheetContentWidth = 30,
+			sheetContenHeight = 40
 		},
         olf = 1,
         omf = 2,
@@ -49,9 +49,9 @@ local theme = {
         ow =  5, --64,
         oh = 32,
         ilf = 4,
-        imf = 4, --5,
-        irf = 4, --6,
-        fw = 5, --64,
+        imf = 5, --5,
+        irf = 6, --6,
+        fw = 5, --64,------
         fh = 32
 	}
 }

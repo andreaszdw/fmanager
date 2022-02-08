@@ -48,7 +48,7 @@ function player:new()
 		tackle = tackle or 0.9,
 		maxTackle = 0.95,
 		tactic = tactic or 0.2,
-		maxTactic = 0.6,
+		maxTactic = 0.5,
 		experience = 0
 	}
 	

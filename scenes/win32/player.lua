@@ -226,8 +226,8 @@ function scene:create(event)
 		-- local value = row.params.value
 		local x = 5
 		local y = 10
-		local tab = 80
-		local tab2 = 380
+		local tab = 90
+		local tab2 = 394
 		local fontSize = 14
 		local headerSize = 22
 
@@ -249,8 +249,8 @@ function scene:create(event)
 				local pvWidth = 300
 
 				-- draw a background rect
-				local pvBgRectLength = pvWidth - 5 - 5 + 9 -- here look in the sheet for progressview to get the right values
-				local pvBgRect = display.newRect(row, tab + 56, 8, pvBgRectLength, row.height - 14)
+				local pvBgRectLength = pvWidth -- here look in the sheet for progressview to get the right values
+				local pvBgRect = display.newRect(row, tab, 8, pvBgRectLength, row.height - 14)
 				pvBgRect:setFillColor(0, 0, 0, 0.5)
 				pvBgRect.anchorX = 0
 				pvBgRect.anchorY = 0
