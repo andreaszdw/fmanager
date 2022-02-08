@@ -249,7 +249,7 @@ function scene:create(event)
 				local pvWidth = 300
 
 				-- draw a background rect
-				local pvBgRectLength = pvWidth - 56 - 56 + 9 -- here look in the sheet for progressview to get the right values
+				local pvBgRectLength = pvWidth - 5 - 5 + 9 -- here look in the sheet for progressview to get the right values
 				local pvBgRect = display.newRect(row, tab + 56, 8, pvBgRectLength, row.height - 14)
 				pvBgRect:setFillColor(0, 0, 0, 0.5)
 				pvBgRect.anchorX = 0

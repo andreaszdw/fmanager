@@ -35,23 +35,23 @@ local theme = {
 	font = "fm/assets/fonts/ubuntu/Ubuntu-R.ttf",
 
 	progressView = {
-		sheet = "fm/assets/images/widget-progress-view-standard.png",
+		sheet = "fm/assets/images/pv.png", --widget-progress-view-standard.png",
 		options = {
-			width = 64,
+			width = 5, --64,
 			height = 64,
-			numFrames = 6,
-			sheetContentWidth = 384,
+			numFrames = 4,
+			sheetContentWidth = 20,
 			sheetContenHeight = 64
 		},
         olf = 1,
         omf = 2,
         orf = 3,
-        ow = 64,
+        ow =  5, --64,
         oh = 32,
         ilf = 4,
-        imf = 5,
-        irf = 6,
-        fw = 64,
+        imf = 4, --5,
+        irf = 4, --6,
+        fw = 5, --64,
         fh = 32
 	}
 }
