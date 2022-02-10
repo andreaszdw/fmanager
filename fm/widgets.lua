@@ -24,6 +24,10 @@ function fmwidgets:new(view, theme)
 	local tmpTheme = theme or "fm.theme"
 	local o = {
 		view = view,
+		viewWidth = display.contentWidth,
+		viewHeight = display.contentHeight,
+		viewCenterX = display.contentWidth * 0.5,
+		viewCenterY = display.contentHeight * 0.5,
 		theme = require(tmpTheme),
 		childs = {}
 	}
@@ -95,6 +99,18 @@ function fmwidgets:table(left, top, width, height, rowRenderer, rowHeight, isLoc
 	local child = tableView:new(self, left, top, width, height, rowRenderer, rowHeight, isLocked)
 	table.insert(self.childs, child)
 	return child
+end
+
+-- --------------------------------------------------------
+--
+-- background for the scene
+-- 
+-- --------------------------------------------------------
+function fmwidgets:stdBackground()
+	display.setDefault("background", self.theme.black)
+	local bgImage = display.newImage(self.view, self.theme.bgImage)
+	bgImage.x = self.viewCenterX
+	bgImage.y = self.viewCenterY
 end
 
 -- --------------------------------------------------------

@@ -12,6 +12,9 @@ local theme = {
 	stroke = d,
 	imageBg = b,
 	green = {0/255, 255/255, 0/255},
+	black = {0, 0, 0},
+
+	bgImage = "assets/images/bg/bg1.jpg",
 	
 	tableView = {
 		lineEven = b,

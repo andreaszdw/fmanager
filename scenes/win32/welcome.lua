@@ -9,17 +9,12 @@
 local composer = require("composer")
 local widget = require("widget")
 local i18n = require("i18n")
-local fmw = require("fm.widgets")
+local fmwidgets = require("fm.widgets")
 
 local strings = i18n.getStrings()
 
 -- new scene
 local scene = composer.newScene()
-
-local width = display.contentWidth 
-local height = display.contentHeight
-local centerX = width * 0.5 
-local centerY = height * 0.5
 
 local sceneView = 0
 
@@ -107,29 +102,24 @@ end
 -- --------------------------------------------------------
 function scene:create(event)
 	
-	local fmwidgets = fmw:new(self.view)
+	local fmw = fmwidgets:new(self.view)
 
-	local theme = fmwidgets:getTheme()
-
-	display.setDefault("background", 0, 0, 0)
-	local bgImage = display.newImage(self.view, "assets/images/bg/bg1.jpg")
-	bgImage.x = centerX
-	bgImage.y = centerY
+	fmw:stdBackground()
 
 	local counter = 0
 	local nextElement = 120
 	local gap = 10
 
-	local welcomeText = fmwidgets:singleText(strings.welcome, 640, 120, 60)
+	local welcomeText = fmw:singleText(strings.welcome, 640, 120, 60)
 	nextElement = nextElement + welcomeText:getHeight()
 
-	local goPlayerButton = fmwidgets:pbutton(strings.player, goPlayer, 640, nextElement)
+	local goPlayerButton = fmw:pbutton(strings.player, goPlayer, 640, nextElement)
 	nextElement = nextElement + goPlayerButton:getHeight() + gap
 
-	local newPlayerButton = fmwidgets:pbutton(strings.newPlayer, newPlayer, 640, nextElement)
+	local newPlayerButton = fmw:pbutton(strings.newPlayer, newPlayer, 640, nextElement)
 	nextElement = nextElement + newPlayerButton:getHeight() + gap
 	
-	local quitButton = fmwidgets:pbutton(strings.quit, quitApp)
+	local quitButton = fmw:pbutton(strings.quit, quitApp)
 	local tmpW = quitButton:getWidth()
 	local tmpH = quitButton:getHeight()
 	quitButton:setPosition(1280 - tmpW/2 - gap, 720 - tmpH/2 - gap)

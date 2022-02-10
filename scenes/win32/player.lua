@@ -21,11 +21,6 @@ local strings = i18n.getStrings()
 -- new scene
 local scene = composer.newScene()
 
-local width = display.contentWidth 
-local height = display.contentHeight
-local centerX = width * 0.5 
-local centerY = height * 0.5
-
 local sceneView = 0
 
 -- --------------------------------------------------------
@@ -88,12 +83,9 @@ function scene:create(event)
 
 	local theme = fmw:getTheme()
 
-	local gap = 10
+	fmw:stdBackground()
 
-	display.setDefault("background", 0, 0, 0)
-	local bgImage = display.newImage(self.view, "assets/images/bg/bg1.jpg")
-	bgImage.x = centerX
-	bgImage.y = centerY
+	local gap = 10
 
 	-- this is the rect for the view
 	local bgRect = display.newRect(self.view, 640, 360, 1280, 720)
