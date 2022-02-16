@@ -9,6 +9,8 @@ local composer = require("composer")
 
 display.setStatusBar(display.HiddenStatusBar)
 
+--print(system.DocumentsDirectory)
+
 -- debug true/false
 debugMode = false
 
