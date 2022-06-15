@@ -172,7 +172,7 @@ def generate_faces():
 
     for i in range(882):
         face = generate()
-        face.saveToDB(con, cur, None)
+        face.print() #face.saveToDB(con, cur, None)
 
 
 class FaceWindow(pyglet.window.Window):
