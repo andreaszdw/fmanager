@@ -37,8 +37,8 @@ function player:new()
 		stamina = stamina or 1.0,
 		maxStamina = 1.0, -- this is always 1.0
 		-- football skills - percentage
-		speed = speed or 1.0,
-		maxSpeed = 1.0,
+		speed = speed or 0.5,
+		maxSpeed = 0.7,
 		passing = passing or 1.0,
 		maxPassing = 1.0,
 		header = header or 1.0,
