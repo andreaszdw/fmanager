@@ -15,7 +15,6 @@ local progress = {}
 --
 -- --------------------------------------------------------
 function progress:new(parent, left, top, width, value, isAnimated)
-	print(width)
 
 	local theme = require("fm.theme")
 
