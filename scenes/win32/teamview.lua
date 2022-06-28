@@ -1,8 +1,10 @@
 -- --------------------------------------------------------
 --
--- template.lua
+-- teamview.lua
 --
 -- andreaszdw@googlemail.com
+--
+-- this shows a team
 --
 -- --------------------------------------------------------
 
@@ -10,6 +12,8 @@ local composer = require("composer")
 local widget = require("widget")
 local i18n = require("i18n")
 local fmwidgets = require("fm.widgets")
+local singleText = require("fm.singletext")
+local progressView = require("fm.progressview")
 
 local strings = i18n.getStrings()
 
@@ -20,14 +24,14 @@ local sceneView = 0
 
 -- --------------------------------------------------------
 --
--- update
+-- onUpdate
 --
 -- --------------------------------------------------------
 local function onUpdate(event)
 end
 
 -- --------------------------------------------------------
---
+-- 
 -- onKey
 --
 -- --------------------------------------------------------
@@ -48,7 +52,7 @@ end
 
 -- -------------------------------------------------------
 --
--- on Mouse
+-- onMouse
 --
 -- -------------------------------------------------------
 local function onMouse(event)
@@ -56,55 +60,12 @@ end
 
 -- -------------------------------------------------------
 --
--- goPlayer
+-- goBack
 --
 -- -------------------------------------------------------
-local function goPlayer(event)
-	local options = {
-		params = {
-			status = "show"
-		}
-	}
-	composer.gotoScene("scenes.win32.player", options)
-end
-
--- --------------------------------------------------------
---
--- newPlayer
--- 
--- --------------------------------------------------------
-local function newPlayer(event)
-	local options = {
-		params = {
-			status = "new"
-		}
-	}
-	composer.gotoScene("scenes.win32.player", options)
-end
-
--- --------------------------------------------------------
---
--- teamview
---
--- --------------------------------------------------------
-local function goTeamView(event)
-	local options = {
-		params = {
-			status = "show"
-		}
-	}
-	composer.gotoScene("scenes.win32.teamview", options)
-end
-
--- --------------------------------------------------------
---
--- quitApp 
---
--- --------------------------------------------------------
-local function quitApp(event)
-	composer.removeHidden()
-	composer.removeScene(composer.getSceneName("current"))
-	native.requestExit()
+local function goBack(event) 
+	local prevScene = composer.getSceneName("previous")
+	composer.gotoScene(prevScene)
 end
 
 -- --------------------------------------------------------
@@ -115,8 +76,9 @@ end
 
 -- --------------------------------------------------------
 function scene:create(event)
-	
 	local fmw = fmwidgets:new(self.view)
+
+	local theme = fmw:getTheme()
 
 	fmw:stdBackground()
 
@@ -124,22 +86,11 @@ function scene:create(event)
 	local nextElement = 120
 	local gap = 10
 
-	local welcomeText = fmw:singleText(strings.welcome, 640, 120, 60)
-	nextElement = nextElement + welcomeText:getHeight()
-
-	local goPlayerButton = fmw:pbutton(strings.player, goPlayer, 640, nextElement)
-	nextElement = nextElement + goPlayerButton:getHeight() + gap
-
-	local newPlayerButton = fmw:pbutton(strings.newPlayer, newPlayer, 640, nextElement)
-	nextElement = nextElement + newPlayerButton:getHeight() + gap
-
-	local goTeamViewButton = fmw:pbutton(strings.teamView, goTeamView, 640, nextElement)
-	nextElement = nextElement + goTeamViewButton:getHeight() + gap
-	
-	local quitButton = fmw:pbutton(strings.quit, quitApp)
-	local tmpW = quitButton:getWidth()
-	local tmpH = quitButton:getHeight()
-	quitButton:setPosition(1280 - tmpW/2 - gap, 720 - tmpH/2 - gap)
+	-- the back button
+	local backButton = fmw:pbutton(strings.back, goBack)
+	local tmpW = backButton:getWidth()
+	local tmpH = backButton:getHeight()
+	backButton:setPosition(1280 - tmpW/2 - gap, 720 - tmpH/2 - gap)
 
 	-- put the view in the local sceneView, so it can be changed on resize
 	sceneView = self.view
@@ -162,7 +113,6 @@ end
 
 -- --------------------------------------------------------
 function scene:hide(event)
-
 	local phase = event.phase
 
 	if phase == "will" then
@@ -176,7 +126,7 @@ end
 
 -- --------------------------------------------------------
 function scene:destroy(event)
-	print("do saving")
+	
 end
 
 -- --------------------------------------------------------
