@@ -15,6 +15,7 @@ local fmwidgets = require("fm.widgets")
 local singleText = require("fm.singletext")
 local progressView = require("fm.progressview")
 
+
 local strings = i18n.getStrings()
 
 -- new scene

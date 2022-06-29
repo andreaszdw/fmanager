@@ -5,6 +5,7 @@
 -- andreaszdw@googlemail.com
 --
 -- --------------------------------------------------------
+local sqlite3 = require("sqlite3")
 
 local player = {}
 
@@ -80,9 +81,17 @@ end
 -- load player from sqlite
 --
 -- --------------------------------------------------------
-function player:loadFromDB(db, id)
-	print("load")
-	self:calcPotRat()
+function player:loadFromDB(dbpath, id)
+	local path = system.pathForFile(dbpath, system.ResourceDirectory)
+	print(path)
+	local db = sqlite3.open(path)
+	local sql = [[SELECT * FROM Player WHERE id=3;]]
+	function showrow(udata, cols, values, names)
+		print(udata, cols, values, names)
+		for i=1,cols do print('',names[i],values[i]) end
+	end
+	db:exec(sql, showrow)
+
 end
 
 -- --------------------------------------------------------

@@ -78,6 +78,7 @@ end
 -- --------------------------------------------------------
 function scene:create(event)
 	local docPlayer = CPlayer:new()
+	docPlayer:loadFromDB("assets\\db\\player.db", 3)
 
 	local fmw = fmwidgets:new(self.view)
 

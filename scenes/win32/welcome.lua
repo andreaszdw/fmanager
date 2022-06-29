@@ -65,7 +65,7 @@ local function goPlayer(event)
 			status = "show"
 		}
 	}
-	composer.gotoScene("scenes.win32.player", options)
+	composer.gotoScene("scenes.win32.playerview", options)
 end
 
 -- --------------------------------------------------------
@@ -79,7 +79,7 @@ local function newPlayer(event)
 			status = "new"
 		}
 	}
-	composer.gotoScene("scenes.win32.player", options)
+	composer.gotoScene("scenes.win32.playerview", options)
 end
 
 -- --------------------------------------------------------
