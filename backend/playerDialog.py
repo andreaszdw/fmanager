@@ -270,7 +270,7 @@ class TestFrame(wx.Frame):
         con = sqlite3.connect("player.db")
         cur = con.cursor()
 
-        p.loadFromDBbyID(cur, 1)
+        p.loadFromDBbyID(cur, 120)
 
         # show the dialog
         pd = PlayerDialog(None, title="Spieler Dialog", player=p)

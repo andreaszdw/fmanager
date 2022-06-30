@@ -14,7 +14,8 @@ local i18n = require("i18n")
 local fmwidgets = require("fm.widgets")
 local singleText = require("fm.singletext")
 local progressView = require("fm.progressview")
-local CPlayer = require("doc.player")
+local player = require("doc.player")
+local face = require("draw.face")
 
 local strings = i18n.getStrings()
 
@@ -77,8 +78,11 @@ end
 
 -- --------------------------------------------------------
 function scene:create(event)
-	local docPlayer = CPlayer:new()
-	docPlayer:loadFromDB("assets\\db\\player.db", 3)
+	local docPlayer = player:new()
+	local dbpath = "assets\\db\\player.db"
+	local path = system.pathForFile(dbpath, system.ResourceDirectory)
+	local db = sqlite3.open(path)
+	docPlayer:loadFromDB(db, 120)
 
 	local fmw = fmwidgets:new(self.view)
 
@@ -104,9 +108,12 @@ function scene:create(event)
 	playerImage.anchorY = 0
 
 	-- the image
-	local image = display.newImage(self.view, docPlayer.imageFile)
-	image.x = 160
-	image.y = 150
+	--local image = display.newImage(self.view, docPlayer.imageFile)
+	--image.x = 160
+	--image.y = 150
+	local face = face:new(self.view, 160, 150, 1)
+	face:loadFromDB(db, docPlayer.image_id)
+	face:draw()
 
 	local pathFlag = "assets/images/flags/"..docPlayer.country.."@3x.png"
 	flagImage = display.newImage(self.view, pathFlag)
@@ -175,7 +182,7 @@ function scene:create(event)
 
 	local pos = docPlayer.position
 	local posValue = ""
-	if pos == "k" then 
+	if pos == "g" then 
 		posValue = strings.keeper 
 	elseif pos == "m" then 
 		posValue = strings.midfielder

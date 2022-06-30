@@ -81,17 +81,47 @@ end
 -- load player from sqlite
 --
 -- --------------------------------------------------------
-function player:loadFromDB(dbpath, id)
-	local path = system.pathForFile(dbpath, system.ResourceDirectory)
-	print(path)
-	local db = sqlite3.open(path)
-	local sql = [[SELECT * FROM Player WHERE id=3;]]
-	function showrow(udata, cols, values, names)
-		print(udata, cols, values, names)
-		for i=1,cols do print('',names[i],values[i]) end
-	end
-	db:exec(sql, showrow)
+function player:loadFromDB(db, id)
 
+	local sql = [[SELECT * FROM Player WHERE id=]]..id..[[;]]
+
+	function readPlayer(udata, cols, values, names)
+		-- for i=1,cols do 
+			-- print(i, names[i], values[i]) 
+		--end
+		self.id = values[1]
+        self.name = values[2]
+        self.country = values[3]
+        self.age = values[4]
+        self.contract = values[5]
+        self.salary = values[6]
+        self.image_id = values[7]
+        self.foot = values[8]
+        self.position = values[9]
+        self.fitness = values[10]
+        self.maxFitness = values[11]
+        self.speed = values[12]
+        self.maxSpeed = values[13]
+        self.stamina = values[14]
+        self.maxStamina = values[15]
+        self.passing = values[16]
+        self.maxPassing = values[17]
+        self.header = values[18]
+        self.maxHeader = values[19]
+        self.shot = values[20]
+        self.maxShot = values[21]
+        self.tackle = values[22]
+        self.maxTackle = values[23]
+        self.tactic = values[24]
+        self.maxTactic = values[25]
+        self.potential = values[26]
+        self.rating = values[17]
+        self.experience = values[28]
+	end
+
+	db:exec(sql, readPlayer)
+
+	self:calcPotRat()
 end
 
 -- --------------------------------------------------------
@@ -101,6 +131,42 @@ end
 -- --------------------------------------------------------
 function player:saveToDB(db, id)
 	print("save")
+end
+
+-- --------------------------------------------------------
+--
+-- print player
+-- 
+-- --------------------------------------------------------
+function player:print()
+	print("id: " .. self.id)
+    print("name: " .. self.name)
+    print("country: " .. self.country)
+    print("age: " .. self.age)
+    print("contract: " .. self.contract)
+    print("salary: " .. self.salary)
+    print("image_id: " .. self.image_id)
+    print("foot: " .. self.foot)
+    print("position: " .. self.position)
+    print("fitness: " .. self.fitness)
+    print("maxFitnes: " ..self.maxFitness)
+    print("speed: " .. self.speed)
+    print("maxSpeed: " .. self.maxSpeed)
+    print("stamina: " .. self.stamina)
+    print("maxStamina: " .. self.maxStamina)
+    print("passing: " .. self.passing)
+    print("maxPassing: " .. self.maxPassing)
+    print("header: " .. self.header)
+    print("maxHeader: " .. self.maxHeader)
+    print("shot: " .. self.shot)
+    print("maxShot: " .. self.maxShot)
+    print("tackle: " .. self.tackle)
+    print("maxTackle: " .. self.maxTackle)
+    print("tactic: " .. self.tactic)
+    print("maxTactic: ".. self.maxTactic)
+    print("potential: " .. self.potential)
+    print("rating: " .. self.rating)
+    print("experience: " .. self.experience)
 end
 
 -- --------------------------------------------------------
