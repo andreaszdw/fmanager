@@ -100,7 +100,10 @@ function scene:create(event)
 
 	-- player image and rect
 	-- the rect 
-	local playerImage = display.newRect(self.view, 10, 10, 300, 450)
+	local imageGroup = display.newGroup()
+	imageGroup.x = 200
+	imageGroup.y = 10
+	local playerImage = display.newRect(imageGroup, 0, 0, 300, 450)
 	playerImage.strokeWidth = 2
 	playerImage:setFillColor(unpack(theme.imageBg))
 	playerImage:setStrokeColor(unpack(theme.stroke))
@@ -111,39 +114,33 @@ function scene:create(event)
 	--local image = display.newImage(self.view, docPlayer.imageFile)
 	--image.x = 160
 	--image.y = 150
-	local face = face:new(self.view, 160, 150, 1)
+	local face = face:new(imageGroup, 150, 150, 1)
 	face:loadFromDB(db, docPlayer.image_id)
 	face:draw()
 
 	local pathFlag = "assets/images/flags/"..docPlayer.country.."@3x.png"
-	flagImage = display.newImage(self.view, pathFlag)
+	flagImage = display.newImage(imageGroup, pathFlag)
 	flagImage.x = 46
 	flagImage.y = 36
 
 	-- the potential in stars
-	local potentialGroup = display.newGroup()
-	potentialGroup.x = 160
-	potentialGroup.y = 420
-	potentialGroup.anchorX = 0.5
-	potentialGroup.anchorY = 0.5
-	potentialGroup.anchorChildren = true
-	table.insert(self.view, potentialGroup)
 	local potential = math.floor(10 * docPlayer.potential)
 	local rating = math.floor(10 * docPlayer.rating)
-	local starX = -potential * 14 + 174
+	local starX = -potential * 14 + 164
 	local starY = 420
 	for i=1, potential do
 		local star
 		if rating >= i then 
-			--print(potential .. " " .. rating)
-			star = display.newImage(self.view, theme.fullStar)
+			star = display.newImage(imageGroup, theme.fullStar)
 		else  
-			star = display.newImage(self.view, theme.emptyStar)
+			star = display.newImage(imageGroup, theme.emptyStar)
 		end		
 		star.x = starX
 		star.y = starY
 		starX = starX + 28
 	end
+
+	self.view:insert(imageGroup)
 	
 
 	-- here comes tableView with player info
@@ -178,7 +175,7 @@ function scene:create(event)
 	end
 
 	-- new table
-	local dataTable = fmw:table(10, 470, 300, 240, dataRender)
+	local dataTable = fmw:table(510, 10, 300, 240, dataRender)
 
 	local pos = docPlayer.position
 	local posValue = ""
@@ -277,7 +274,7 @@ function scene:create(event)
 	end
 
 	-- new table
-	local skillTable = fmw:table(320, 10, 460, 480, skillRender, 40)
+	local skillTable = fmw:table(815, 10, 460, 480, skillRender, 40)
 
 	skillTable:insertRow({header = strings.skills})
 	skillTable:insertRow({header = strings.physical})
