@@ -289,12 +289,12 @@ function scene:create(event)
 	skillTable:insertRow({title = strings.tactic, value = docPlayer.tactic, max = docPlayer.maxTactic})
 	skillTable:insertRow({title = strings.experience, points = docPlayer.experience})
 
-
 	-- the back button
 	local backButton = fmw:pbutton(strings.back, goBack)
 	local tmpW = backButton:getWidth()
 	local tmpH = backButton:getHeight()
-	backButton:setPosition(1280 - tmpW/2 - gap, 720 - tmpH/2 - gap)
+	-- backButton:setPosition(1280 - tmpW/2 - gap, 720 - tmpH/2 - gap)
+	backButton:setPosition(0 + tmpW/2 + gap, 720 - tmpH/2 - gap)
 
 	-- put the view in the local sceneView, so it can be changed on resize
 	sceneView = self.view
