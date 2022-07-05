@@ -91,7 +91,7 @@ function scene:create(event)
 	local backButton = fmw:pbutton(strings.back, goBack)
 	local tmpW = backButton:getWidth()
 	local tmpH = backButton:getHeight()
-	backButton:setPosition(1280 - tmpW/2 - gap, 720 - tmpH/2 - gap)
+	backButton:setPosition(0 + tmpW/2 + gap, 720 - tmpH/2 - gap)
 
 	-- put the view in the local sceneView, so it can be changed on resize
 	sceneView = self.view

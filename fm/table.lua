@@ -10,6 +10,7 @@ local widget = require("widget")
 
 local table = {}
 
+
 -- --------------------------------------------------------
 --
 -- constructor
@@ -40,6 +41,8 @@ function table:new(parent, left, top, width, height, rowRenderer, rowHeight, isL
 		noLines = true,
 		listener = scrollListener
 	})
+
+	o.sumHeight = 0
 
 	o.parent.view:insert(o.tableView)
 
@@ -74,6 +77,7 @@ function table:insertRow(params, isCategory)
 		params = params
 	})
 end
+
 
 -- --------------------------------------------------------
 return table

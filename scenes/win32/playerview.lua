@@ -101,9 +101,9 @@ function scene:create(event)
 	-- player image and rect
 	-- the rect 
 	local imageGroup = display.newGroup()
-	imageGroup.x = 200
+	imageGroup.x = 300
 	imageGroup.y = 10
-	local playerImage = display.newRect(imageGroup, 0, 0, 300, 450)
+	local playerImage = display.newRect(imageGroup, 0, 0, 970, 700)
 	playerImage.strokeWidth = 2
 	playerImage:setFillColor(unpack(theme.imageBg))
 	playerImage:setStrokeColor(unpack(theme.stroke))
@@ -127,7 +127,7 @@ function scene:create(event)
 	local potential = math.floor(10 * docPlayer.potential)
 	local rating = math.floor(10 * docPlayer.rating)
 	local starX = -potential * 14 + 164
-	local starY = 420
+	local starY = 620
 	for i=1, potential do
 		local star
 		if rating >= i then 
@@ -174,9 +174,6 @@ function scene:create(event)
 		rowValue:setFillColor(fmw.theme.labelWhite)
 	end
 
-	-- new table
-	local dataTable = fmw:table(510, 10, 300, 240, dataRender)
-
 	local pos = docPlayer.position
 	local posValue = ""
 	if pos == "g" then 
@@ -201,6 +198,8 @@ function scene:create(event)
 	elseif foot == "b" then 
 		footValue = strings.both 
 	end
+	-- new table
+	local dataTable = fmw:table(imageGroup.x + 1, 300, 298, 240, dataRender, 40)
 
 	-- insert rows
 	dataTable:insertRow({title = strings.name, value = docPlayer.name})
@@ -274,8 +273,9 @@ function scene:create(event)
 	end
 
 	-- new table
-	local skillTable = fmw:table(815, 10, 460, 480, skillRender, 40)
+	local skillTable = fmw:table(imageGroup.x + 370, 11, 460, 480, skillRender, 40)
 
+	-- insert rows
 	skillTable:insertRow({header = strings.skills})
 	skillTable:insertRow({header = strings.physical})
 	skillTable:insertRow({title = strings.fitness, value = docPlayer.fitness, max = docPlayer.maxFitness})
@@ -293,7 +293,6 @@ function scene:create(event)
 	local backButton = fmw:pbutton(strings.back, goBack)
 	local tmpW = backButton:getWidth()
 	local tmpH = backButton:getHeight()
-	-- backButton:setPosition(1280 - tmpW/2 - gap, 720 - tmpH/2 - gap)
 	backButton:setPosition(0 + tmpW/2 + gap, 720 - tmpH/2 - gap)
 
 	-- put the view in the local sceneView, so it can be changed on resize
