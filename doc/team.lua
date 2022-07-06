@@ -13,7 +13,7 @@ local team = {}
 -- constructor
 --
 -- --------------------------------------------------------
-function club:new()
+function team:new()
 
 	local o = {
 		keeper = {},
@@ -27,4 +27,4 @@ function club:new()
 end
 
 -- --------------------------------------------------------
-return club
+return team
