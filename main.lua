@@ -9,7 +9,24 @@ local composer = require("composer")
 
 display.setStatusBar(display.HiddenStatusBar)
 
---print(system.DocumentsDirectory)
+DB = {
+	DEBUG = true,
+	new = true,
+	backtrace = true,
+	name = "assets/db/player.db",
+	type = "sqlite3"
+}
+
+local Table = require("orm.model")
+local fields = require("orm.tools.fields")
+
+local Player = Table({
+	__tablename__ = "player",
+	id = fields.PrimaryField(),
+	name = fields.TextField(),
+	country = fields.TextField(),
+	age = fields.IntegerField()
+	})
 
 -- debug true/false
 debugMode = false

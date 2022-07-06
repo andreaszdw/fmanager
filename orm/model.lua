@@ -4,6 +4,7 @@
 
 require('orm.class.global')
 require("orm.tools.func")
+local sqlite3 = require("sqlite3")
 
 local Table = require('orm.class.table')
 
@@ -51,9 +52,11 @@ local sql, _connect
 
 -- Get database by settings
 if DB.type == SQLITE then
-    local luasql = require("luasql.sqlite3")
-    sql = luasql.sqlite3()
-    _connect = sql:connect(DB.name)
+    -- local luasql = require("luasql.sqlite3")
+    -- sql = luasql.sqlite3()
+    --_connect = sql:connect(DB.name)
+    print(DB.type)
+    _connect = sqlite3.open(DB.name)
 
 elseif DB.type == MYSQL then
     local luasql = require("luasql.mysql")
@@ -92,6 +95,7 @@ end
 -- Database settings
 db = {
     -- Database connect instance
+    print(_connect)
     connect = _connect,
 
     -- Execute SQL query
