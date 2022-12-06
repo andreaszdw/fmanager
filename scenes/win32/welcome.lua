@@ -148,6 +148,11 @@ end
 -- --------------------------------------------------------
 function scene:show(event)
 
+	if composer.getSceneName("previous") then
+		local prevScene = composer.getSceneName("previous")
+		composer.removeScene(prevScene)
+	end
+
 	local phase = event.phase
 
 	if (phase == "will") then

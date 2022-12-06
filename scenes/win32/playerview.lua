@@ -82,7 +82,21 @@ function scene:create(event)
 	local dbpath = "assets\\db\\player.db"
 	local path = system.pathForFile(dbpath, system.ResourceDirectory)
 	local db = sqlite3.open(path)
-	docPlayer:loadFromDB(db, 120)
+
+	-- random player
+
+	-- first get the count of rows in table
+	local count = 0
+	for a in db:rows("SELECT * FROM Player") do
+		count = count + 1
+	end
+
+	-- get random player id
+	math.randomseed(os.time())
+	local id = math.random(1, count)
+
+	print(id)
+	docPlayer:loadFromDB(db, id)
 
 	local fmw = fmwidgets:new(self.view)
 
