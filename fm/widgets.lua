@@ -81,7 +81,7 @@ end
 
 -- --------------------------------------------------------
 --
--- progressVies
+-- progressView
 --
 -- --------------------------------------------------------
 function fmwidgets:progressView(left, top, width, value, isAnimated)

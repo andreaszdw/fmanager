@@ -17,7 +17,7 @@ DB = {
 	type = "sqlite3"
 }
 
-local Table = require("orm.model")
+--[[local Table = require("orm.model")
 local fields = require("orm.tools.fields")
 
 local Player = Table({
@@ -26,7 +26,7 @@ local Player = Table({
 	name = fields.TextField(),
 	country = fields.TextField(),
 	age = fields.IntegerField()
-	})
+	})]]--
 
 -- debug true/false
 debugMode = false
