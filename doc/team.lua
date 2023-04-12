@@ -5,25 +5,21 @@
 -- andreaszdw@googlemail.com
 --
 -- --------------------------------------------------------
+local class = require("30log")
 
-local team = {}
+local team = class()
 
 -- --------------------------------------------------------
 --
 -- constructor
 --
 -- --------------------------------------------------------
-function team:new()
+function team:init()
 
-	local o = {
-		keeper = {},
-		defender = {},
-		midfielder = {},
-		attacker = {}
-	}
-	setmetatable(o, self)
-	self.__index = self
-	return o
+	self.keeper = {}
+	self.defender = {}
+	self.midfielder = {}
+	self.attacker = {}
 end
 
 -- --------------------------------------------------------

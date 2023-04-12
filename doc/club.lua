@@ -5,26 +5,22 @@
 -- andreaszdw@googlemail.com
 --
 -- --------------------------------------------------------
+local class = require("30log")
 
-local club = {}
+local club = class()
 
 -- --------------------------------------------------------
 --
 -- constructor
 --
 -- --------------------------------------------------------
-function club:new()
+function club:init()
 
-	local o = {
-		name = name or "FC NRW",
-		stadion = stadion,
-		coach = {},
-		team = {},
-		financial = {}
-	}
-	setmetatable(o, self)
-	self.__index = self
-	return o
+	self.name = name or "FC NRW"
+	self.stadion = stadion
+	self.coach = {}
+	self.team = {}
+	self.financial = {}
 end
 
 -- --------------------------------------------------------

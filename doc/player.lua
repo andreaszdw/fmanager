@@ -5,63 +5,58 @@
 -- andreaszdw@googlemail.com
 --
 -- --------------------------------------------------------
+local class = require("30log")
 local sqlite3 = require("sqlite3")
 
-local player = {}
+local player = class()
 
 -- --------------------------------------------------------
 --
 -- constructor
 --
 -- --------------------------------------------------------
-function player:new()
+function player:init()
 
-	local o = {
-		id = id or nil,
-		name = name or "Egal Egal",
-		age = age or 17, -- this is the normal starting age
-		country = "DE",
-		contract = contract or 3,
-		salary = salary or 125000,
-		imageFile = imageFile or "assets/images/player/BürgerLarsDietrich.png",
-		foot = foot or "b",
-		-- position 
-		-- k = Keeper
-		-- d = Defender
-		-- m = Midfield
-		-- a = Attacker
-		position = position or "m",
-		-- sport skills - this is a percentage system
-		-- max... is the percentage, the player could reach
-		fitness = fitness or 1.0,
-		maxFitness = 1.0, -- this is always 1.0
-		stamina = stamina or 1.0,
-		maxStamina = 1.0, -- this is always 1.0
-		-- football skills - percentage
-		speed = speed or 0.5,
-		maxSpeed = 0.7,
-		passing = passing or 1.0,
-		maxPassing = 1.0,
-		header = header or 1.0,
-		maxHeader = 1.0,
-		shot = shot or 0.90,
-		maxShot = 1.0,
-		tackle = tackle or 0.9,
-		maxTackle = 0.95,
-		tactic = tactic or 0.2,
-		maxTactic = 0.5,
-		experience = 0
-	}
+	self.id = id or nil
+	self.name = name or "Empty Empty"
+	self.age = age or 17 -- this is the normal starting age
+	self.country = "DE"
+	self.contract = contract or 3
+	self.salary = salary or 125000
+	self.imageFile = imageFile or "assets/images/player/BürgerLarsDietrich.png"
+	self.foot = foot or "b"
+	-- position 
+	-- k = Keeper
+	-- d = Defender
+	-- m = Midfield
+	-- a = Attacker
+	self.position = position or "m"
+	-- sport skills - this is a percentage system
+	-- max... is the percentage, the player could reach
+	self.fitness = fitness or 1.0
+	self.maxFitness = 1.0 -- this is always 1.0
+	self.stamina = stamina or 1.0
+	self.maxStamina = 1.0 -- this is always 1.0
+	-- football skills - percentage
+	self.speed = speed or 0.5
+	self.maxSpeed = 0.7
+	self.passing = passing or 1.0
+	self.maxPassing = 1.0
+	self.header = header or 1.0
+	self.maxHeader = 1.0
+	self.shot = shot or 0.90
+	self.maxShot = 1.0
+	self.tackle = tackle or 0.9
+	self.maxTackle = 0.95
+	self.tactic = tactic or 0.2
+	self.maxTactic = 0.5
+	self.experience = 0
 	
 	-- calc potential and rating
-	tmpMax = o.maxFitness + o.maxStamina + o.maxSpeed + o.maxPassing + o.maxHeader + o.maxShot + o.maxTackle + o.maxTactic
-	tmpValues = o.fitness + o.stamina + o.speed + o.passing + o.header + o.shot + o.tackle + o.tactic
-	o.potential = tmpMax / 8
-	o.rating = tmpValues / 8
-
-	setmetatable(o, self)
-	self.__index = self
-	return o
+	tmpMax = self.maxFitness + self.maxStamina + self.maxSpeed + self.maxPassing + self.maxHeader + self.maxShot + self.maxTackle + self.maxTactic
+	tmpValues = self.fitness + self.stamina + self.speed + self.passing + self.header + self.shot + self.tackle + self.tactic
+	self.potential = tmpMax / 8
+	self.rating = tmpValues / 8
 end
 
 -- --------------------------------------------------------
