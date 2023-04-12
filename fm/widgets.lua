@@ -6,35 +6,31 @@
 --
 -- --------------------------------------------------------
 
+local class = require("30log")
+
 local button = require("fm.button")
 local pbutton = require("fm.pbutton")
 local singleText = require("fm.singletext")
 local progressView = require("fm.progressview")
 local tableView = require("fm.table")
 
-local fmwidgets = {}
+local fmwidgets = class()
 
 -- --------------------------------------------------------
 --
 -- constructor
 -- 
 -- --------------------------------------------------------
-function fmwidgets:new(view, theme)
+function fmwidgets:init(view, theme)
 
 	local tmpTheme = theme or "fm.theme"
-	local o = {
-		view = view,
-		viewWidth = display.contentWidth,
-		viewHeight = display.contentHeight,
-		viewCenterX = display.contentWidth * 0.5,
-		viewCenterY = display.contentHeight * 0.5,
-		theme = require(tmpTheme),
-		childs = {}
-	}
-
-	setmetatable(o, self)
-	self.__index = self
-	return o
+	self.view = view
+	self.viewWidth = display.contentWidth
+	self.viewHeight = display.contentHeight
+	self.viewCenterX = display.contentWidth * 0.5
+	self.viewCenterY = display.contentHeight * 0.5
+	self.theme = require(tmpTheme)
+	self.childs = {}
 end
 
 -- --------------------------------------------------------
@@ -52,7 +48,7 @@ end
 --
 -- --------------------------------------------------------
 function fmwidgets:button(label, onEvent, x, y, width, height)
-	local child = button:new(self, label, onEvent, x, y, width, height)
+	local child = button(self, label, onEvent, x, y, width, height)
 	table.insert(self.childs, child)
 	return child
 end
@@ -63,7 +59,7 @@ end
 --
 -- --------------------------------------------------------
 function fmwidgets:pbutton(label, onEvent, x, y, width, height)
-	local child = pbutton:new(self, label, onEvent, x, y, width, height)
+	local child = pbutton(self, label, onEvent, x, y, width, height)
 	table.insert(self.childs, child)
 	return child
 end

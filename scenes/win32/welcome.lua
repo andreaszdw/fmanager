@@ -116,7 +116,7 @@ end
 -- --------------------------------------------------------
 function scene:create(event)
 	
-	local fmw = fmwidgets:new(self.view)
+	local fmw = fmwidgets(self.view)
 
 	fmw:stdBackground()
 

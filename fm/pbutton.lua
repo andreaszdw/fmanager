@@ -5,16 +5,17 @@
 -- andreaszdw@googlemail.com
 --
 -- --------------------------------------------------------
+local class = require("30log")
 local widget = require("widget")
 
-local pbutton = {}
+local pbutton = class()
 
 -- --------------------------------------------------------
 --
 -- constructor
 --
 -- --------------------------------------------------------
-function pbutton:new(parent, label, eventFunction, x, y, width, height)
+function pbutton:init(parent, label, eventFunction, x, y, width, height)
 
 	-- this is the function for the button,
 	-- it will call the function for the given function
@@ -24,44 +25,41 @@ function pbutton:new(parent, label, eventFunction, x, y, width, height)
 		end
 	end
 
-	local o = {
-		parent = parent,
-		theme = parent.theme,
-		label = label,
-		x = x or 0,
-		y = y or 0,
-		width = width or parent.theme.button.width,
-		height = height or parent.theme.button.height
-	}
+	self.parent = parent
+	self.theme = parent.theme
+	self.label = label
+	self.x = x or 0
+	self.y = y or 0
+	self.width = width or parent.theme.button.width
+	self.height = height or parent.theme.button.height
 
 	pgx = parent.theme.button.pButtonX
 
-	verts = {o.x + pgx, o.y - o.height, o.x + pgx + o.width, o.y - o.height, o.x + o.width, o.y, o.x, o.y}
+	verts = {
+		self.x + pgx, self.y - self.height,
+		self.x + pgx + self.width, self.y - self.height,
+		self.x + self.width, self.y, self.x, self.y}
 
-	o.button = widget.newButton(
+	self.button = widget.newButton(
 	{
-		label = o.label,
+		label = self.label,
 		onEvent = onEvent,
 		emboss = false,
 		shape = "polygon",
 		vertices = verts,
-		width = o.width,
-		height = o.height,
-		labelColor = o.theme.button.labelColor,
-		fillColor = o.theme.button.fillColor,
-		strokeColor = o.theme.button.strokeColor,
-		strokeWidth = o.theme.button.strokeWidth,
-		font = o.theme.font
+		width = self.width,
+		height = self.height,
+		labelColor = self.theme.button.labelColor,
+		fillColor = self.theme.button.fillColor,
+		strokeColor = self.theme.button.strokeColor,
+		strokeWidth = self.theme.button.strokeWidth,
+		font = self.theme.font
 	})
 
-	o.button.x = x 
-	o.button.y = y 
+	self.button.x = x 
+	self.button.y = y 
 
-	parent.view:insert(o.button)
-
-	setmetatable(o, self)
-	self.__index = self
-	return o
+	parent.view:insert(self.button)
 end
 
 -- --------------------------------------------------------
