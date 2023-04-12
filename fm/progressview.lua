@@ -5,35 +5,34 @@
 -- andreaszdw@googlemail.com
 --
 -- --------------------------------------------------------
+local class = require("30log")
 local widget = require("widget")
 
-local progress = {}
+local progress = class()
 
 -- --------------------------------------------------------
 --
 -- constructor
 --
 -- --------------------------------------------------------
-function progress:new(parent, left, top, width, value, isAnimated)
+function progress:init(parent, left, top, width, value, isAnimated)
 
 	local theme = require("fm.theme")
 
-	local o = {
-		parent = parent,
-		theme = parent.theme or theme,
-		label = label,
-		left = left or 0,
-		top =  top or 0,
-		width = width or 100,
-		value = value or 0,
-		isAnimated = isAnimated or false
-	}
+	self.parent = parent
+	self.theme = parent.theme or theme
+	self.label = label
+	self.left = left or 0
+	self.top =  top or 0
+	self.width = width or 100
+	self.value = value or 0
+	self.isAnimated = isAnimated or false
 
 	-- this is shorter to type
-	local t = o.theme.progressView
+	local t = self.theme.progressView
 	local sheet = graphics.newImageSheet(t.sheet, t.options)
 
-	o.progressView = widget.newProgressView(
+	self.progressView = widget.newProgressView(
 	{
 		sheet = sheet,
         fillOuterLeftFrame = t.olf,
@@ -50,17 +49,12 @@ function progress:new(parent, left, top, width, value, isAnimated)
         top = top,
         width = width,
         isAnimated = isAnimated
-	}
-	)
+	})
 
 	local view = parent.view or parent
 
-	o.progressView:setProgress(o.value)
-	view:insert(o.progressView)
-
-	setmetatable(o, self)
-	self.__index = self
-	return o
+	self.progressView:setProgress(self.value)
+	view:insert(self.progressView)
 end
 
 -- --------------------------------------------------------

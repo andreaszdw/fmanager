@@ -70,7 +70,7 @@ end
 --
 -- --------------------------------------------------------
 function fmwidgets:singleText(label, x, y, fontSize, font)
-	local child = singleText:new(self, label, x, y, fontSize, font)
+	local child = singleText(self, label, x, y, fontSize, font)
 	table.insert(self.childs, child)
 	return child
 end
@@ -81,7 +81,7 @@ end
 --
 -- --------------------------------------------------------
 function fmwidgets:progressView(left, top, width, value, isAnimated)
-	local child = progressView:new(self, left, top, width, value, isAnimated)
+	local child = progressView(self, left, top, width, value, isAnimated)
 	table.insert(self.childs, child)
 	return child
 end

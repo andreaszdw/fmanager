@@ -6,49 +6,43 @@
 -- andreaszdw@googlemail.com
 --
 -- --------------------------------------------------------
+local class = require("30log")
 local widget = require("widget")
 
-local table = {}
-
+local table = class()
 
 -- --------------------------------------------------------
 --
 -- constructor
 --
 -- --------------------------------------------------------
-function table:new(parent, left, top, width, height, rowRenderer, rowHeight, isLocked)
-	local o = {
-		parent = parent,
-		theme = parent.theme,
-		left = left or 0,
-		top = top or 0,
-		width = width or 0,
-		height = height or 0,
-		rowRenderer = rowRenderer,
-		isLocked = isLocked or true,
-		rowHeight = rowHeight or 35
-	}
+function table:init(parent, left, top, width, height, rowRenderer, rowHeight, isLocked)
+	self.parent = parent
+	self.theme = parent.theme
+	self.left = left or 0
+	self.top = top or 0
+	self.width = width or 0
+	self.height = height or 0
+	self.rowRenderer = rowRenderer
+	self.isLocked = isLocked or true
+	self.rowHeight = rowHeight or 35
 
-	o.tableView = widget.newTableView(
+	self.tableView = widget.newTableView(
 	{
-		left = o.left,
-		top = o.top,
-		height = o.height,
-		width = o.width,
-		onRowRender = o.rowRenderer,
-		isLocked = o.isLocked,
-		backgroundColor = {unpack(o.theme.bg)},
+		left = self.left,
+		top = self.top,
+		height = self.height,
+		width = self.width,
+		onRowRender = self.rowRenderer,
+		isLocked = self.isLocked,
+		backgroundColor = {unpack(self.theme.bg)},
 		noLines = true,
 		listener = scrollListener
 	})
 
-	o.sumHeight = 0
+	self.sumHeight = 0
 
-	o.parent.view:insert(o.tableView)
-
-	setmetatable(o, self)
-	self.__index = self
-	return o
+	self.parent.view:insert(self.tableView)
 end
 
 -- --------------------------------------------------------

@@ -6,37 +6,33 @@
 -- andreaszdw@googlemail.com
 --
 -- --------------------------------------------------------
+local class = require("30log")
 local widget = require("widget")
 
-local singleText = {}
+local singleText = class()
 
 -- --------------------------------------------------------
 --
 -- constructor
 --
 -- --------------------------------------------------------
-function singleText:new(parent, label, x, y, fontSize, font)
+function singleText:init(parent, label, x, y, fontSize, font)
 
 	local theme = require("fm.theme")
 
-	local o = {
-		parent = parent,
-		theme = parent.theme or theme,
-		label = label or " ",
-		x = x or 0,
-		y = y or 0,
-		fontSize = fontSize or 14,
-		font = font or theme.font
-	}
+	self.parent = parent
+	self.theme = parent.theme or theme
+	self.label = label or " "
+	self.x = x or 0
+	self.y = y or 0
+	self.fontSize = fontSize or 14
+	self.font = font or theme.font
 
 	local view = parent.view or parent 
 
-	o.text = display.newText(view, o.label, o.x, o.y, o.font, o.fontSize)
-	o.text:setFillColor(unpack(o.theme.label))
-
-	setmetatable(o, self)
-	self.__index = self
-	return o
+	self.text = display.newText(
+		view, self.label, self.x, self.y, self.font, self.fontSize)
+	self.text:setFillColor(unpack(self.theme.label))
 end
 -- --------------------------------------------------------
 --
