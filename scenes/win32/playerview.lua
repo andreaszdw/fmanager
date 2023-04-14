@@ -79,7 +79,7 @@ end
 -- --------------------------------------------------------
 function scene:create(event)
 	local docPlayer = player:new()
-	local dbpath = "assets\\db\\player.db"
+	local dbpath = DB.name --"assets\\db\\player.db"
 	local path = system.pathForFile(dbpath, system.ResourceDirectory)
 	local db = sqlite3.open(path)
 

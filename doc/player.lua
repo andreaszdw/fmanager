@@ -112,6 +112,7 @@ function player:loadFromDB(db, id)
         self.potential = values[26]
         self.rating = values[17]
         self.experience = values[28]
+        return sqlite3.OK
 	end
 
 	db:exec(sql, readPlayer)
