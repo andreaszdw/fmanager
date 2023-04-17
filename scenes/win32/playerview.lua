@@ -107,19 +107,21 @@ function scene:create(event)
 	local gap = 10
 
 	-- this is the rect for the view
-	local bgRect = display.newRect(self.view, 640, 360, 1280, 720)
+	local bgRect = display.newRect(self.view, 0, 0, 1280, 720)
 	bgRect.strokeWidth = 2
 	bgRect:setStrokeColor(unpack(theme.stroke))
-	bgRect:setFillColor(unpack(theme.bg), 0)
+	bgRect:setFillColor(unpack(theme.panel), 0)
+	bgRect.anchorX = 0
+	bgRect.anchorY = 0
 
 	-- player image and rect
 	-- the rect 
 	local imageGroup = display.newGroup()
-	imageGroup.x = 300
+	imageGroup.x = 200
 	imageGroup.y = 10
-	local playerImage = display.newRect(imageGroup, 0, 0, 970, 700)
+	local playerImage = display.newRect(imageGroup, 0, 0, 1070, 700)
 	playerImage.strokeWidth = 2
-	playerImage:setFillColor(unpack(theme.imageBg))
+	playerImage:setFillColor(unpack(theme.panel))
 	playerImage:setStrokeColor(unpack(theme.stroke))
 	playerImage.anchorX = 0
 	playerImage.anchorY = 0
@@ -213,7 +215,7 @@ function scene:create(event)
 		footValue = strings.both 
 	end
 	-- new table
-	local dataTable = fmw:table(imageGroup.x + 1, 300, 298, 240, dataRender, 40)
+	local dataTable = fmw:table(imageGroup.x + 5, 300, 298, 240, dataRender, 40)
 
 	-- insert rows
 	dataTable:insertRow({title = strings.name, value = docPlayer.name})
@@ -287,7 +289,7 @@ function scene:create(event)
 	end
 
 	-- new table
-	local skillTable = fmw:table(imageGroup.x + 370, 11, 460, 480, skillRender, 40)
+	local skillTable = fmw:table(imageGroup.x + 370, 11, 660, 580, skillRender, 40)
 
 	-- insert rows
 	skillTable:insertRow({header = strings.skills})

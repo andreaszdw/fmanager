@@ -6,6 +6,7 @@ local e = {255/255, 255/255, 255/255}
 
 local theme = {
 	bg = a,
+	panel = b,
 	fill = a,
 	label = d,
 	labelWhite = e,

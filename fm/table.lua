@@ -35,11 +35,10 @@ function table:init(parent, left, top, width, height, rowRenderer, rowHeight, is
 		width = self.width,
 		onRowRender = self.rowRenderer,
 		isLocked = self.isLocked,
-		backgroundColor = {unpack(self.theme.bg)},
+		backgroundColor = {unpack(self.theme.panel)},
 		noLines = true,
 		listener = scrollListener
 	})
-
 	self.sumHeight = 0
 
 	self.parent.view:insert(self.tableView)
