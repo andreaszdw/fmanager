@@ -115,7 +115,6 @@ end
 
 -- --------------------------------------------------------
 function scene:create(event)
-	
 	local fmw = fmwidgets(self.view)
 
 	fmw:stdBackground()
@@ -139,7 +138,7 @@ function scene:create(event)
 	local quitButton = fmw:pbutton(strings.quit, quitApp)
 	local tmpW = quitButton:getWidth()
 	local tmpH = quitButton:getHeight()
-	quitButton:setPosition(1280 - tmpW/2 - gap, 720 - tmpH/2 - gap)
+	quitButton:setPosition(1280 - tmpW/2 - gap, 720 - tmpH/2 - gap) 
 
 	-- put the view in the local sceneView, so it can be changed on resize
 	sceneView = self.view
@@ -147,7 +146,6 @@ end
 
 -- --------------------------------------------------------
 function scene:show(event)
-
 	if composer.getSceneName("previous") then
 		local prevScene = composer.getSceneName("previous")
 		composer.removeScene(prevScene)

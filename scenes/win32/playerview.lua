@@ -117,7 +117,6 @@ function scene:create(event)
 
 	local pathFlag = "assets/images/flags/"..docPlayer.country.."@3x.png"
 	flagImage = display.newImage(imagePanel.view, pathFlag)
-	print(imagePanel.x, imagePanel.y)
 	flagImage.x = 46
 	flagImage.y = 36
 

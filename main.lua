@@ -13,7 +13,7 @@ DB = {
 	DEBUG = true,
 	new = true,
 	backtrace = true,
-	name = "assets/db/player.db",
+	name = "assets/db/player.db", 
 	type = "sqlite3"
 }
 

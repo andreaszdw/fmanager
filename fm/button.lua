@@ -5,17 +5,19 @@
 -- andreaszdw@googlemail.com
 --
 -- --------------------------------------------------------
-local class = require("30log")
+local BaseWidget = require("basewidget")
 local widget = require("widget")
 
-local button = class()
+local Button = BaseWidget:extend()
 
 -- --------------------------------------------------------
 --
 -- constructor
 --
 -- --------------------------------------------------------
-function button:init(parent, label, eventFunction, x, y, width, height)
+function Button:init(parent, label, eventFunction, x, y, width, height)
+
+	Button.super.init(self, parent, x, y, width, height)
 
 	-- this is the function for the button,
 	-- it will call the function for the given function
@@ -25,11 +27,7 @@ function button:init(parent, label, eventFunction, x, y, width, height)
 		end
 	end
 
-	self.parent = parent
-	self.theme = parent.theme
 	self.label = label
-	self.x = x or 0
-	self.y = y or 0
 	self.width = width or parent.theme.button.width
 	self.height = height or parent.theme.button.height
 
@@ -53,7 +51,7 @@ function button:init(parent, label, eventFunction, x, y, width, height)
 	self.button.x = x 
 	self.button.y = y 
 
-	parent.view:insert(self.button)
+	self.view:insert(self.button)
 end
 
 -- --------------------------------------------------------
@@ -61,7 +59,7 @@ end
 -- getHeight
 --
 -- --------------------------------------------------------
-function button:getHeight() 
+function Button:getHeight() 
 	return self.button.height 
 end
 
@@ -70,7 +68,7 @@ end
 -- getWidth
 --
 -- --------------------------------------------------------
-function button:getWidth() 
+function Button:getWidth() 
 	return self.button.width 
 end
 
@@ -79,10 +77,10 @@ end
 -- set position
 --
 -- --------------------------------------------------------
-function button:setPosition(x, y)
+function Button:setPosition(x, y)
 	self.button.x = x 
 	self.button.y = y 
 end
 
 -- --------------------------------------------------------
-return button
+return Button

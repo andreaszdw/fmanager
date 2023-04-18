@@ -1,25 +1,23 @@
 -- --------------------------------------------------------
 --
--- panel.lua
+-- basewidget.lua
 --
 -- andreaszdw@googlemail.com
 --
 -- --------------------------------------------------------
-local BaseWidget = require("basewidget")
+local Class = require("30log")
 local widget = require("widget")
 
-local Panel = BaseWidget:extend()
+local Base = Class()
 
 -- --------------------------------------------------------
 --
 -- constructor
 --
 -- --------------------------------------------------------
-function Panel:init(parent, x, y, width, height)
-
-	Panel.super.init(self, parent, x, y, width, height)
-
-	--[[self.parent = parent
+function Base:init(parent, x, y, width, height)
+	print(x, y)
+	self.parent = parent
 	self.theme = parent.theme
 	self.view = display.newGroup()
 	self.view.x = x
@@ -27,17 +25,9 @@ function Panel:init(parent, x, y, width, height)
 	self.x = x or 0
 	self.y = y or 0
 	self.width = width or 10
-	self.height = height or 10]]--
+	self.height = height or 10
 
-	local bgRect = display.newRect(self.view, 0, 0, width, height)
-	bgRect.strokeWidth = 2
-	bgRect:setStrokeColor(unpack(self.theme.stroke))
-	bgRect:setFillColor(unpack(self.theme.bg))
-	bgRect.anchorX = 0
-	bgRect.anchorY = 0
-
-	--self.parent.view:insert(self.view)
-
+	self.parent.view:insert(self.view)
 end
 
 -- --------------------------------------------------------
@@ -45,7 +35,7 @@ end
 -- getView
 --
 -- --------------------------------------------------------
-function Panel:getView()
+function Base:getView()
 	return self.view
 end
 
@@ -54,7 +44,7 @@ end
 -- getHeight
 --
 -- --------------------------------------------------------
-function Panel:getHeight() 
+function Base:getHeight() 
 	return self.height 
 end
 
@@ -63,7 +53,7 @@ end
 -- getWidth
 --
 -- --------------------------------------------------------
-function Panel:getWidth() 
+function Base:getWidth() 
 	return self.width 
 end
 
@@ -72,10 +62,10 @@ end
 -- set position
 --
 -- --------------------------------------------------------
-function Panel:setPosition(x, y)
+function Base:setPosition(x, y)
 	self.x = x 
 	self.y = y 
 end
 
 -- --------------------------------------------------------
-return Panel
+return Base

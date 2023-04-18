@@ -5,31 +5,30 @@
 -- andreaszdw@googlemail.com
 --
 -- --------------------------------------------------------
-local class = require("30log")
+local BaseWidget = require("basewidget")
 local widget = require("widget")
 
-local pbutton = class()
+local PButton = BaseWidget:extend()
 
 -- --------------------------------------------------------
 --
 -- constructor
 --
 -- --------------------------------------------------------
-function pbutton:init(parent, label, eventFunction, x, y, width, height)
+function PButton:init(parent, label, eventFunction, x, y, width, height)
+	print(x, y)
+	PButton.super.init(self, parent, x, y, width, height)
 
 	-- this is the function for the button,
 	-- it will call the function for the given function
 	local function onEvent(event)
 		if("ended" == event.phase) then 
+		print("ende")
 			eventFunction(event)
 		end
 	end
 
-	self.parent = parent
-	self.theme = parent.theme
 	self.label = label
-	self.x = x or 0
-	self.y = y or 0
 	self.width = width or parent.theme.button.width
 	self.height = height or parent.theme.button.height
 
@@ -59,7 +58,7 @@ function pbutton:init(parent, label, eventFunction, x, y, width, height)
 	self.button.x = x 
 	self.button.y = y 
 
-	parent.view:insert(self.button)
+	self.view:insert(self.button)
 end
 
 -- --------------------------------------------------------
@@ -67,7 +66,7 @@ end
 -- getHeight
 --
 -- --------------------------------------------------------
-function pbutton:getHeight() 
+function PButton:getHeight() 
 	return self.button.height 
 end
 
@@ -76,7 +75,7 @@ end
 -- getWidth
 --
 -- --------------------------------------------------------
-function pbutton:getWidth() 
+function PButton:getWidth() 
 	return self.button.width 
 end
 
@@ -85,10 +84,10 @@ end
 -- set position
 --
 -- --------------------------------------------------------
-function pbutton:setPosition(x, y)
+function PButton:setPosition(x, y)
 	self.button.x = x 
 	self.button.y = y 
 end
 
 -- --------------------------------------------------------
-return pbutton
+return PButton

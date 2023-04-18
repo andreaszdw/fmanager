@@ -5,9 +5,9 @@
 -- andreaszdw@googlemail.com
 --
 -- --------------------------------------------------------
-
 local class = require("30log")
 
+local BaseWidget = require("fm.basewidget")
 local panel = require("fm.panel")
 local button = require("fm.button")
 local pbutton = require("fm.pbutton")
@@ -23,7 +23,6 @@ local fmwidgets = class()
 -- 
 -- --------------------------------------------------------
 function fmwidgets:init(view, theme)
-
 	local tmpTheme = theme or "fm.theme"
 	self.view = display.newGroup()
 	self.viewWidth = display.contentWidth
@@ -74,7 +73,7 @@ end
 function fmwidgets:pbutton(label, onEvent, x, y, width, height)
 	local child = pbutton(self, label, onEvent, x, y, width, height)
 	table.insert(self.childs, child)
-	return child
+	return child 
 end
 
 -- --------------------------------------------------------
