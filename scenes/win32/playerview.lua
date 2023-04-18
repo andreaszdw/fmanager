@@ -106,30 +106,15 @@ function scene:create(event)
 
 	local gap = 10
 
-	-- this is the rect for the view
-	local bgRect = display.newRect(self.view, 0, 0, 1280, 720)
-	bgRect.strokeWidth = 2
-	bgRect:setStrokeColor(unpack(theme.stroke))
-	bgRect:setFillColor(unpack(theme.panel), 0)
-	bgRect.anchorX = 0
-	bgRect.anchorY = 0
-
 	-- player image and rect
 	-- the rect 
 	local imageGroup = display.newGroup()
 	imageGroup.x = 200
 	imageGroup.y = 10
-	local playerImage = display.newRect(imageGroup, 0, 0, 1070, 700)
-	playerImage.strokeWidth = 2
-	playerImage:setFillColor(unpack(theme.panel))
-	playerImage:setStrokeColor(unpack(theme.stroke))
-	playerImage.anchorX = 0
-	playerImage.anchorY = 0
+
+	local imagePanel = fmw:panel(200, 10, 1070, 700)
 
 	-- the image
-	--local image = display.newImage(self.view, docPlayer.imageFile)
-	--image.x = 160
-	--image.y = 150
 	local face = face:new(imageGroup, 150, 150, 1)
 	face:loadFromDB(db, docPlayer.image_id)
 	face:draw()

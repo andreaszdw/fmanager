@@ -8,6 +8,7 @@
 
 local class = require("30log")
 
+local panel = require("fm.panel")
 local button = require("fm.button")
 local pbutton = require("fm.pbutton")
 local singleText = require("fm.singletext")
@@ -40,6 +41,16 @@ end
 -- --------------------------------------------------------
 function fmwidgets:getTheme()
 	return self.theme 
+end
+
+-- --------------------------------------------------------
+--
+-- panel
+--
+-- --------------------------------------------------------
+function fmwidgets:panel(x, y, width, height)
+	local child = panel(self, x, y, width, height)
+	table.insert(self.childs, child)
 end
 
 -- --------------------------------------------------------
@@ -88,7 +99,7 @@ end
 
 -- --------------------------------------------------------
 --
--- grid
+-- table
 -- 
 -- --------------------------------------------------------
 function fmwidgets:table(left, top, width, height, rowRenderer, rowHeight, isLocked)
@@ -107,6 +118,13 @@ function fmwidgets:stdBackground()
 	local bgImage = display.newImage(self.view, self.theme.bgImage)
 	bgImage.x = self.viewCenterX
 	bgImage.y = self.viewCenterY
+
+	local bgRect = display.newRect(self.view, 0, 0, 1280, 720)
+	bgRect.strokeWidth = 2
+	bgRect:setStrokeColor(unpack(self.theme.stroke))
+	bgRect:setFillColor(unpack(self.theme.panel), 0)
+	bgRect.anchorX = 0
+	bgRect.anchorY = 0
 end
 
 -- --------------------------------------------------------
