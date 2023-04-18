@@ -35,7 +35,7 @@ function table:init(parent, left, top, width, height, rowRenderer, rowHeight, is
 		width = self.width,
 		onRowRender = self.rowRenderer,
 		isLocked = self.isLocked,
-		backgroundColor = {unpack(self.theme.panel)},
+		backgroundColor = {unpack(self.theme.bg)},
 		noLines = true,
 		listener = scrollListener
 	})

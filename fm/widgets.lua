@@ -25,13 +25,14 @@ local fmwidgets = class()
 function fmwidgets:init(view, theme)
 
 	local tmpTheme = theme or "fm.theme"
-	self.view = view
+	self.view = display.newGroup()
 	self.viewWidth = display.contentWidth
 	self.viewHeight = display.contentHeight
 	self.viewCenterX = display.contentWidth * 0.5
 	self.viewCenterY = display.contentHeight * 0.5
 	self.theme = require(tmpTheme)
 	self.childs = {}
+	view:insert(self.view)
 end
 
 -- --------------------------------------------------------
@@ -51,6 +52,7 @@ end
 function fmwidgets:panel(x, y, width, height)
 	local child = panel(self, x, y, width, height)
 	table.insert(self.childs, child)
+	return child
 end
 
 -- --------------------------------------------------------
@@ -122,7 +124,7 @@ function fmwidgets:stdBackground()
 	local bgRect = display.newRect(self.view, 0, 0, 1280, 720)
 	bgRect.strokeWidth = 2
 	bgRect:setStrokeColor(unpack(self.theme.stroke))
-	bgRect:setFillColor(unpack(self.theme.panel), 0)
+	bgRect:setFillColor(unpack(self.theme.bg), 0)
 	bgRect.anchorX = 0
 	bgRect.anchorY = 0
 end

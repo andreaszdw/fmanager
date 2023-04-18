@@ -6,51 +6,47 @@
 --
 -- --------------------------------------------------------
 local sqlite3 = require("sqlite3")
+local class = require("30log")
 
-local face = {}
+local face = class()
 
 -- --------------------------------------------------------
 --
 -- constructor
 --
 -- --------------------------------------------------------
-function face:new(parent, x, y, scale)
+function face:init(parent, x, y, scale)
+	self.parent = parent
+	self.x = x or 0
+	self.y = y or 0
+	self.scale = scale or 1
+	self.id = id
+	self.head = "tint4_head.png"
+	self.hair = "brown2Man1.png"
+	self.hairX = 2
+	self.hairY = 49
+	self.brows = "brown2Brow2.png"
+	self.browsLX = -32
+	self.browsLY = 34
+	self.browsRX = 33
+	self.browsRY = 31
+	self.eyes = "eyePine_small.png"
+	self.eyesLX = -34
+	self.eyesLY = 9
+	self.eyesRX = 31
+	self.eyesRY = 14
+	self.nose = "tint4Nose3.png"
+	self.noseX = -3
+	self.noseY = -11
+	self.mouth = "mouth_teethUpper.png"
+	self.mouthX = 3
+	self.mouthY = -44
+	self.group = display.newGroup()
+	self.group.x = parent.x
+	self.group.y = parent.y
+	self.path = "assets\\images\\faces\\"
 
-	local o = {
-		parent = parent,
-		x = x or 0,
-		y = y or 0,
-		scale = scale or 1,
-	    id = id,
-        head = "tint4_head.png",
-        hair = "brown2Man1.png",
-        hairX = 2,
-        hairY = 49,
-        brows = "brown2Brow2.png",
-        browsLX = -32,
-        browsLY = 34,
-        browsRX = 33,
-        browsRY = 31,
-        eyes = "eyePine_small.png",
-        eyesLX = -34,
-        eyesLY = 9,
-        eyesRX = 31,
-        eyesRY = 14,
-        nose = "tint4Nose3.png",
-        noseX = -3,
-        noseY = -11,
-        mouth = "mouth_teethUpper.png",
-        mouthX = 3,
-        mouthY = -44,
-        group = display.newGroup(),
-        path = "assets\\images\\faces\\"
-	}
-
-	parent:insert(o.group)
-
-	setmetatable(o, self)
-	self.__index = self
-	return o
+	self.parent.view:insert(self.group)
 end
 
 -- --------------------------------------------------------

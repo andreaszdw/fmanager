@@ -95,7 +95,6 @@ function scene:create(event)
 	math.randomseed(os.time())
 	local id = math.random(1, count)
 
-	print(id)
 	docPlayer:loadFromDB(db, id)
 
 	local fmw = fmwidgets:new(self.view)
@@ -106,21 +105,19 @@ function scene:create(event)
 
 	local gap = 10
 
-	-- player image and rect
-	-- the rect 
-	local imageGroup = display.newGroup()
-	imageGroup.x = 200
-	imageGroup.y = 10
+	-- player image 
 
+	-- new panel
 	local imagePanel = fmw:panel(200, 10, 1070, 700)
 
 	-- the image
-	local face = face:new(imageGroup, 150, 150, 1)
+	local face = face:new(imagePanel, 150, 150, 1)
 	face:loadFromDB(db, docPlayer.image_id)
 	face:draw()
 
 	local pathFlag = "assets/images/flags/"..docPlayer.country.."@3x.png"
-	flagImage = display.newImage(imageGroup, pathFlag)
+	flagImage = display.newImage(imagePanel.view, pathFlag)
+	print(imagePanel.x, imagePanel.y)
 	flagImage.x = 46
 	flagImage.y = 36
 
@@ -132,17 +129,14 @@ function scene:create(event)
 	for i=1, potential do
 		local star
 		if rating >= i then 
-			star = display.newImage(imageGroup, theme.fullStar)
+			star = display.newImage(imagePanel.view, theme.fullStar)
 		else  
-			star = display.newImage(imageGroup, theme.emptyStar)
+			star = display.newImage(imagePanel.view, theme.emptyStar)
 		end		
 		star.x = starX
 		star.y = starY
 		starX = starX + 28
-	end
-
-	self.view:insert(imageGroup)
-	
+	end	
 
 	-- here comes tableView with player info
 	-- name, age, contract, salary
@@ -200,7 +194,7 @@ function scene:create(event)
 		footValue = strings.both 
 	end
 	-- new table
-	local dataTable = fmw:table(imageGroup.x + 5, 300, 298, 240, dataRender, 40)
+	local dataTable = fmw:table(imagePanel.x + 5, 300, 298, 240, dataRender, 40)
 
 	-- insert rows
 	dataTable:insertRow({title = strings.name, value = docPlayer.name})
@@ -274,7 +268,7 @@ function scene:create(event)
 	end
 
 	-- new table
-	local skillTable = fmw:table(imageGroup.x + 370, 11, 660, 580, skillRender, 40)
+	local skillTable = fmw:table(imagePanel.x + 370, 11, 660, 580, skillRender, 40)
 
 	-- insert rows
 	skillTable:insertRow({header = strings.skills})
