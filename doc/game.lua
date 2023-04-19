@@ -1,27 +1,31 @@
 -- --------------------------------------------------------
 --
--- club.lua
+-- game.lua
 --
 -- andreaszdw@googlemail.com
 --
+-- this class holds the data for the game, club,
+-- etc....
+-- 
 -- --------------------------------------------------------
 local Class = require("30log")
 
-local Club = Class()
+local Game = Class()
 
 -- --------------------------------------------------------
 --
 -- constructor
 --
 -- --------------------------------------------------------
-function Club:init()
-
-	self.name = name or "FC NRW"
-	self.stadion = stadion
-	self.coach = {}
-	self.team = {}
-	self.financial = {}
+function Game:init()
+	self.playerName = ""
+	self.club = ""
+	self.trainerTeam = ""
+	self.team = ""
+	self.stadium = ""
+	self.fiancial = ""
+	self.trainingGround = ""
 end
 
 -- --------------------------------------------------------
-return Club
+return Game
