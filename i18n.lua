@@ -37,7 +37,8 @@ local de = {
 	experience = "Erfahrung",
 	load = "Laden",
 	selectFile = "Datei wählen",
-	singleFilterDescription = "Spielstand"
+	singleFilterDescription = "Spielstand",
+	playerPool = "Player Pool"
 }
 
 local default = {
@@ -79,7 +80,8 @@ local default = {
 	experience = "Experience",
 	load = "Load",
 	selectFile = "Select File",
-	singleFilterDescription = "Save game file"
+	singleFilterDescription = "Save game file",
+	playerPool = "Player Pool"
 }
 
 local i18n = {}

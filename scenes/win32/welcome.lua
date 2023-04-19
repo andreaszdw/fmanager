@@ -98,6 +98,15 @@ end
 
 -- --------------------------------------------------------
 --
+-- poolview
+-- 
+-- --------------------------------------------------------
+local function goPlayerPool(event)
+	composer.gotoScene("scenes.win32.playerpool")
+end
+
+-- --------------------------------------------------------
+--
 -- quitApp 
 --
 -- --------------------------------------------------------
@@ -134,6 +143,9 @@ function scene:create(event)
 
 	local goTeamViewButton = fmw:pbutton(strings.teamView, goTeamView, 640, nextElement)
 	nextElement = nextElement + goTeamViewButton:getHeight() + gap
+
+	local playerPoolButton = fmw:button(strings.playerPool, goPlayerPool, 640, nextElement)
+	nextElement = nextElement + playerPoolButton:getHeight() + gap
 	
 	local quitButton = fmw:pbutton(strings.quit, quitApp)
 	local tmpW = quitButton:getWidth()
