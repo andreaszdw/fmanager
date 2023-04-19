@@ -81,9 +81,9 @@ function player:loadFromDB(db, id)
 	local sql = [[SELECT * FROM Player WHERE id=]]..id..[[;]]
 
 	function readPlayer(udata, cols, values, names)
-		--[[for i=1,cols do 
+		for i=1, cols do 
 			print(i, names[i], values[i]) 
-		end]]--
+		end
 
 		self.id = values[1]
         self.name = values[2]

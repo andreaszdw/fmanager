@@ -14,7 +14,7 @@ local i18n = require("i18n")
 local FMWidgets = require("fm.widgets")
 local SingleText = require("fm.singletext")
 local ProgressView = require("fm.progressview")
-local player = require("doc.player")
+local Player = require("doc.player")
 local face = require("draw.face")
 
 local strings = i18n.getStrings()
@@ -78,7 +78,7 @@ end
 
 -- --------------------------------------------------------
 function scene:create(event)
-	local docPlayer = player:new()
+	local docPlayer = Player()
 	local dbpath = DB.name --"assets\\db\\player.db"
 	local path = system.pathForFile(dbpath, system.ResourceDirectory)
 	local db = sqlite3.open(path)
