@@ -6,19 +6,20 @@
 -- andreaszdw@googlemail.com
 --
 -- --------------------------------------------------------
-local class = require("30log")
+local BaseWidget = require("fm.basewidget")
 local widget = require("widget")
 
-local table = class()
+local Table = BaseWidget:extend()
 
 -- --------------------------------------------------------
 --
 -- constructor
 --
 -- --------------------------------------------------------
-function table:init(parent, left, top, width, height, rowRenderer, rowHeight, isLocked)
-	self.parent = parent
-	self.theme = parent.theme
+function Table:init(parent, left, top, width, height, rowRenderer, rowHeight, isLocked)
+
+	Table.super.init(self, parent, left, top, width, height)
+	
 	self.left = left or 0
 	self.top = top or 0
 	self.width = width or 0
@@ -49,7 +50,7 @@ end
 -- inserRow 
 -- 
 -- --------------------------------------------------------
-function table:insertRow(params, isCategory)
+function Table:insertRow(params, isCategory)
 	local odd = false
 
 	if self.tableView:getNumRows() % 2 == 1 then 
@@ -73,4 +74,4 @@ end
 
 
 -- --------------------------------------------------------
-return table
+return Table

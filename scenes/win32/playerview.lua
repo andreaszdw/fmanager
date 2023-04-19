@@ -11,9 +11,9 @@
 local composer = require("composer")
 local widget = require("widget")
 local i18n = require("i18n")
-local fmwidgets = require("fm.widgets")
-local singleText = require("fm.singletext")
-local progressView = require("fm.progressview")
+local FMWidgets = require("fm.widgets")
+local SingleText = require("fm.singletext")
+local ProgressView = require("fm.progressview")
 local player = require("doc.player")
 local face = require("draw.face")
 
@@ -97,7 +97,7 @@ function scene:create(event)
 
 	docPlayer:loadFromDB(db, id)
 
-	local fmw = fmwidgets:new(self.view)
+	local fmw = FMWidgets:new(self.view)
 
 	local theme = fmw:getTheme()
 
@@ -160,10 +160,10 @@ function scene:create(event)
 
 		-- here I must use singleText directly, not via wigedts/fmw because
 		-- the parent must be the row of the parent tableView
-		local rowTitle = singleText:new(row, title, x, y, fontSize)
+		local rowTitle = SingleText(row, title, x, y, fontSize)
 		rowTitle:setAnchor(0, 0)
 		
-		local rowValue = singleText:new(row, value, tab, y, fontSize)
+		local rowValue = SingleText(row, value, tab, y, fontSize)
 		rowValue:setAnchor(0, 0)
 		rowValue:setFillColor(fmw.theme.labelWhite)
 	end
@@ -226,12 +226,12 @@ function scene:create(event)
 		end
 
 		if row.params.header then 
-			local rowHeader = singleText:new(row, row.params.header, row.width*0.5, y-2, headerSize)
+			local rowHeader = SingleText(row, row.params.header, row.width*0.5, y-2, headerSize)
 			rowHeader:setAnchor(0.5, 0)
 		end
 
 		if row.params.title then 
-			local rowTitle = singleText:new(row, row.params.title, x, y, fontSize)
+			local rowTitle = SingleText(row, row.params.title, x, y, fontSize)
 			rowTitle:setAnchor(0, 0)
 
 			if row.params.value then
@@ -248,18 +248,18 @@ function scene:create(event)
 				-- draw the width of progressview in dependance of the max value
 				local length = pvWidth * row.params.max
 
-				local valueView = progressView:new(row, tab, 5, length, row.params.value / row.params.max)
+				local valueView = ProgressView(row, tab, 5, length, row.params.value / row.params.max)
 
 				-- print the percent, without decimals
 				local valuePercent = string.format("%.0f", row.params.value * 100)
 				local mostPossible = string.format("%.0f", row.params.max * 100)
 				local valueString = valuePercent .. " / " .. mostPossible
-				local valueText = singleText:new(row, valueString, tab2, y, fontSize)
+				local valueText = SingleText(row, valueString, tab2, y, fontSize)
 				valueText:setAnchor(0, 0)
 				valueText:setFillColor(fmw.theme.labelWhite)
 			end
 			if row.params.points then 
-				local pointsText = singleText:new(row, row.params.points, tab + 50, y, fontSize)
+				local pointsText = SingleText(row, row.params.points, tab + 50, y, fontSize)
 				pointsText:setAnchor(0, 0)
 				pointsText:setFillColor(fmw.theme.labelWhite)
 			end

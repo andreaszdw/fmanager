@@ -5,24 +5,25 @@
 -- andreaszdw@googlemail.com
 --
 -- --------------------------------------------------------
-local class = require("30log")
+local Class = require("fm.30log")
 
+local BaseContainer = require("fm.basecontainer")
 local BaseWidget = require("fm.basewidget")
-local panel = require("fm.panel")
-local button = require("fm.button")
-local pbutton = require("fm.pbutton")
-local singleText = require("fm.singletext")
-local progressView = require("fm.progressview")
-local tableView = require("fm.table")
+local Panel = require("fm.panel")
+local Button = require("fm.button")
+local PButton = require("fm.pbutton")
+local SingleText = require("fm.singletext")
+local ProgressView = require("fm.progressview")
+local TableView = require("fm.table")
 
-local fmwidgets = class()
+local FmWidgets = Class()
 
 -- --------------------------------------------------------
 --
 -- constructor
 -- 
 -- --------------------------------------------------------
-function fmwidgets:init(view, theme)
+function FmWidgets:init(view, theme)
 	local tmpTheme = theme or "fm.theme"
 	self.view = display.newGroup()
 	self.viewWidth = display.contentWidth
@@ -39,7 +40,7 @@ end
 -- getTheme
 --
 -- --------------------------------------------------------
-function fmwidgets:getTheme()
+function FmWidgets:getTheme()
 	return self.theme 
 end
 
@@ -48,8 +49,8 @@ end
 -- panel
 --
 -- --------------------------------------------------------
-function fmwidgets:panel(x, y, width, height)
-	local child = panel(self, x, y, width, height)
+function FmWidgets:panel(x, y, width, height)
+	local child = Panel(self, x, y, width, height)
 	table.insert(self.childs, child)
 	return child
 end
@@ -59,8 +60,8 @@ end
 -- button
 --
 -- --------------------------------------------------------
-function fmwidgets:button(label, onEvent, x, y, width, height)
-	local child = button(self, label, onEvent, x, y, width, height)
+function FmWidgets:button(label, onEvent, x, y, width, height)
+	local child = Button(self, label, onEvent, x, y, width, height)
 	table.insert(self.childs, child)
 	return child
 end
@@ -70,8 +71,8 @@ end
 -- pbutton
 --
 -- --------------------------------------------------------
-function fmwidgets:pbutton(label, onEvent, x, y, width, height)
-	local child = pbutton(self, label, onEvent, x, y, width, height)
+function FmWidgets:pbutton(label, onEvent, x, y, width, height)
+	local child = PButton(self, label, onEvent, x, y, width, height)
 	table.insert(self.childs, child)
 	return child 
 end
@@ -81,8 +82,8 @@ end
 -- singleText
 --
 -- --------------------------------------------------------
-function fmwidgets:singleText(label, x, y, fontSize, font)
-	local child = singleText(self, label, x, y, fontSize, font)
+function FmWidgets:singleText(label, x, y, fontSize, font)
+	local child = SingleText(self, label, x, y, fontSize, font)
 	table.insert(self.childs, child)
 	return child
 end
@@ -92,8 +93,8 @@ end
 -- progressView
 --
 -- --------------------------------------------------------
-function fmwidgets:progressView(left, top, width, value, isAnimated)
-	local child = progressView(self, left, top, width, value, isAnimated)
+function FmWidgets:progressView(left, top, width, value, isAnimated)
+	local child = ProgressView(self, left, top, width, value, isAnimated)
 	table.insert(self.childs, child)
 	return child
 end
@@ -103,8 +104,8 @@ end
 -- table
 -- 
 -- --------------------------------------------------------
-function fmwidgets:table(left, top, width, height, rowRenderer, rowHeight, isLocked)
-	local child = tableView:new(self, left, top, width, height, rowRenderer, rowHeight, isLocked)
+function FmWidgets:table(left, top, width, height, rowRenderer, rowHeight, isLocked)
+	local child = TableView:new(self, left, top, width, height, rowRenderer, rowHeight, isLocked)
 	table.insert(self.childs, child)
 	return child
 end
@@ -114,7 +115,7 @@ end
 -- background for the scene
 -- 
 -- --------------------------------------------------------
-function fmwidgets:stdBackground()
+function FmWidgets:stdBackground()
 	display.setDefault("background", self.theme.black)
 	local bgImage = display.newImage(self.view, self.theme.bgImage)
 	bgImage.x = self.viewCenterX
@@ -129,4 +130,4 @@ function fmwidgets:stdBackground()
 end
 
 -- --------------------------------------------------------
-return fmwidgets
+return FmWidgets

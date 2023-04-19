@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 --
--- basewidget.lua
+-- basecontainer.lua
 --
 -- andreaszdw@googlemail.com
 --
@@ -8,21 +8,25 @@
 local Class = require("fm.30log")
 local widget = require("widget")
 
-local Base = Class()
+local Container = Class()
 
 -- --------------------------------------------------------
 --
 -- constructor
 --
 -- --------------------------------------------------------
-function Base:init(parent, x, y, width, height)
+function Container:init(parent, x, y, width, height)
 	self.parent = parent
-	self.view = parent.view
 	self.theme = parent.theme
+	self.view = display.newGroup()
+	self.view.x = x
+	self.view.y = y
 	self.x = x or 0
 	self.y = y or 0
 	self.width = width or 10
 	self.height = height or 10
+
+	self.parent.view:insert(self.view)
 end
 
 -- --------------------------------------------------------
@@ -30,7 +34,7 @@ end
 -- getView
 --
 -- --------------------------------------------------------
-function Base:getView()
+function Container:getView()
 	return self.view
 end
 
@@ -39,7 +43,7 @@ end
 -- getHeight
 --
 -- --------------------------------------------------------
-function Base:getHeight() 
+function Container:getHeight() 
 	return self.height 
 end
 
@@ -48,7 +52,7 @@ end
 -- getWidth
 --
 -- --------------------------------------------------------
-function Base:getWidth() 
+function Container:getWidth() 
 	return self.width 
 end
 
@@ -57,10 +61,10 @@ end
 -- set position
 --
 -- --------------------------------------------------------
-function Base:setPosition(x, y)
+function Container:setPosition(x, y)
 	self.x = x 
 	self.y = y 
 end
 
 -- --------------------------------------------------------
-return Base
+return Container

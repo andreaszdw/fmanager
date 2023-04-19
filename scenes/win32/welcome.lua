@@ -9,7 +9,7 @@
 local composer = require("composer")
 local widget = require("widget")
 local i18n = require("i18n")
-local fmwidgets = require("fm.widgets")
+local FMWidgets = require("fm.widgets")
 
 local strings = i18n.getStrings()
 
@@ -115,12 +115,12 @@ end
 
 -- --------------------------------------------------------
 function scene:create(event)
-	local fmw = fmwidgets(self.view)
+	local fmw = FMWidgets(self.view)
 
 	fmw:stdBackground()
 
 	local counter = 0
-	local nextElement = 120
+	local nextElement = 120 
 	local gap = 10
 
 	local welcomeText = fmw:singleText(strings.welcome, 640, 120, 60)

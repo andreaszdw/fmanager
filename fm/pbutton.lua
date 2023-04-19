@@ -5,7 +5,7 @@
 -- andreaszdw@googlemail.com
 --
 -- --------------------------------------------------------
-local BaseWidget = require("basewidget")
+local BaseWidget = require("fm.basewidget")
 local widget = require("widget")
 
 local PButton = BaseWidget:extend()
@@ -16,14 +16,13 @@ local PButton = BaseWidget:extend()
 --
 -- --------------------------------------------------------
 function PButton:init(parent, label, eventFunction, x, y, width, height)
-	print(x, y)
+	
 	PButton.super.init(self, parent, x, y, width, height)
 
 	-- this is the function for the button,
 	-- it will call the function for the given function
 	local function onEvent(event)
 		if("ended" == event.phase) then 
-		print("ende")
 			eventFunction(event)
 		end
 	end

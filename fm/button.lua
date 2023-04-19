@@ -5,7 +5,7 @@
 -- andreaszdw@googlemail.com
 --
 -- --------------------------------------------------------
-local BaseWidget = require("basewidget")
+local BaseWidget = require("fm.basewidget")
 local widget = require("widget")
 
 local Button = BaseWidget:extend()

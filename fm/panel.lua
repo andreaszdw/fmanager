@@ -5,10 +5,10 @@
 -- andreaszdw@googlemail.com
 --
 -- --------------------------------------------------------
-local BaseWidget = require("basewidget")
+local BaseContainer = require("fm.basecontainer")
 local widget = require("widget")
 
-local Panel = BaseWidget:extend()
+local Panel = BaseContainer:extend()
 
 -- --------------------------------------------------------
 --
@@ -16,18 +16,8 @@ local Panel = BaseWidget:extend()
 --
 -- --------------------------------------------------------
 function Panel:init(parent, x, y, width, height)
-
+	
 	Panel.super.init(self, parent, x, y, width, height)
-
-	--[[self.parent = parent
-	self.theme = parent.theme
-	self.view = display.newGroup()
-	self.view.x = x
-	self.view.y = y
-	self.x = x or 0
-	self.y = y or 0
-	self.width = width or 10
-	self.height = height or 10]]--
 
 	local bgRect = display.newRect(self.view, 0, 0, width, height)
 	bgRect.strokeWidth = 2
@@ -35,9 +25,6 @@ function Panel:init(parent, x, y, width, height)
 	bgRect:setFillColor(unpack(self.theme.bg))
 	bgRect.anchorX = 0
 	bgRect.anchorY = 0
-
-	--self.parent.view:insert(self.view)
-
 end
 
 -- --------------------------------------------------------

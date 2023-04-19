@@ -5,22 +5,24 @@
 -- andreaszdw@googlemail.com
 --
 -- --------------------------------------------------------
-local class = require("30log")
+local BaseWidget = require("fm.basewidget")
 local widget = require("widget")
 
-local progress = class()
+local ProgressView = BaseWidget:extend()
 
 -- --------------------------------------------------------
 --
 -- constructor
 --
 -- --------------------------------------------------------
-function progress:init(parent, left, top, width, value, isAnimated)
+function ProgressView:init(parent, left, top, width, value, isAnimated)
 
+	ProgressView.super.init(self, parent, left, top, width, height)
+
+	-- this is for table render needed
 	local theme = require("fm.theme")
-
-	self.parent = parent
 	self.theme = parent.theme or theme
+	
 	self.label = label
 	self.left = left or 0
 	self.top =  top or 0
@@ -51,6 +53,7 @@ function progress:init(parent, left, top, width, value, isAnimated)
         isAnimated = isAnimated
 	})
 
+	-- this is for table render needed
 	local view = parent.view or parent
 
 	self.progressView:setProgress(self.value)
@@ -62,7 +65,7 @@ end
 -- setValue
 --
 -- --------------------------------------------------------
-function progress:setValue(v)
+function ProgressView:setValue(v)
 	self.progressView:setProgress(v)
 end
 
@@ -71,7 +74,7 @@ end
 -- getHeight
 --
 -- --------------------------------------------------------
-function progress:getHeight() 
+function ProgressView:getHeight() 
 	return self.button.height 
 end
 
@@ -80,7 +83,7 @@ end
 -- getWidth
 --
 -- --------------------------------------------------------
-function progress:getWidth() 
+function ProgressView:getWidth() 
 	return self.button.width 
 end
 
@@ -89,8 +92,8 @@ end
 -- set position
 --
 -- --------------------------------------------------------
-function progress:setPosition(x, y)
+function ProgressView:setPosition(x, y)
 end
 
 -- --------------------------------------------------------
-return progress
+return ProgressView
