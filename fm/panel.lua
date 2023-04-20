@@ -19,12 +19,39 @@ function Panel:init(parent, x, y, width, height)
 	
 	Panel.super.init(self, parent, x, y, width, height)
 
-	local bgRect = display.newRect(self.view, 0, 0, width, height)
-	bgRect.strokeWidth = 2
-	bgRect:setStrokeColor(unpack(self.theme.stroke))
-	bgRect:setFillColor(unpack(self.theme.bg))
-	bgRect.anchorX = 0
-	bgRect.anchorY = 0
+	self.bgRect = display.newRect(self.view, 0, 0, width, height)
+	self.bgRect.strokeWidth = 2
+	self.bgRect:setStrokeColor(unpack(self.theme.stroke))
+	self.bgRect:setFillColor(unpack(self.theme.bg))
+	self.bgRect.anchorX = 0
+	self.bgRect.anchorY = 0
+end
+
+-- --------------------------------------------------------
+--
+-- setFillColor
+--
+-- --------------------------------------------------------
+function Panel:setFillColor(r, g, b, a)
+	self.bgRect:setFillColor(r, g, b, a or 1)
+end
+
+-- --------------------------------------------------------
+--
+-- setStrokeColor
+--
+-- --------------------------------------------------------
+function Panel:setStrokeColor(r, g, b, a)
+	self.bgRect:setStrokeColor(r, g, b, a or 1)
+end
+
+-- --------------------------------------------------------
+--
+-- setStrokeWidth
+--
+-- --------------------------------------------------------
+function Panel:setStrokeWidth(w)
+	self.bgRect.strokeWidth = w or 2
 end
 
 -- --------------------------------------------------------

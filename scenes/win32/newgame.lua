@@ -59,37 +59,6 @@ end
 local function onMouse(event)
 end
 
-
--- --------------------------------------------------------
---
--- quitApp 
---
--- --------------------------------------------------------
-local function quitApp(event)
-	composer.removeHidden()
-	composer.removeScene(composer.getSceneName("current"))
-	native.requestExit()
-end
-
--- --------------------------------------------------------
---
--- newGame
---
--- --------------------------------------------------------
-local function newGame(event)
-	composer.gotoScene("scenes.win32.newgame")
-end
-
--- --------------------------------------------------------
---
--- loadGame
---
--- --------------------------------------------------------
-local function loadGame(event)
-	print(system.ResourceDirectory)
-	print(system.DocumentsDirectory)
-end
-
 -- --------------------------------------------------------
 -- 
 -- now the scene functions 
@@ -107,16 +76,14 @@ function scene:create(event)
 	local nextElement = 120
 	local gap = 10
 
-	local loadButton = fmw:pbutton(strings.new, newGame, 640, nextElement)
-	nextElement = nextElement + loadButton:getHeight() + gap 
+	-- new panel
+	local mainPanel = fmw:panel(10, 10, width-20, height-20)
+	local r, g, b = unpack(mainPanel.theme.bg)
+	mainPanel:setFillColor(r, g, b, 0.5)
 
-	local newButton = fmw:pbutton(strings.load, loadGame, 640, nextElement)
-	nextElement = nextElement + newButton:getHeight() + gap
-
-	local quitButton = fmw:pbutton(strings.quit, quitApp)
-	local tmpW = quitButton:getWidth()
-	local tmpH = quitButton:getHeight()
-	quitButton:setPosition(1280 - tmpW/2 - gap, 720 - tmpH/2 - gap)
+	r, g, b = unpack(mainPanel.theme.stroke)
+	mainPanel:setStrokeColor(r, g, b, 0.5)
+	mainPanel:setStrokeWidth(2)
 
 	-- put the view in the local sceneView, so it can be changed on resize
 	sceneView = self.view

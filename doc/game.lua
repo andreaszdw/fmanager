@@ -18,13 +18,10 @@ local Game = Class()
 --
 -- --------------------------------------------------------
 function Game:init()
-	self.playerName = ""
-	self.club = ""
+	self.manager = ""
+	self.clubName = ""
 	self.trainerTeam = ""
-	self.team = ""
-	self.stadium = ""
-	self.fiancial = ""
-	self.trainingGround = ""
+	self.playerTeam = ""
 end
 
 -- --------------------------------------------------------
