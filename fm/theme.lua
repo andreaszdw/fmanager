@@ -56,6 +56,11 @@ local theme = {
         irf = 6, --6,
         fw = 5, --64,------
         fh = 32
+	},
+
+	textField = {
+		width = 200,
+		height = 40
 	}
 }
 

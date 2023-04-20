@@ -85,6 +85,8 @@ function scene:create(event)
 	mainPanel:setStrokeColor(r, g, b, 0.5)
 	mainPanel:setStrokeWidth(2)
 
+	local tf = fmw:textField(640, nextElement)
+
 	-- put the view in the local sceneView, so it can be changed on resize
 	sceneView = self.view
 end

@@ -15,6 +15,7 @@ local PButton = require("fm.pbutton")
 local SingleText = require("fm.singletext")
 local ProgressView = require("fm.progressview")
 local TableView = require("fm.table")
+local TextField = require("fm.textfield")
 
 local FmWidgets = Class()
 
@@ -106,6 +107,17 @@ end
 -- --------------------------------------------------------
 function FmWidgets:table(left, top, width, height, rowRenderer, rowHeight, isLocked)
 	local child = TableView:new(self, left, top, width, height, rowRenderer, rowHeight, isLocked)
+	table.insert(self.childs, child)
+	return child
+end
+
+-- --------------------------------------------------------
+--
+-- textField
+-- 
+-- --------------------------------------------------------
+function FmWidgets:textField(x, y, width, height)
+	local child = TextField(self, x, y, width, height)
 	table.insert(self.childs, child)
 	return child
 end
