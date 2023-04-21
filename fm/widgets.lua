@@ -25,6 +25,7 @@ local FmWidgets = Class()
 -- 
 -- --------------------------------------------------------
 function FmWidgets:init(view, theme)
+	print("new instance")
 	local tmpTheme = theme or "fm.theme"
 	self.view = display.newGroup()
 	self.viewWidth = display.contentWidth
@@ -35,6 +36,43 @@ function FmWidgets:init(view, theme)
 	self.childs = {}
 	view:insert(self.view)
 end
+
+-- --------------------------------------------------------
+--
+-- clean up
+--
+-- --------------------------------------------------------
+function FmWidgets:destroy()
+	print("FmW destroy")
+	for k, v in pairs(self.childs) do
+		v:destroy()
+	end
+end
+
+-- --------------------------------------------------------
+--
+-- hide
+--
+-- --------------------------------------------------------
+function FmWidgets:hide()
+	print("FmW hide")
+	for k, v in pairs(self.childs) do
+		v:hide()
+	end
+end
+
+-- --------------------------------------------------------
+--
+-- show
+--
+-- --------------------------------------------------------
+function FmWidgets:show()
+	print("FmW show")
+	for k, v in pairs(self.childs) do
+		v:show()
+	end
+end
+
 
 -- --------------------------------------------------------
 --

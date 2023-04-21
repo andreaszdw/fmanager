@@ -12,6 +12,8 @@ local i18n = require("i18n")
 local FMWidgets = require("fm.widgets")
 
 local strings = i18n.getStrings()
+	
+local fmw
 
 -- new scene
 local scene = composer.newScene()
@@ -59,6 +61,16 @@ end
 local function onMouse(event)
 end
 
+-- -------------------------------------------------------
+--
+-- goBack
+--
+-- -------------------------------------------------------
+local function goBack(event) 
+	local prevScene = composer.getSceneName("previous")
+	composer.gotoScene(prevScene)
+end
+
 -- --------------------------------------------------------
 -- 
 -- now the scene functions 
@@ -67,8 +79,7 @@ end
 
 -- --------------------------------------------------------
 function scene:create(event)
-	
-	local fmw = FMWidgets(self.view)
+	fmw = FMWidgets(self.view)
 
 	fmw:stdBackground()
 
@@ -86,6 +97,13 @@ function scene:create(event)
 	mainPanel:setStrokeWidth(2)
 
 	local tf = fmw:textField(640, nextElement)
+	nextElement = nextElement + gap
+
+	-- the back button
+	local backButton = fmw:pbutton(strings.back, goBack)
+	local tmpW = backButton:getWidth()
+	local tmpH = backButton:getHeight()
+	backButton:setPosition(1280 - tmpW/2 - gap, 720 - tmpH/2 - gap)
 
 	-- put the view in the local sceneView, so it can be changed on resize
 	sceneView = self.view
@@ -103,6 +121,7 @@ function scene:show(event)
 		Runtime:addEventListener("enterFrame", onUpdate)
 		Runtime:addEventListener("key", onKey)
 		Runtime:addEventListener("mouse", onMouse)
+		fmw:show()
 	end
 end
 
@@ -116,13 +135,14 @@ function scene:hide(event)
 		Runtime:removeEventListener("enterFrame", onUpdate)
 		Runtime:removeEventListener("key", onKey)
 		Runtime:removeEventListener("mouse", onMouse)
+		fmw:hide()
 	elseif phase == "did" then 
 	end
 end
 
 -- --------------------------------------------------------
 function scene:destroy(event)
-	print("do saving")
+	fmw:destroy()
 end
 
 -- --------------------------------------------------------

@@ -16,6 +16,9 @@ local strings = i18n.getStrings()
 -- new scene
 local scene = composer.newScene()
 
+--forward delaration
+local fmw
+
 local width = display.contentWidth 
 local height = display.contentHeight
 local centerX = width * 0.5 
@@ -99,7 +102,7 @@ end
 -- --------------------------------------------------------
 function scene:create(event)
 	
-	local fmw = FMWidgets(self.view)
+	fmw = FMWidgets(self.view)
 
 	fmw:stdBackground()
 
@@ -134,6 +137,7 @@ function scene:show(event)
 		Runtime:addEventListener("enterFrame", onUpdate)
 		Runtime:addEventListener("key", onKey)
 		Runtime:addEventListener("mouse", onMouse)
+		fmw:show()
 	end
 end
 
@@ -147,6 +151,7 @@ function scene:hide(event)
 		Runtime:removeEventListener("enterFrame", onUpdate)
 		Runtime:removeEventListener("key", onKey)
 		Runtime:removeEventListener("mouse", onMouse)
+		fmw:hide()
 	elseif phase == "did" then 
 	end
 end
@@ -154,6 +159,7 @@ end
 -- --------------------------------------------------------
 function scene:destroy(event)
 	print("do saving")
+	fmw:destroy()
 end
 
 -- --------------------------------------------------------

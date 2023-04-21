@@ -22,10 +22,31 @@ function TextField:init(parent, x, y, width, height)
 	w = width or self.theme.textField.width
 	h = height or self.theme.textField.height
 
+	local function tapListener(event)
+		print("tap")
+		return true
+	end
+
 	self.rect = display.newRect(self.view, x, y, w, h)
 	self.rect.strokeWidth = 2
 	self.rect:setStrokeColor(unpack(self.theme.stroke))
 	self.rect:setFillColor(unpack(self.theme.bg))
+
+	--self.rect:addEventListener("tap", tapListener)
+	--Runtime:addEventListener("tap", )
+	self:addListener()
+end
+
+function TextField:addListener()
+	local function tapListener(event)
+		print("ion")
+		self:tapListener(event)
+	end
+	self.rect:addEventListener("tap", self:tapListener)
+end
+
+function TextField:tapListener(event)
+	print("tap in")
 end
 
 -- --------------------------------------------------------
