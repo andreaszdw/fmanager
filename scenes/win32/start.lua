@@ -158,7 +158,6 @@ end
 
 -- --------------------------------------------------------
 function scene:destroy(event)
-	print("do saving")
 	fmw:destroy()
 end
 

@@ -10,13 +10,15 @@ local widget = require("widget")
 
 local TextField = BaseWidget:extend()
 
+-- forward declaration
+local insideListener, outsideListener
+
 -- --------------------------------------------------------
 --
 -- constructor
 --
 -- --------------------------------------------------------
 function TextField:init(parent, x, y, width, height)
-	print("init")
 
 	TextField.super.init(self, parent, x, y, width, height)
 
@@ -29,6 +31,8 @@ function TextField:init(parent, x, y, width, height)
 	self.rect:setFillColor(unpack(self.theme.bg))
 
 	self.focus = false
+
+	self.firstTime = true
 end
 
 -- --------------------------------------------------------
@@ -37,27 +41,29 @@ end
 --
 -- --------------------------------------------------------
 function TextField:focusListener(phase)
-	local function insideListener(event)
-		self.focus = true
-		print("true")
-		return true
-	end
 
-	local function outsideListener(event)
-		self.focus = false
-		print("false")
+	-- this is for one time initailiztion
+	if self.firstTime then
+
+		insideListener = function(event)
+			self.focus = true
+			return true
+		end
+
+		function outsideListener(event)
+			self.focus = false
+		end
 	end
+	self.firstTime = false
 
 	if phase=="show" then
-		print("in show")
 		self.rect:addEventListener("tap", insideListener)
 		Runtime:addEventListener("tap", outsideListener)
 	end
-	
+
 	if phase=="hide" then
-		print("in hide")
-		print(self.rect:removeEventListener("tap", insideListener))
-		print(Runtime:removeEventListener("tap", outsideListener))
+		self.rect:removeEventListener("tap", insideListener)
+		Runtime:removeEventListener("tap", outsideListener)
 	end
 end
 
