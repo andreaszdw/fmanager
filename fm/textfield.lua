@@ -30,6 +30,22 @@ function TextField:init(parent, x, y, width, height)
 	self.rect:setStrokeColor(unpack(self.theme.stroke))
 	self.rect:setFillColor(unpack(self.theme.bg))
 
+	local options = {
+		parent = self.view,
+		text = "ldsajljsd",
+		x = x,
+		y = y,
+		font = self.theme.font,
+		fontSize = self.theme.fontSize
+	}
+
+	self.text = display.newText(options)
+
+	local container = display.newContainer(w-4, h)
+	container:translate(x+2, y)
+	container:insert(self.text, true)
+	self.view:insert(container)
+
 	self.focus = false
 
 	self.firstTime = true

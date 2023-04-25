@@ -61,7 +61,9 @@ local theme = {
 
 	textField = {
 		width = 200,
-		height = 40
+		height = 40,
+		font = font,
+		fontSize = 14
 	}
 }
 
