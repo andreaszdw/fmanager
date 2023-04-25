@@ -47,11 +47,13 @@ function TextField:focusListener(phase)
 
 		insideListener = function(event)
 			self.focus = true
+			self.rect:setStrokeColor(unpack(self.theme.strokeFocus))
 			return true
 		end
 
 		function outsideListener(event)
 			self.focus = false
+			self.rect:setStrokeColor(unpack(self.theme.stroke))
 		end
 	end
 	self.firstTime = false
