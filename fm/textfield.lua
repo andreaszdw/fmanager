@@ -32,7 +32,7 @@ function TextField:init(parent, x, y, width, height)
 
 	local options = {
 		parent = self.view,
-		text = "ldsajljsd",
+		text = "ldsajljsd1234567891011121314151617",
 		x = x,
 		y = y,
 		font = self.theme.font,
