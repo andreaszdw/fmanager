@@ -32,18 +32,18 @@ function TextField:init(parent, x, y, width, height)
 
 	local options = {
 		parent = self.view,
-		text = "ldsajljsd1234567891011121314151617",
-		x = x,
-		y = y,
+		text = "ldsajl123456789101112131415161718",
 		font = self.theme.font,
 		fontSize = self.theme.fontSize
 	}
 
 	self.text = display.newText(options)
 
-	local container = display.newContainer(w-4, h)
+	local container = display.newContainer(w-8, h)
 	container:translate(x+2, y)
-	container:insert(self.text, true)
+	container:insert(self.text)--, true)
+	self.text.anchorX = 0
+	container.anchorChildren = false
 	self.view:insert(container)
 
 	self.focus = false
