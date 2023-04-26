@@ -103,8 +103,9 @@ function TextField:keyListener(phase)
 				if event.phase == "down" then
 					local k = event.keyName
 					print("ä = " .. utf8.codepoint("ä", 1, 1))
-					print(utf8.char(228) .. " " .. event.keyName)
-					self.text.text = self.text.text .. k
+					print(utf8.char(event.nativeKeyCode) .. " " .. event.nativeKeyCode)
+
+					self.text.text = self.text.text .. event.keyName
 					if self.text.width > self.container.width then
 						self.text.x = -(self.text.width - self.container.width)
 					else
