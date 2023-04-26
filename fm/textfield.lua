@@ -11,41 +11,44 @@ local widget = require("widget")
 local TextField = BaseWidget:extend()
 
 -- forward declaration
-local insideListener, outsideListener
+local insideListener, outsideListener, onKey
 
 -- --------------------------------------------------------
 --
 -- constructor
 --
 -- --------------------------------------------------------
-function TextField:init(parent, x, y, width, height)
+function TextField:init(parent, x, y, width, height, anchorX, anchorY)
 
 	TextField.super.init(self, parent, x, y, width, height)
 
 	w = width or self.theme.textField.width
 	h = height or self.theme.textField.height
+	aX = 0 or anchorX
+	aY = 0 or anchorY
 
 	self.rect = display.newRect(self.view, x, y, w, h)
 	self.rect.strokeWidth = 2
 	self.rect:setStrokeColor(unpack(self.theme.stroke))
 	self.rect:setFillColor(unpack(self.theme.bg))
+	self.rect.anchorX = aX
 
 	local options = {
 		parent = self.view,
-		text = "1234567891011121314151617181920",
+		text = "",
 		font = self.theme.font,
 		fontSize = self.theme.fontSize
 	}
 
 	self.text = display.newText(options)
-	self.text.anchorX = 0
+	self.text.anchorX = aX
 
-	local container = display.newContainer(w*2, h)
-	container.anchorChildren = true--false
-	container.anchorX = 1
-	container:translate(x+w*0.5, y)
-	container:insert(self.text)--, true)
-	self.view:insert(container)
+	self.container = display.newContainer(w, h)
+	self.container.anchorChildren = false
+	self.container.anchorX = aX
+	self.container:translate(x, y)
+	self.container:insert(self.text)--, true)
+	self.view:insert(self.container)
 
 	self.focus = false
 
@@ -73,7 +76,6 @@ function TextField:focusListener(phase)
 			self.rect:setStrokeColor(unpack(self.theme.stroke))
 		end
 	end
-	self.firstTime = false
 
 	if phase=="show" then
 		self.rect:addEventListener("tap", insideListener)
@@ -88,11 +90,47 @@ end
 
 -- --------------------------------------------------------
 --
+-- key event
+--
+-- --------------------------------------------------------
+function TextField:keyListener(phase)
+
+	-- firsttime
+	if self.firstTime then
+		onKey = function(event)
+			if self.focus then
+				if event.phase == "down" then
+					local k = event.keyName
+					k = k:upper()
+					self.text.text = self.text.text .. k
+					print(self.container.width, self.text.width)
+					if self.text.width > self.container.width then
+						self.text.x = -(self.text.width - self.container.width)
+					else
+						self.text.x = 0
+					end
+				end
+			end
+		end
+	end
+
+	if phase == "show" then
+		Runtime:addEventListener("key", onKey)
+	end
+	if phase == "hide" then
+		Runtime:removeEventListener("key", onKey)
+	end
+end
+
+
+-- --------------------------------------------------------
+--
 -- hide
 -- 
 -- --------------------------------------------------------
 function TextField:hide()
 	self:focusListener("hide")
+	self:keyListener("hide")
 end
 
 -- --------------------------------------------------------
@@ -102,6 +140,8 @@ end
 -- --------------------------------------------------------
 function TextField:show()
 	self:focusListener("show")
+	self:keyListener("show")
+	self.firstTime = false
 end
 
 -- --------------------------------------------------------

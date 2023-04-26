@@ -84,7 +84,7 @@ function scene:create(event)
 	fmw:stdBackground()
 
 	local counter = 0
-	local nextElement = 120
+	local nextElementY = 120
 	local gap = 10
 
 	-- new panel
@@ -96,8 +96,8 @@ function scene:create(event)
 	mainPanel:setStrokeColor(r, g, b, 0.5)
 	mainPanel:setStrokeWidth(2)
 
-	local tf = fmw:textField(640, nextElement, 400)
-	nextElement = nextElement + gap
+	local tf = fmw:textField(640, nextElementY)
+	nextElementY = nextElementY + gap
 
 	-- the back button
 	local backButton = fmw:pbutton(strings.back, goBack)
