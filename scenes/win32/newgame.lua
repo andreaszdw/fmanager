@@ -96,7 +96,7 @@ function scene:create(event)
 	mainPanel:setStrokeColor(r, g, b, 0.5)
 	mainPanel:setStrokeWidth(2)
 
-	local tf = fmw:textField(640, nextElementY)
+	local tf = fmw:textField(640, nextElementY + 100)
 	nextElementY = nextElementY + gap
 
 	-- the back button
