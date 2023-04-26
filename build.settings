@@ -45,4 +45,10 @@ settings =
     		["de"] = "For the game!"
     	}
     },
+    plugins =
+    {
+ 		["plugin.utf8"] = {
+            publisherId = "com.coronalabs",
+        },
+    },
 }

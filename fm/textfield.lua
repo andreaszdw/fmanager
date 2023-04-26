@@ -7,6 +7,7 @@
 -- --------------------------------------------------------
 local BaseWidget = require("fm.basewidget")
 local widget = require("widget")
+local utf8 = require( "plugin.utf8" )
 
 local TextField = BaseWidget:extend()
 
@@ -101,7 +102,7 @@ function TextField:keyListener(phase)
 			if self.focus then
 				if event.phase == "down" then
 					local k = event.keyName
-					k = k:upper()
+					print(utf8.char(event.nativeKeyCode) .. " " .. event.nativeKeyCode)
 					self.text.text = self.text.text .. k
 					print(self.container.width, self.text.width)
 					if self.text.width > self.container.width then
